@@ -4,9 +4,9 @@ namespace Security.Entities
 {
     public abstract class Person
     {
-        public static TimeSpan WorkDayBegins;
+        public static TimeSpan WorkDayBegins { get; set; }
 
-        public static TimeSpan WorkDayEnds;
+        public static TimeSpan WorkDayEnds { get; set; }
 
         public bool IsPresentLegal(TimeSpan currenttime)
         {

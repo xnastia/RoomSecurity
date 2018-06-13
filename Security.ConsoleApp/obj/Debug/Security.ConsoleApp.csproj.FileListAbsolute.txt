@@ -1,0 +1,8 @@
+D:\Projects\RoomSecurity\Security.ConsoleApp\bin\Debug\Security.Example.exe.config
+D:\Projects\RoomSecurity\Security.ConsoleApp\obj\Debug\Security.Example.exe
+D:\Projects\RoomSecurity\Security.ConsoleApp\obj\Debug\Security.Example.pdb
+D:\Projects\RoomSecurity\Security.ConsoleApp\bin\Debug\Security.Example.exe
+D:\Projects\RoomSecurity\Security.ConsoleApp\bin\Debug\Security.Example.pdb
+D:\Projects\RoomSecurity\Security.ConsoleApp\bin\Debug\Security.Entities.dll
+D:\Projects\RoomSecurity\Security.ConsoleApp\bin\Debug\Security.Entities.pdb
+D:\Projects\RoomSecurity\Security.ConsoleApp\obj\Debug\Security.ConsoleApp.csprojResolveAssemblyReference.cache

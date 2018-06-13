@@ -1,0 +1,9 @@
+C:\Users\HYS\documents\visual studio 2015\Projects\Security\SecurityEntities\bin\Debug\Security.Entities.dll
+C:\Users\HYS\documents\visual studio 2015\Projects\Security\SecurityEntities\bin\Debug\Security.Entities.pdb
+C:\Users\HYS\documents\visual studio 2015\Projects\Security\SecurityEntities\obj\Debug\Security.Entities.dll
+C:\Users\HYS\documents\visual studio 2015\Projects\Security\SecurityEntities\obj\Debug\Security.Entities.pdb
+D:\Projects\RoomSecurity\Security.Entities\bin\Debug\Security.Entities.dll
+D:\Projects\RoomSecurity\Security.Entities\bin\Debug\Security.Entities.pdb
+D:\Projects\RoomSecurity\Security.Entities\obj\Debug\Security.Entities.csprojResolveAssemblyReference.cache
+D:\Projects\RoomSecurity\Security.Entities\obj\Debug\Security.Entities.dll
+D:\Projects\RoomSecurity\Security.Entities\obj\Debug\Security.Entities.pdb

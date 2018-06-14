@@ -1,4 +1,5 @@
 ﻿using System;
+using Security.Entities.Actors;
 
 namespace Security.Entities
 {

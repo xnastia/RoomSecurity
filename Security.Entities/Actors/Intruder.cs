@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Security.Entities
+namespace Security.Entities.Actors
 {
     class Intruder : Person
     {

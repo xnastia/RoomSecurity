@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Security.Entities
+namespace Security.Entities.Actors
 {
     public abstract class Person
     {
@@ -13,20 +13,20 @@ namespace Security.Entities
             return currenttime >= WorkDayBegins && currenttime <= WorkDayEnds;
         }
 
-        public static Person GetPersonByBadge(BageType bageType)
+        public static Person GetPersonByBadge(BadgeType badgeType)
         {
-            switch (bageType)
+            switch (badgeType)
             {
-                case BageType.Visitor:
+                case BadgeType.Visitor:
                     return new Visitor();
-                case BageType.Support:
+                case BadgeType.Support:
                     return new Support();
-                case BageType.SecurityOfficer:
+                case BadgeType.SecurityOfficer:
                     return new SecurityOfficer();
-                case BageType.NoBadge:
+                case BadgeType.NoBadge:
                     return new Intruder();
                 default:
-                    throw new NotImplementedException($"This value of {nameof(bageType)} is not supported");
+                    throw new NotImplementedException($"This value of {nameof(badgeType)} is not supported");
             }
         }
     }

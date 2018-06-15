@@ -40,15 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllowedTime.cs" />
     <Compile Include="BageType.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Intruder.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Actors\Intruder.cs" />
+    <Compile Include="Actors\Person.cs" />
+    <Compile Include="PresentRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomMonitor.cs" />
-    <Compile Include="SecurityOfficer.cs" />
-    <Compile Include="Support.cs" />
-    <Compile Include="Visitor.cs" />
+    <Compile Include="Actors\SecurityOfficer.cs" />
+    <Compile Include="Actors\Support.cs" />
+    <Compile Include="Actors\Visitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

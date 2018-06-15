@@ -1,6 +1,6 @@
 ﻿namespace Security.Entities
 {
-    public enum BageType
+    public enum BadgeType
     {
         Visitor = 1,
         Support,

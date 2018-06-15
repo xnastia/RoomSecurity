@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Security.Entities;
+using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace Security.Example
+namespace UnitTestProject1
 {
-    internal class Program
+    [TestClass]
+    public class UnitTestRoomMonitor
     {
-        public static RoomMonitor DataCreator()
+        RoomMonitor _roomMonitor = TestDataCreator();
+        public static RoomMonitor TestDataCreator()
         {
             var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
             var visitorAllowedTimes =
@@ -50,16 +54,27 @@ namespace Security.Example
                     BadgeType.SecurityOfficer
                 })
             };
-            return roomMonitor;
+           return roomMonitor;
         }
-        private static void Main()
+      
+        [TestMethod]
+        public void TestIsBadgeAllowed()
         {
-            var roomMonitor=new RoomMonitor();
-            roomMonitor = DataCreator();
-            AllowedTime allowedTime=new AllowedTime(new TimeSpan(10,00,00), new TimeSpan(15,00,00) );
-
-           Console.WriteLine(roomMonitor.IsIntruderInRoom(new TimeSpan(11, 00, 00)));
-           Console.ReadLine();
+            _roomMonitor.IsBadgeAllowed(BadgeType.Visitor, new TimeSpan(11, 00, 00));
+            IsTrue(_roomMonitor.IsBadgeAllowed(BadgeType.Visitor, new TimeSpan(12, 00, 00)));
         }
+        [TestMethod]
+        public void TestIsAreaSafety()
+        {
+            IsTrue(_roomMonitor.IsAreaSafety(new TimeSpan(11, 00, 00), new Camera(new List<BadgeType> { BadgeType.Visitor, BadgeType.Support, BadgeType.Visitor })));
+            
+        }
+        [TestMethod]
+        public void TestIsIntruderInRoom()
+        {
+            IsTrue(_roomMonitor.IsIntruderInRoom(new TimeSpan(11, 00, 00)));
+        }
+
+
     }
 }

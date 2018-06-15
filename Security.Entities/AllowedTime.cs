@@ -15,7 +15,7 @@ namespace Security.Entities
 
         public bool IsTimeAllowed(TimeSpan currentTime)
         {
-            return StartTime <= currentTime && currentTime >= EndTime;
+            return StartTime <= currentTime && currentTime <= EndTime;
         }
     }
 }

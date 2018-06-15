@@ -28,10 +28,12 @@ namespace Security.Entities
 
         public bool IsIntruderInRoom(TimeSpan currentTime)
         {
+            var isIntruderInRoom = true;
             foreach (var camera in Cameras)
-                if (!IsAreaSafety(currentTime, camera))
-                    return true;
-            return false;
+                isIntruderInRoom=IsAreaSafety(currentTime, camera)&&isIntruderInRoom;
+
+
+            return isIntruderInRoom;
         }
     }
 }

@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.ConsoleApp", "Security.ConsoleApp\Security.ConsoleApp.csproj", "{3833EAB4-B062-48D4-891E-77754216F925}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.ConsoleApp", "assemblies\Security.ConsoleApp\Security.ConsoleApp.csproj", "{3833EAB4-B062-48D4-891E-77754216F925}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Entities", "Security.Entities\Security.Entities.csproj", "{30B7906D-A91F-43DF-90C2-718327AD4D43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Entities", "assemblies\Security.Entities\Security.Entities.csproj", "{30B7906D-A91F-43DF-90C2-718327AD4D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject1\UnitTestProject.csproj", "{49A83517-B764-4316-BEB0-321D8A08C707}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Entities.UnitTests", "tests\Security.Entities.UnitTests\Security.Entities.UnitTests.csproj", "{49A83517-B764-4316-BEB0-321D8A08C707}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9740F23-ADEA-4D5C-90AE-1C571C65326F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assemblies", "assemblies", "{0E316422-EC36-4328-9182-1F0078693704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3833EAB4-B062-48D4-891E-77754216F925} = {0E316422-EC36-4328-9182-1F0078693704}
+		{30B7906D-A91F-43DF-90C2-718327AD4D43} = {0E316422-EC36-4328-9182-1F0078693704}
+		{49A83517-B764-4316-BEB0-321D8A08C707} = {C9740F23-ADEA-4D5C-90AE-1C571C65326F}
 	EndGlobalSection
 EndGlobal

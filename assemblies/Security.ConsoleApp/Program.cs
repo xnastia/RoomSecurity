@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Security.Entities;
-using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace UnitTestProject1
+namespace Security.Example
 {
-    [TestClass]
-    public class UnitTestRoomMonitor
+    internal class Program
     {
-        RoomMonitor _roomMonitor = TestDataCreator();
-        public static RoomMonitor TestDataCreator()
+        public static RoomMonitor DataCreator()
         {
             var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
             var visitorAllowedTimes =
@@ -28,7 +24,7 @@ namespace UnitTestProject1
             presentRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
 
             var roomMonitor = new RoomMonitor();
-            roomMonitor.PresentRules = presentRules;
+            roomMonitor.PresenseRules = presentRules;
             roomMonitor.Cameras = new List<Camera>
             {
                 new Camera(new List<BadgeType> {BadgeType.Visitor, BadgeType.Support, BadgeType.Visitor}),
@@ -54,27 +50,16 @@ namespace UnitTestProject1
                     BadgeType.SecurityOfficer
                 })
             };
-           return roomMonitor;
+            return roomMonitor;
         }
-      
-        [TestMethod]
-        public void TestIsBadgeAllowed()
+        private static void Main()
         {
-            _roomMonitor.IsBadgeAllowed(BadgeType.Visitor, new TimeSpan(11, 00, 00));
-            IsTrue(_roomMonitor.IsBadgeAllowed(BadgeType.Visitor, new TimeSpan(12, 00, 00)));
-        }
-        [TestMethod]
-        public void TestIsAreaSafety()
-        {
-            IsTrue(_roomMonitor.IsAreaSafety(new TimeSpan(11, 00, 00), new Camera(new List<BadgeType> { BadgeType.Visitor, BadgeType.Support, BadgeType.Visitor })));
-            
-        }
-        [TestMethod]
-        public void TestIsIntruderInRoom()
-        {
-            IsTrue(_roomMonitor.IsIntruderInRoom(new TimeSpan(11, 00, 00)));
-        }
+            var roomMonitor=new RoomMonitor();
+            roomMonitor = DataCreator();
+            AllowedTime allowedTime=new AllowedTime(new TimeSpan(10,00,00), new TimeSpan(15,00,00) );
 
-
+           Console.WriteLine(roomMonitor.IsIntruderInRoom(new TimeSpan(11, 00, 00)));
+           Console.ReadLine();
+        }
     }
 }

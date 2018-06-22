@@ -27,8 +27,14 @@ namespace Security.Entities
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            Console.WriteLine("Is intruder in room? {0}. Press any key to stop timer",
-                _roomSecurityChecker.IsIntruderInRoom(_currentTime));
+            bool isIntruderInRoom = _roomSecurityChecker.IsIntruderInRoom(_currentTime);
+            Console.WriteLine("Is intruder in room? {0}.",isIntruderInRoom);
+            if (isIntruderInRoom)
+            {
+                BadgeType intruderBadge = GetIntruderBadgeType();
+                Console.WriteLine(intruderBadge);
+            }
+            
             _currentTime += new TimeSpan(0, 30, 0);
         }
 
@@ -42,5 +48,19 @@ namespace Security.Entities
             
             _timer.Enabled = false;
         }
+
+        private BadgeType GetIntruderBadgeType()
+        {
+            
+            foreach (BadgeType badge in _roomSecurityChecker.PresenseRules.Keys)
+            {
+               if(!_roomSecurityChecker.IsBadgeAllowed(badge, _currentTime))
+                {
+                    return badge;
+                }
+            }
+            return BadgeType.NoBadge;
+        }
+
     }
 }

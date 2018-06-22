@@ -6,7 +6,7 @@ namespace Security.Example
 {
     internal class Program
     {
-        public static RoomMonitor DataCreator()
+        public static RoomSecurityChecker CreateRoomSecurityChecker()
         {
             var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
             var visitorAllowedTimes =
@@ -23,43 +23,21 @@ namespace Security.Example
             presentRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
             presentRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
 
-            var roomMonitor = new RoomMonitor();
-            roomMonitor.PresenseRules = presentRules;
-            roomMonitor.Cameras = new List<Camera>
-            {
-                new Camera(new List<BadgeType> {BadgeType.Visitor, BadgeType.Support, BadgeType.Visitor}),
-                new Camera(new List<BadgeType>
-                {
-                    BadgeType.Visitor,
-                    BadgeType.Support,
-                    BadgeType.Visitor,
-                    BadgeType.SecurityOfficer
-                }),
-                new Camera(new List<BadgeType>
-                {
-                    BadgeType.Visitor,
-                    BadgeType.Support,
-                    BadgeType.NoBadge,
-                    BadgeType.SecurityOfficer
-                }),
-                new Camera(new List<BadgeType>
-                {
-                    BadgeType.SecurityOfficer,
-                    BadgeType.Support,
-                    BadgeType.Visitor,
-                    BadgeType.SecurityOfficer
-                })
-            };
-            return roomMonitor;
+            var roomSecurityChecker = new RoomSecurityChecker();
+            roomSecurityChecker.PresenseRules = presentRules;
+            roomSecurityChecker.Cameras = new List<Camera>
+            {new Camera(),new Camera(),new Camera(),new Camera()};
+            return roomSecurityChecker;
         }
+
         private static void Main()
         {
-            var roomMonitor=new RoomMonitor();
-            roomMonitor = DataCreator();
-            AllowedTime allowedTime=new AllowedTime(new TimeSpan(10,00,00), new TimeSpan(15,00,00) );
-
-           Console.WriteLine(roomMonitor.IsIntruderInRoom(new TimeSpan(11, 00, 00)));
-           Console.ReadLine();
+            var roomSecurityChecker = CreateRoomSecurityChecker();
+            RoomMonitor roomMonitor = new RoomMonitor(DateTime.Now.TimeOfDay, roomSecurityChecker);
+            roomMonitor.Start();
+            Console.WriteLine("Press Enter to stop and exit");
+            Console.ReadLine();
+            roomMonitor.End();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace UnitTestProject1
     {
         class RoomCreator
         {
-            public static RoomMonitor CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15()
+            public static RoomChecker CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15()
             {
                 var allowedTimesFrom10To15 = new List<AllowedTime>
                 {
@@ -34,7 +34,7 @@ namespace UnitTestProject1
 
                 var cameraWithOnlyOneSupport = new Camera(detectedSupportBage);
 
-                var roomMonitor = new RoomMonitor
+                var roomMonitor = new RoomChecker
                 {
                     PresenseRules = presenseRules,
                     Cameras = new List<Camera>
@@ -46,7 +46,7 @@ namespace UnitTestProject1
                 return roomMonitor;
             }
 
-            public static RoomMonitor CreateRoomMonitorWithNoBadge()
+            public static RoomChecker CreateRoomMonitorWithNoBadge()
             {
                 var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
                 
@@ -57,7 +57,7 @@ namespace UnitTestProject1
                     BadgeType.NoBadge,
                 });
 
-                var roomMonitor = new RoomMonitor
+                var roomMonitor = new RoomChecker
                 {
                     PresenseRules = presentRules,
                     Cameras = new List<Camera>
@@ -115,7 +115,7 @@ namespace UnitTestProject1
                 BadgeType.NoBadge
             };
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
             {
                 {
@@ -144,7 +144,7 @@ namespace UnitTestProject1
                 BadgeType.Visitor
             };
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
             {
                 {
@@ -172,7 +172,7 @@ namespace UnitTestProject1
                 BadgeType.Visitor
             };
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
             {
                 {
@@ -198,7 +198,7 @@ namespace UnitTestProject1
             var currentTime = new TimeSpan(13, 00, 00);
             var detectedBages = new List<BadgeType>{};
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>{};
             roomMonitor.PresenseRules = roomMonitorPresenseRules;
             roomMonitor.Cameras = new List<Camera>() { camera };
@@ -217,7 +217,7 @@ namespace UnitTestProject1
             var anyCurrentTime = new TimeSpan(11, 00, 00);
             var detectedBages = new List<BadgeType> {BadgeType.NoBadge};
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>> { };
             roomMonitor.PresenseRules = roomMonitorPresenseRules;
             roomMonitor.Cameras=new List<Camera>() {camera};
@@ -235,7 +235,7 @@ namespace UnitTestProject1
             var anyCurrentTime = new TimeSpan(11, 00, 00);
             var detectedBages = new List<BadgeType> {};
             var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomMonitor();
+            var roomMonitor = new RoomChecker();
             var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>> { };
             roomMonitor.PresenseRules = roomMonitorPresenseRules;
             roomMonitor.Cameras = new List<Camera>() { camera };

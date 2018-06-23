@@ -35,7 +35,7 @@ namespace Security.Example
             var roomSecurityChecker = CreateRoomSecurityChecker();
             RoomMonitor roomMonitor = new RoomMonitor(DateTime.Now.TimeOfDay, roomSecurityChecker);
             Alarmer alarmer = new Alarmer();
-            roomMonitor.EventOnIntruder += alarmer.OnIntruder;
+            roomMonitor.AddObserver(alarmer);
             roomMonitor.Start();
             Console.WriteLine("Press Enter to stop and exit");
             Console.ReadLine();

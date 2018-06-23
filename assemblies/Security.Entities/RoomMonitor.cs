@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Timers;
 
 namespace Security.Entities
@@ -7,11 +8,11 @@ namespace Security.Entities
     {
         private TimeSpan _currentTime; 
         private Timer _timer;
+        private List<Alarmer> Observers;
         private RoomSecurityChecker _roomSecurityChecker;
-        public delegate void OnIntruderDelegate (RoomSecurityChecker roomSecorityChecker, BadgeType badge);
-        public event OnIntruderDelegate EventOnIntruder;
         public RoomMonitor(TimeSpan currentTime, RoomSecurityChecker roomChecker)
         {
+            Observers = new List<Alarmer>();
             _currentTime = currentTime;
             _timer = new Timer();
             _roomSecurityChecker = roomChecker;
@@ -25,7 +26,10 @@ namespace Security.Entities
 
             //Thread.Sleep(30000);
         }
-
+        public void AddObserver(Alarmer observer)
+        {
+            this.Observers.Add(observer);
+        }
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
             CheckerResponse cr = _roomSecurityChecker.IsIntruderInRoom(_currentTime);
@@ -34,7 +38,10 @@ namespace Security.Entities
             if (cr.IsIntruder)
             {
                 BadgeType intruderBadge = cr.Badge;
-                EventOnIntruder(_roomSecurityChecker, intruderBadge);
+                foreach (Alarmer observer in Observers)
+                {
+                    observer.OnIntruder(_roomSecurityChecker, intruderBadge);
+                }
             }
             
             _currentTime += new TimeSpan(0, 30, 0);

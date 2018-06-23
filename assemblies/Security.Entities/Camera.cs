@@ -4,13 +4,13 @@ namespace Security.Entities
 {
     public class Camera
     {
-        private Recognizer Recognizer { get; }
+        private Recognizer Recognizer;
 
         public List<BadgeType> DetectedBages { get; set; }
 
         public Camera()
         {
-           Recognizer=new Recognizer();
+            Recognizer=new Recognizer();
             DetectedBages= Recognizer.IdentifyBadges();
         }
       }

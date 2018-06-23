@@ -8,7 +8,8 @@ namespace Security.Entities
         private TimeSpan _currentTime; 
         private Timer _timer;
         private RoomSecurityChecker _roomSecurityChecker;
-
+        public delegate void OnIntruderDelegate (RoomSecurityChecker roomSecorityChecker, BadgeType badge);
+        public event OnIntruderDelegate EventOnIntruder;
         public RoomMonitor(TimeSpan currentTime, RoomSecurityChecker roomChecker)
         {
             _currentTime = currentTime;
@@ -27,12 +28,13 @@ namespace Security.Entities
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            bool isIntruderInRoom = _roomSecurityChecker.IsIntruderInRoom(_currentTime);
-            Console.WriteLine("Is intruder in room? {0}.",isIntruderInRoom);
-            if (isIntruderInRoom)
+            CheckerResponse cr = _roomSecurityChecker.IsIntruderInRoom(_currentTime);
+            
+            Console.WriteLine("Is intruder in room? {0}.",cr.IsIntruder);
+            if (cr.IsIntruder)
             {
-                BadgeType intruderBadge = GetIntruderBadgeType();
-                Console.WriteLine(intruderBadge);
+                BadgeType intruderBadge = cr.Badge;
+                EventOnIntruder(_roomSecurityChecker, intruderBadge);
             }
             
             _currentTime += new TimeSpan(0, 30, 0);
@@ -49,7 +51,7 @@ namespace Security.Entities
             _timer.Enabled = false;
         }
 
-        private BadgeType GetIntruderBadgeType()
+        /*private BadgeType GetIntruderBadgeType()
         {
             
             foreach (BadgeType badge in _roomSecurityChecker.PresenseRules.Keys)
@@ -60,7 +62,7 @@ namespace Security.Entities
                 }
             }
             return BadgeType.NoBadge;
-        }
+        }*/
 
-    }
+    } 
 }

@@ -1,21 +1,30 @@
-﻿namespace Security.Entities
+﻿using System.Collections.Generic;
+
+namespace Security.Entities
 {
     public class Alarmer
     {
-        public void OnIntruder(RoomSecurityChecker roomSecorityChecker, BadgeType badge)
+        public void OnIntruder(List<BadgeType> intruders)
         {
-            string alarmMessage = CreateAlarmMessage(roomSecorityChecker, badge);
+            string alarmMessage = CreateAlarmMessage(intruders);
             System.Console.WriteLine(alarmMessage);
         }
-        public string CreateAlarmMessage(RoomSecurityChecker roomSecurityChecker, BadgeType badgeType)
+        public string CreateAlarmMessage( List<BadgeType> intruders)
         {
-            string alarmMessage;
-            if (badgeType == BadgeType.NoBadge)
-                alarmMessage = "Intruder in the room!";
-            alarmMessage = badgeType + " not in allowed time. Allowed hours are ";
-            var allowedTimes = roomSecurityChecker.PresenseRules[badgeType];
-            foreach (var allowedTime in allowedTimes)
-                alarmMessage += "from " + allowedTime.StartTime + " to " + allowedTime.EndTime;
+            string alarmMessage="";
+            foreach (var intruder in intruders)
+            {
+                if (intruder == BadgeType.NoBadge)
+                {
+                    alarmMessage = "Intruder in the room!\n";
+                }
+
+                else
+                {
+                    alarmMessage += intruder + " not in allowed time.\n";
+                }
+
+            }
             return alarmMessage;
         }
     }

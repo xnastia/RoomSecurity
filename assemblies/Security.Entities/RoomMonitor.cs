@@ -1,43 +1,47 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Timers;
 
 namespace Security.Entities
 {
     public class RoomMonitor
     {
-        private TimeSpan _currentTime; 
-        private Timer _timer;
-        private RoomSecurityChecker _roomSecurityChecker;
-        public delegate void OnIntruderDelegate (RoomSecurityChecker roomSecorityChecker, BadgeType badge);
-        public event OnIntruderDelegate EventOnIntruder;
+        
+
         public RoomMonitor(TimeSpan currentTime, RoomSecurityChecker roomChecker)
         {
-            _currentTime = currentTime;
-            _timer = new Timer();
-            _roomSecurityChecker = roomChecker;
+            CurrentTime = currentTime;
+            CheckTimer = new Timer();
+            RoomChecker = roomChecker;
         }
+
+        private TimeSpan CurrentTime { get; set; }
+        private Timer CheckTimer { get; }
+        private RoomSecurityChecker RoomChecker { get; }
+        public delegate void OnIntruderDelegate(List<BadgeType> intruders);
+        public event OnIntruderDelegate EventOnIntruder;
 
         private void Timer()
         {
-            _timer.Enabled = true;
-            _timer.Interval = 1000;
-            _timer.Elapsed += TimerOnElapsed;
+            CheckTimer.Enabled = true;
+            CheckTimer.Interval = 1000;
+            CheckTimer.Elapsed += TimerOnElapsed;
 
             //Thread.Sleep(30000);
         }
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            CheckerResponse cr = _roomSecurityChecker.IsIntruderInRoom(_currentTime);
-            
-            Console.WriteLine("Is intruder in room? {0}.",cr.IsIntruder);
-            if (cr.IsIntruder)
+            var checkerResponse = RoomChecker.IsIntruderInRoom(CurrentTime);
+
+            Console.WriteLine("Is intruder in room? {0}.", checkerResponse.IntruderFound);
+            if (checkerResponse.IntruderFound)
             {
-                BadgeType intruderBadge = cr.Badge;
-                EventOnIntruder(_roomSecurityChecker, intruderBadge);
+                var intruders = checkerResponse.Intruders;
+                EventOnIntruder(intruders);
             }
-            
-            _currentTime += new TimeSpan(0, 30, 0);
+
+            CurrentTime += new TimeSpan(0, 30, 0);
         }
 
         public void Start()
@@ -47,22 +51,7 @@ namespace Security.Entities
 
         public void End()
         {
-            
-            _timer.Enabled = false;
+            CheckTimer.Enabled = false;
         }
-
-        /*private BadgeType GetIntruderBadgeType()
-        {
-            
-            foreach (BadgeType badge in _roomSecurityChecker.PresenseRules.Keys)
-            {
-               if(!_roomSecurityChecker.IsBadgeAllowed(badge, _currentTime))
-                {
-                    return badge;
-                }
-            }
-            return BadgeType.NoBadge;
-        }*/
-
-    } 
+    }
 }

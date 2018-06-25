@@ -13,12 +13,18 @@ namespace Security.Entities
             _chanceRange = 1000;
             _badgesWithOccurencePossibility = new Dictionary<BadgeType, int>()
             {
-                {BadgeType.Visitor, 1000},
+                {BadgeType.Visitor, 100},
                 {BadgeType.Support, 15},
                 {BadgeType.SecurityOfficer, 10},
                 {BadgeType.NoBadge, 1}
 
             };
+        }
+
+        public Recognizer(int chanceRange, Dictionary<BadgeType, int> badgesWithOccurencePossibility)
+        {
+            _chanceRange = chanceRange;
+            _badgesWithOccurencePossibility = badgesWithOccurencePossibility;
         }
 
         private void AddRandomNumberOfBadgeType(List<BadgeType> detectedBadges, BadgeType badgeType)

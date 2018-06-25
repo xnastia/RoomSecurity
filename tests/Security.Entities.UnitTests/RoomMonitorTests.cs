@@ -13,73 +13,86 @@ namespace UnitTestProject1
     {
         class RoomCreator
         {
-            public static RoomChecker CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15()
+            public static Dictionary<BadgeType, List<AllowedTime>> PresenceRulesCreat()
             {
-                var allowedTimesFrom10To15 = new List<AllowedTime>
+                var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>();
+                var visitorAllowedTimes =
+                    new List<AllowedTime> { new AllowedTime(new TimeSpan(08, 00, 00), new TimeSpan(20, 00, 01)) };
+                var supportAllowedTimes =
+                    new List<AllowedTime> { new AllowedTime(new TimeSpan(10, 00, 00), new TimeSpan(15, 00, 00)) };
+                var securityOfficerAllowedTimes =
+                    new List<AllowedTime> { new AllowedTime(new TimeSpan(00, 00, 00), new TimeSpan(24, 00, 00)) };
+                var noBadgeAllowedTimes =
+                    new List<AllowedTime> { new AllowedTime(new TimeSpan(0, 00, 00), new TimeSpan(0, 00, 01)) };
+
+                presenseRules.Add(BadgeType.Visitor, visitorAllowedTimes);
+                presenseRules.Add(BadgeType.Support, supportAllowedTimes);
+                presenseRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
+                presenseRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
+                return presenseRules;
+
+            }
+            public static RoomSecurityChecker CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15()
+            {
+                int chanceRange = 1;
+                Dictionary<BadgeType, int> badgesWithOccurancePossibility = new Dictionary<BadgeType, int>()
                 {
-                    new AllowedTime(new TimeSpan(10, 00, 00), new TimeSpan(15, 00, 00))
-                };
-                var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>
-                {
-                    {
-                        BadgeType.Support,
-                        allowedTimesFrom10To15
-                    }
+                    { BadgeType.Visitor, 0},
+                    {BadgeType.Support, 1},
+                    {BadgeType.SecurityOfficer, 0},
+                    {BadgeType.NoBadge, 0}
                 };
 
-                var detectedSupportBage = new List<BadgeType>
-                {
-                    BadgeType.Support
-                };
+                Recognizer recognizer=new Recognizer(chanceRange, badgesWithOccurancePossibility);
 
-                var cameraWithOnlyOneSupport = new Camera(detectedSupportBage);
+                Camera camera=new Camera(recognizer);
 
-                var roomMonitor = new RoomChecker
-                {
-                    PresenseRules = presenseRules,
-                    Cameras = new List<Camera>
-                    {
-                        cameraWithOnlyOneSupport
-                    }
-                };
+                var presenseRules = PresenceRulesCreat();
 
-                return roomMonitor;
+                    var withSupportBadgeAndAllowedTimeFrom10To15 = new RoomSecurityChecker();
+                    withSupportBadgeAndAllowedTimeFrom10To15.PresenseRules = presenseRules;
+                    withSupportBadgeAndAllowedTimeFrom10To15.Cameras = new List<Camera>
+                        {camera};
+                    return withSupportBadgeAndAllowedTimeFrom10To15;
+
+
             }
 
-            public static RoomChecker CreateRoomMonitorWithNoBadge()
+            public static RoomSecurityChecker CreateRoomSecurityCheckerWithNoBadge()
             {
-                var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
-                
-                presentRules.Add(BadgeType.NoBadge, new List<AllowedTime>());
-
-                var camera = new Camera(new List<BadgeType>
+                int chanceRange = 1;
+                Dictionary<BadgeType, int> badgesWithOccurancePossibility = new Dictionary<BadgeType, int>()
                 {
-                    BadgeType.NoBadge,
-                });
-
-                var roomMonitor = new RoomChecker
-                {
-                    PresenseRules = presentRules,
-                    Cameras = new List<Camera>
-                    {
-                        camera
-                    }
+                    { BadgeType.Visitor, 0},
+                    {BadgeType.Support, 0},
+                    {BadgeType.SecurityOfficer, 0},
+                    {BadgeType.NoBadge, 1}
                 };
-                return roomMonitor;
+
+                Recognizer recognizer = new Recognizer(chanceRange, badgesWithOccurancePossibility);
+
+                Camera camera = new Camera(recognizer);
+                
+                  var roomSecurityCheckerWithNoBadge = new RoomSecurityChecker();
+                var presenseRules = PresenceRulesCreat();
+                roomSecurityCheckerWithNoBadge.PresenseRules = presenseRules;
+                roomSecurityCheckerWithNoBadge.Cameras = new List<Camera>
+                        {camera};
+                return roomSecurityCheckerWithNoBadge;
             }
         }
        
         [Test]
         public void IsBadgeAllowedRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15On13ReturnsTrue()
         {
-            var roomMonitor = RoomCreator.CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15();
+            var roomMonitor = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
             var isBadgeAllowed = roomMonitor.IsBadgeAllowed(BadgeType.Support, new TimeSpan(13, 00, 00));
             Assert.IsTrue(isBadgeAllowed);
         }
         [Test]
         public void IsBadgeAllowedRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15On17ReturnsFalse()
         {
-            var roomMonitor = RoomCreator.CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15();
+            var roomMonitor = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
             var isBadgeAllowed = roomMonitor.IsBadgeAllowed(BadgeType.Support, new TimeSpan(17, 00, 00));
             Assert.IsFalse(isBadgeAllowed);
         }
@@ -87,7 +100,7 @@ namespace UnitTestProject1
         [Test]
         public void IsBadgeAllowedRoomMonitorWithNoBadgeReturnsFalse()
         {
-            var roomMonitor = RoomCreator.CreateRoomMonitorWithNoBadge();
+            var roomMonitor = RoomCreator.CreateRoomSecurityCheckerWithNoBadge();
             var isBadgeAllowed = roomMonitor.IsBadgeAllowed(BadgeType.NoBadge, new TimeSpan(11, 00, 00));
             Assert.IsFalse(isBadgeAllowed);
         }
@@ -95,7 +108,7 @@ namespace UnitTestProject1
         public void IsBadgeAllowed_withInappropriateTime_ThrowsArgumentException()
         {
             //Arrange
-            var roomMonitor = RoomCreator.CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15();
+            var roomMonitor = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
             var inappropriateTime = new TimeSpan(99, 00, 00);
 
             //Act & Assert
@@ -108,56 +121,25 @@ namespace UnitTestProject1
         public void IsAreaSafetyWithNoBadgeReturnsFalse()
         {
             //Arrange
-            var currentTime = new TimeSpan(11, 00, 00);
-            var detectedBages = new List<BadgeType>
-            {
-                BadgeType.Visitor,
-                BadgeType.NoBadge
-            };
-            var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomChecker();
-            var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
-            {
-                {
-                    BadgeType.Visitor,
-                    new List<AllowedTime>
-                    {
-                        new AllowedTime(new TimeSpan(09, 00, 00), new TimeSpan(11, 00, 00))
-                    }
-                }
-            };
-            roomMonitor.PresenseRules = roomMonitorPresenseRules;
+            RoomSecurityChecker roomSecurityCheckerWithNoBadge = RoomCreator.CreateRoomSecurityCheckerWithNoBadge();
+
 
             //Act
-            var isAreaSafety = roomMonitor.IsAreaSafety(currentTime, camera);
+            var isAreaSafety = roomSecurityCheckerWithNoBadge.IsAreaSafety(DateTime.Now.TimeOfDay,roomSecurityCheckerWithNoBadge.Cameras.FirstOrDefault());
 
             //Assert
             Assert.IsFalse(isAreaSafety);
         }
-        [Test]
+       [Test]
         public void IsAreaSafetyWithAllowedBadgeInAppropriateTimeReturnsTrue()
         {
             //Arrange
             var currentTime = new TimeSpan(11, 00, 00);
-            var detectedBages = new List<BadgeType>
-            {
-                BadgeType.Visitor
-            };
-            var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomChecker();
-            var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
-            {
-                {
-                    BadgeType.Visitor,
-                    new List<AllowedTime>
-                    {
-                        new AllowedTime(new TimeSpan(09, 00, 00), new TimeSpan(11, 00, 00))
-                    }
-                }
-            };
-            roomMonitor.PresenseRules = roomMonitorPresenseRules;
+            RoomSecurityChecker roomSecurityCheckerWithAllowedBadgeInAppropriateTime = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
+
             //Act
-            var isAreaSafety = roomMonitor.IsAreaSafety(currentTime, camera);
+            var isAreaSafety = roomSecurityCheckerWithAllowedBadgeInAppropriateTime.IsAreaSafety(currentTime,
+                roomSecurityCheckerWithAllowedBadgeInAppropriateTime.Cameras.First());
 
             //Assert
             Assert.IsTrue(isAreaSafety);
@@ -166,29 +148,16 @@ namespace UnitTestProject1
         public void IsAreaSafetyWithAllowedBadgeInInappropriateTimeReturnsFalse()
         {
             //Arrange
-            var currentTime = new TimeSpan(13, 00, 00);
-            var detectedBages = new List<BadgeType>
-            {
-                BadgeType.Visitor
-            };
-            var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomChecker();
-            var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>
-            {
-                {
-                    BadgeType.Visitor,
-                    new List<AllowedTime>
-                    {
-                        new AllowedTime(new TimeSpan(09, 00, 00), new TimeSpan(11, 00, 00))
-                    }
-                }
-            };
-            roomMonitor.PresenseRules = roomMonitorPresenseRules;
-           //Act
-            var  isAreaSafety = roomMonitor.IsAreaSafety(currentTime, camera);
+            var currentTime = new TimeSpan(11, 00, 00);
+            RoomSecurityChecker roomSecurityCheckerWithAllowedBadgeInAppropriateTime = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
+
+            //Act
+            var isAreaSafety = roomSecurityCheckerWithAllowedBadgeInAppropriateTime.IsAreaSafety(currentTime,
+                roomSecurityCheckerWithAllowedBadgeInAppropriateTime.Cameras.First());
 
             //Assert
-            Assert.IsFalse(isAreaSafety);
+            Assert.IsTrue(isAreaSafety);
+           
         }
 
         [Test]
@@ -196,21 +165,32 @@ namespace UnitTestProject1
         {
             //Arrange
             var currentTime = new TimeSpan(13, 00, 00);
-            var detectedBages = new List<BadgeType>{};
-            var camera = new Camera(detectedBages);
-            var roomMonitor = new RoomChecker();
-            var roomMonitorPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>{};
-            roomMonitor.PresenseRules = roomMonitorPresenseRules;
-            roomMonitor.Cameras = new List<Camera>() { camera };
+
+            int chanceRange = 1;
+            Dictionary<BadgeType, int> badgesWithOccurancePossibility = new Dictionary<BadgeType, int>()
+            {
+                { BadgeType.Visitor, 0},
+                {BadgeType.Support, 0},
+                {BadgeType.SecurityOfficer, 0},
+                {BadgeType.NoBadge, 0}
+            };
+
+            Recognizer recognizer = new Recognizer(chanceRange, badgesWithOccurancePossibility);
+
+            Camera camera = new Camera(recognizer);
+            var roomSecurityChecker = new RoomSecurityChecker();
+            var roomSecurityCheckerPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>{};
+            roomSecurityChecker.PresenseRules = roomSecurityCheckerPresenseRules;
+            roomSecurityChecker.Cameras = new List<Camera>() { camera };
             //Act
-            var isAreaSafety = roomMonitor.IsAreaSafety(currentTime, camera);
+            var isAreaSafety = roomSecurityChecker.IsAreaSafety(currentTime, camera);
 
             //Assert
             Assert.IsTrue(isAreaSafety);
 
         }
 
-        [Test]
+        /*[Test]
         public void IsIntruderInRoomWhenCameraHasNoBadgeReturnsTrue()
         {
             //Arrange
@@ -259,19 +239,20 @@ namespace UnitTestProject1
             //Assert
             Assert.IsFalse(isIntruderInRoom);
         }
-
+        */
         [Test]
         public void IsIntruderInRoomWhenCameraHasBadgeInNotAllowedTimeReturnsTrue()
         {
             //Arrange
-            var roomMonitor = RoomCreator.CreateRoomMonitorWithSupportBadgeAndAllowedTimeFrom10To15();
+            var roomSecurityChecker = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
             var notAllowedTime = new TimeSpan(9, 00, 00);
 
             //Act
-            var isIntruderInRoom = roomMonitor.IsIntruderInRoom(notAllowedTime);
+            CheckerResponse isIntruderInRoom = roomSecurityChecker.IsIntruderInRoom(notAllowedTime);
+            CheckerResponse checkerResponse=new CheckerResponse(new List<BadgeType>() {BadgeType.NoBadge},notAllowedTime);
 
             //Assert
-            Assert.IsTrue(isIntruderInRoom);
+            Assert.AreEqual(checkerResponse,isIntruderInRoom);
         }
         
     }

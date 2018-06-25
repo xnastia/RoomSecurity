@@ -6,12 +6,19 @@ namespace Security.Entities
     {
         private Recognizer Recognizer;
 
-        public List<BadgeType> DetectedBages { get; set; }
+        public List<BadgeType> DetectedBadges { get; set; }
 
         public Camera()
         {
             Recognizer=new Recognizer();
-            DetectedBages= Recognizer.IdentifyBadges();
+            DetectedBadges= Recognizer.IdentifyBadges();
         }
+
+        public Camera(Recognizer recognizer)
+        {
+            Recognizer = recognizer;
+            DetectedBadges = Recognizer.IdentifyBadges();
+        }
+
       }
 }

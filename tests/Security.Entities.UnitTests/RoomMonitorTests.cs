@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Security.Entities;
-using Assert = NUnit.Framework.Assert;
 
 namespace UnitTestProject1
 {

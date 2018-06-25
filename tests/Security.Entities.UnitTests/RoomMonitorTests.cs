@@ -108,85 +108,14 @@ namespace UnitTestProject1
             //Arrange
             var roomMonitor = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
             var inappropriateTime = new TimeSpan(99, 00, 00);
+            var expectedMessagePart = "0 to 24";
 
             //Act & Assert
-            Assert.Throws<ArgumentException>(() => roomMonitor.IsBadgeAllowed(BadgeType.Support, inappropriateTime))
-                .Message.Contains("0 to 24");
+            var message = Assert.Throws<ArgumentException>(() => roomMonitor.IsBadgeAllowed(BadgeType.Support, inappropriateTime)).Message;
+            Assert.IsTrue(message.Contains(expectedMessagePart));
         }
 
         //What method _ on which condition _ does something
-        [Test]
-        public void IsAreaSafetyWithNoBadgeReturnsFalse()
-        {
-            //Arrange
-            RoomSecurityChecker roomSecurityCheckerWithNoBadge = RoomCreator.CreateRoomSecurityCheckerWithNoBadge();
-
-
-            //Act
-            var isAreaSafety = roomSecurityCheckerWithNoBadge.IsAreaSafety(DateTime.Now.TimeOfDay,roomSecurityCheckerWithNoBadge.Cameras.FirstOrDefault());
-
-            //Assert
-            Assert.IsFalse(isAreaSafety);
-        }
-       [Test]
-        public void IsAreaSafetyWithAllowedBadgeInAppropriateTimeReturnsTrue()
-        {
-            //Arrange
-            var currentTime = new TimeSpan(11, 00, 00);
-            RoomSecurityChecker roomSecurityCheckerWithAllowedBadgeInAppropriateTime = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
-
-            //Act
-            var isAreaSafety = roomSecurityCheckerWithAllowedBadgeInAppropriateTime.IsAreaSafety(currentTime,
-                roomSecurityCheckerWithAllowedBadgeInAppropriateTime.Cameras.First());
-
-            //Assert
-            Assert.IsTrue(isAreaSafety);
-        }
-        [Test]
-        public void IsAreaSafetyWithAllowedBadgeInInappropriateTimeReturnsFalse()
-        {
-            //Arrange
-            var currentTime = new TimeSpan(11, 00, 00);
-            RoomSecurityChecker roomSecurityCheckerWithAllowedBadgeInAppropriateTime = RoomCreator.CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15();
-
-            //Act
-            var isAreaSafety = roomSecurityCheckerWithAllowedBadgeInAppropriateTime.IsAreaSafety(currentTime,
-                roomSecurityCheckerWithAllowedBadgeInAppropriateTime.Cameras.First());
-
-            //Assert
-            Assert.IsTrue(isAreaSafety);
-           
-        }
-
-        [Test]
-        public void IsAreaSafetyWithHasNotDetectedBagesReturnsTrue()
-        {
-            //Arrange
-            var currentTime = new TimeSpan(13, 00, 00);
-
-            int chanceRange = 1;
-            Dictionary<BadgeType, int> badgesWithOccurancePossibility = new Dictionary<BadgeType, int>()
-            {
-                { BadgeType.Visitor, 0},
-                {BadgeType.Support, 0},
-                {BadgeType.SecurityOfficer, 0},
-                {BadgeType.NoBadge, 0}
-            };
-
-            Recognizer recognizer = new Recognizer(chanceRange, badgesWithOccurancePossibility);
-
-            Camera camera = new Camera(recognizer);
-            var roomSecurityChecker = new RoomSecurityChecker();
-            var roomSecurityCheckerPresenseRules = new Dictionary<BadgeType, List<AllowedTime>>{};
-            roomSecurityChecker.PresenseRules = roomSecurityCheckerPresenseRules;
-            roomSecurityChecker.Cameras = new List<Camera>() { camera };
-            //Act
-            var isAreaSafety = roomSecurityChecker.IsAreaSafety(currentTime, camera);
-
-            //Assert
-            Assert.IsTrue(isAreaSafety);
-
-        }
 
         /*[Test]
         public void IsIntruderInRoomWhenCameraHasNoBadgeReturnsTrue()
@@ -246,11 +175,10 @@ namespace UnitTestProject1
             var notAllowedTime = new TimeSpan(9, 00, 00);
 
             //Act
-            CheckerResponse isIntruderInRoom = roomSecurityChecker.IsIntruderInRoom(notAllowedTime);
-            CheckerResponse checkerResponse=new CheckerResponse(new List<BadgeType>() {BadgeType.NoBadge},notAllowedTime);
+            CheckerResponse checkerResponse = roomSecurityChecker.CheckRoom(notAllowedTime);
 
             //Assert
-            Assert.AreEqual(checkerResponse,isIntruderInRoom);
+            Assert.IsTrue(checkerResponse.IntruderFound);
         }
         
     }

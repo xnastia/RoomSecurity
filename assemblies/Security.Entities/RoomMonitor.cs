@@ -32,7 +32,7 @@ namespace Security.Entities
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            var checkerResponse = RoomChecker.IsIntruderInRoom(CurrentTime);
+            var checkerResponse = RoomChecker.CheckRoom(CurrentTime);
 
             Console.WriteLine("Is intruder in room? {0}.", checkerResponse.IntruderFound);
             if (checkerResponse.IntruderFound)

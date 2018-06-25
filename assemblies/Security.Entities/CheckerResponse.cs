@@ -8,7 +8,7 @@ namespace Security.Entities
 {
     public class CheckerResponse
     {
-        public bool IntruderFound => Intruders == null || Intruders.Count() > 0;
+        public bool IntruderFound => Intruders == null || Intruders.Any();
         public List<BadgeType> Intruders { get; set; }
 
         public TimeSpan CheckTime { get; set; }

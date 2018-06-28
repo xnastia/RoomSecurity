@@ -27,9 +27,7 @@ namespace Security.Entities
         {
             var intrudersBadges = new List<BadgeType>();
             foreach (var camera in Cameras)
-            {
                 intrudersBadges.AddRange(camera.DetectedBadges.Where(badge => !IsBadgeAllowed(badge, currentTime)));
-            }
             var checkerResponse = new CheckerResponse(intrudersBadges, currentTime);
             return checkerResponse;
         }

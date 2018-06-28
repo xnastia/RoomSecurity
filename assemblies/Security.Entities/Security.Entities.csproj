@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleAlarmMessageHandler.cs" />
     <Compile Include="AllowedTime.cs" />
     <Compile Include="BadgeType.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Alarmer.cs" />
     <Compile Include="CheckerResponse.cs" />
-    <Compile Include="Recognizer.cs" />
+    <Compile Include="IAlarmMessageHandler.cs" />
+    <Compile Include="IRecognizer.cs" />
+    <Compile Include="RandomRecognizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomSecurityChecker.cs" />
     <Compile Include="RoomMonitor.cs" />

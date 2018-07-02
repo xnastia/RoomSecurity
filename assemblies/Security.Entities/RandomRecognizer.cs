@@ -28,7 +28,7 @@ namespace Security.Entities
             _badgesWithOccurencePossibility = badgesWithOccurencePossibility;
         }
 
-        public List<BadgeType> IdentifyBadges()
+        public List<BadgeType> IdentifyBadges(byte [] imageBytes)
         {
             var detectedBadges = new List<BadgeType>();
             var badgesList = Enum.GetValues(typeof(BadgeType));

@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Security.Entities
+﻿namespace Security.Entities
 {
     public class Camera
     {
-        private readonly IRecognizer Recognizer;
-
-        public Camera(IRecognizer recognizer)
+        public byte[] GetImage()
         {
-            Recognizer = recognizer;
+            return null;
         }
-
-        public List<BadgeType> DetectedBadges => Recognizer.IdentifyBadges();
     }
 }

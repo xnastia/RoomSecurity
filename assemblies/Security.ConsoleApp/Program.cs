@@ -6,7 +6,7 @@ namespace Security.Example
 {
     internal class Program
     {
-        public static RoomSecurityChecker CreateRoomSecurityChecker()
+        public static SecurityScanner CreateRoomSecurityChecker()
         {
             var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
             var visitorAllowedTimes =
@@ -23,8 +23,8 @@ namespace Security.Example
             presentRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
             presentRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
 
-            var roomSecurityChecker = new RoomSecurityChecker();
-            roomSecurityChecker.PresenseRules = presentRules;
+            var roomSecurityChecker = new SecurityScanner();
+            roomSecurityChecker._presenseRules = presentRules;
             roomSecurityChecker.Cameras = new List<Camera>
             {
                 new Camera(new RandomRecognizer(123123)),
@@ -37,7 +37,7 @@ namespace Security.Example
         private static void Main()
         {
             var roomSecurityChecker = CreateRoomSecurityChecker();
-            var roomMonitor = new RoomMonitor(new TimeSpan(12, 0, 0), roomSecurityChecker);
+            var roomMonitor = new Monitor(new TimeSpan(12, 0, 0), roomSecurityChecker);
             List<BadgeType> intruders = roomSecurityChecker.CheckRoom(new TimeSpan(12, 0, 0)).Intruders;
             List<string> alarmMessages = new List<string>();
             IAlarmMessageHandler alarmMessageHandler = new ConsoleAlarmMessageHandler();

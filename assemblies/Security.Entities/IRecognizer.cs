@@ -4,6 +4,6 @@ namespace Security.Entities
 {
     public interface IRecognizer
     {
-        List<BadgeType> IdentifyBadges();
+        List<BadgeType> IdentifyBadges(byte[] imageBytes);
     }
 }

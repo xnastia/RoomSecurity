@@ -10,15 +10,18 @@ namespace Security.Entities.UnitTests
     {
         private class RoomCreator
         {
-            public static RoomSecurityChecker CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15()
+            public static SecurityScanner CreateRoomSecurityCheckerWithSupportBadgeAndAllowedTimeFrom10To15()
             {
                 var recognizer = MockRepository.GenerateStub<IRecognizer>();
-                recognizer.Stub(x => x.IdentifyBadges()).Return(new List<BadgeType>
+                recognizer.Stub(x => x.IdentifyBadges(Arg<byte[]>.Is.Anything)).Return(new List<BadgeType>
                 {
                     BadgeType.Support
                 });
 
-                var camera = new Camera(recognizer);
+                var cameras = new List<Camera>
+                {
+                    new Camera() 
+                };
 
                 var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>
                 {
@@ -30,34 +33,58 @@ namespace Security.Entities.UnitTests
                     }
                 };
 
-                var securityChecker = new RoomSecurityChecker
-                {
-                    PresenseRules = presenseRules,
-                    Cameras = new List<Camera>
-                    {
-                        camera
-                    }
-                };
+                var securityChecker = new SecurityScanner(presenseRules, recognizer, cameras);
                 return securityChecker;
             }
 
-            public static RoomSecurityChecker CreateRoomSecurityCheckerWithNoBadge()
+            public static SecurityScanner CreateRoomSecurityCheckerWithNoBadge()
             {
                 var recognizer = MockRepository.GenerateStub<IRecognizer>();
-                recognizer.Stub(x => x.IdentifyBadges()).Return(new List<BadgeType>());
-
-                var camera = new Camera(recognizer);
-
-                var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>();
-
-                var securityChecker = new RoomSecurityChecker
+                recognizer.Stub(x => x.IdentifyBadges(Arg<byte[]>.Is.Anything)).Return(new List<BadgeType>
                 {
-                    PresenseRules = presenseRules,
-                    Cameras = new List<Camera>
+                    BadgeType.NoBadge
+                });
+
+                var cameras = new List<Camera>
+                {
+                    new Camera()
+                };
+
+                var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>
+                {
                     {
-                        camera
+                        BadgeType.Support, new List<AllowedTime>
+                        {
+                            new AllowedTime(new TimeSpan(10, 0, 0), new TimeSpan(15, 0, 0))
+                        }
                     }
                 };
+
+                var securityChecker = new SecurityScanner(presenseRules, recognizer, cameras);
+                return securityChecker;
+            }
+
+            public static SecurityScanner CreateRoomSecurityCheckerWithNoBadges()
+            {
+                var recognizer = MockRepository.GenerateStub<IRecognizer>();
+                recognizer.Stub(x => x.IdentifyBadges(Arg<byte[]>.Is.Anything)).Return(new List<BadgeType>());
+
+                var cameras = new List<Camera>
+                {
+                    new Camera()
+                };
+
+                var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>
+                {
+                    {
+                        BadgeType.Support, new List<AllowedTime>
+                        {
+                            new AllowedTime(new TimeSpan(10, 0, 0), new TimeSpan(15, 0, 0))
+                        }
+                    }
+                };
+
+                var securityChecker = new SecurityScanner(presenseRules, recognizer, cameras);
                 return securityChecker;
             }
         }
@@ -151,20 +178,17 @@ namespace Security.Entities.UnitTests
         {
             //Arrange
             var recognizer = MockRepository.GenerateStub<IRecognizer>();
-            recognizer.Stub(x => x.IdentifyBadges()).Return(new List<BadgeType> {BadgeType.NoBadge});
+            recognizer.Stub(x => x.IdentifyBadges(Arg<byte[]>.Is.Anything)).Return(new List<BadgeType> {BadgeType.NoBadge});
 
-            var camera = new Camera(recognizer);
+            var cameras = new List<Camera>
+            {
+                new Camera()
+            };
 
             var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>();
 
-            var securityChecker = new RoomSecurityChecker
-            {
-                PresenseRules = presenseRules,
-                Cameras = new List<Camera>
-                {
-                    camera
-                }
-            };
+            var securityChecker = new SecurityScanner(presenseRules, recognizer, cameras);
+
 
             var anyCurrentTime = DateTime.Now.TimeOfDay;
 
@@ -179,7 +203,7 @@ namespace Security.Entities.UnitTests
         public void IsIntruderInRoom_WhenCameraHasNotDetectedBages_ReturnsFalse()
         {
             //Arrange
-            var roomSecurityCheckerHasNotDetectedBadges = RoomCreator.CreateRoomSecurityCheckerWithNoBadge();
+            var roomSecurityCheckerHasNotDetectedBadges = RoomCreator.CreateRoomSecurityCheckerWithNoBadges();
             var anyCurrentTime = DateTime.Now.TimeOfDay;
 
             //Act

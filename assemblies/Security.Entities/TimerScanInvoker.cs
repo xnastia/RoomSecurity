@@ -5,6 +5,8 @@ namespace Security.Entities
 {
     public class TimerScanInvoker : ITimerScanInvoker
     {
+        public TimeSpan CurrentTime { get; set; }
+
         public event OnScanHandler OnScanInvoke;
 
         private readonly Timer _checkTimer;
@@ -15,13 +17,11 @@ namespace Security.Entities
 
         public TimerScanInvoker(int checkTimerInterval = 1000)
         {
-            _currentTime = new TimeSpan(0, 0, 0);
+            CurrentTime = new TimeSpan(0, 0, 0);
             _checkTimerInterval = checkTimerInterval;
             _checkTimer = new Timer();
         }
-
-        private TimeSpan _currentTime;
-
+        
         private void InitTimer()
         {
             _checkTimer.Enabled = true;
@@ -31,11 +31,11 @@ namespace Security.Entities
 
         private void OnScan(object sender, ElapsedEventArgs e)
         {
-            _currentTime += _timerStepSize;
-            if (_currentTime.Hours >= 24)
-                _currentTime = new TimeSpan(0, 0, 0);
+            CurrentTime += _timerStepSize;
+            if (CurrentTime.Hours >= 24)
+                CurrentTime = new TimeSpan(0, 0, 0);
 
-            OnScanInvoke?.Invoke(_currentTime);
+            OnScanInvoke?.Invoke(CurrentTime);
         }
 
         public void Start()

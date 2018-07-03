@@ -6,6 +6,7 @@ namespace Security.Entities
 {
     public class Alarmer
     {
+
         private readonly IAlarmMessageHandler _alarmMessageHandler;
 
         public Alarmer(IAlarmMessageHandler alarmMessageHandler)
@@ -14,16 +15,16 @@ namespace Security.Entities
                 throw new ArgumentNullException(nameof(alarmMessageHandler));
 
             _alarmMessageHandler = alarmMessageHandler;
-        }
+         }
 
-        public void OnIntruder(List<BadgeType> intruders)
+        public void OnIntruderDetected(CheckerResponse checkerResponse)
         {
-            if (intruders == null)
-                throw new ArgumentNullException(nameof(intruders));
+            if (checkerResponse.Intruders == null)
+                throw new ArgumentNullException(nameof(checkerResponse.Intruders));
 
-            if (!intruders.Any())
+            if (!checkerResponse.Intruders.Any())
                 return;
-            var alarmMessages = CreateAlarmMessages(intruders);
+            var alarmMessages = CreateAlarmMessages(checkerResponse.Intruders);
             _alarmMessageHandler.HandleAlarmMessage(alarmMessages);
         }
 

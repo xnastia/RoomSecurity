@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmMessageHandler.cs" />
     <Compile Include="ConsoleAlarmMessageHandler.cs" />
     <Compile Include="AllowedTime.cs" />
     <Compile Include="BadgeType.cs" />

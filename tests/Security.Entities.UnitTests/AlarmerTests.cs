@@ -27,7 +27,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act
-            alarmer.OnIntruder(intruders);
+            alarmer.OnIntruderDetected(intruders);
 
             //Assert
             alarmMessageHandlerMock.VerifyAllExpectations();
@@ -47,7 +47,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act
-            alarmer.OnIntruder(intruders);
+            alarmer.OnIntruderDetected(intruders);
 
             //Assert
             alarmMessageHandlerMock.VerifyAllExpectations();
@@ -61,7 +61,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act & Assert
-            Assert.Throws<ArgumentNullException>(() => alarmer.OnIntruder(null));
+            Assert.Throws<ArgumentNullException>(() => alarmer.OnIntruderDetected(null));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act
-            alarmer.OnIntruder(intruders);
+            alarmer.OnIntruderDetected(intruders);
 
             //Assert
             alarmMessageHandlerMock.VerifyAllExpectations();
@@ -108,7 +108,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act
-            alarmer.OnIntruder(intruders);
+            alarmer.OnIntruderDetected(intruders);
 
             //Assert
             alarmMessageHandlerMock.VerifyAllExpectations();
@@ -133,7 +133,7 @@ namespace Security.Entities.UnitTests
             var alarmer = new Alarmer(alarmMessageHandlerMock);
 
             //Act
-            alarmer.OnIntruder(intruders);
+            alarmer.OnIntruderDetected(intruders);
 
             //Assert
             alarmMessageHandlerMock.VerifyAllExpectations();

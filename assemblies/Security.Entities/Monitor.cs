@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 namespace Security.Entities
 {
-    public delegate void OnIntruderDelegate(List<BadgeType> intruders);
+    public delegate void CheckDoneHandler(CheckerResponse checkerResponse);
 
     public delegate void OnScanHandler(TimeSpan currentTime);
 
     public class Monitor
     {
+        public event CheckDoneHandler EventOnIntruderDetected;
+        public event CheckDoneHandler EventOnCheckDone;
+
         private readonly List<SecurityScanner> _securityScanners;
 
         public Monitor(List<SecurityScanner> securityScanners)
@@ -19,21 +22,20 @@ namespace Security.Entities
             _securityScanners = securityScanners;
         }
 
-        public event OnIntruderDelegate EventOnIntruder;
-
         public void Scan(TimeSpan currentTime)
         {
             foreach (var securityScanner in _securityScanners)
             {
                 var checkerResponse = securityScanner.CheckRoom(currentTime);
 
-                Console.WriteLine($"{currentTime}: Is intruder in room? {checkerResponse.IntruderFound}.");
+                EventOnCheckDone?.Invoke(checkerResponse);
+
+                //Console.WriteLine($"{currentTime}: Is intruder in room? {checkerResponse.IntruderFound}.");
                 if (checkerResponse.IntruderFound)
                 {
-                    var intruders = checkerResponse.Intruders;
-                    EventOnIntruder?.Invoke(intruders);
+                    EventOnIntruderDetected?.Invoke(checkerResponse);
                 }
             }
-        }
+         }
     }
 }

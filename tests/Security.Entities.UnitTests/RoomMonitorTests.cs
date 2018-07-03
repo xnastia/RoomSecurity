@@ -15,7 +15,7 @@ namespace Security.Entities.UnitTests
         //    var anyCurrentTime = new TimeSpan(12, 0, 0);
 
         //    //Act
-        //    var roomMonitor = new Monitor(anyCurrentTime, roomSecurityChecker);
+        //    var roomMonitor = new _monitor(anyCurrentTime, roomSecurityChecker);
         //    roomMonitor.End();
 
         //    //Assert
@@ -30,7 +30,7 @@ namespace Security.Entities.UnitTests
         //    var currentTime = new TimeSpan(25, 0, 0);
 
         //    //Assert & Act
-        //    Assert.Throws<ArgumentException>(() => new Monitor(currentTime, roomSecurityChecker));
+        //    Assert.Throws<ArgumentException>(() => new _monitor(currentTime, roomSecurityChecker));
         //}
 
         //[Test]
@@ -41,7 +41,7 @@ namespace Security.Entities.UnitTests
         //    var anyCurrentTime = new TimeSpan(2, 0, 0);
 
         //    //Assert & Act
-        //    Assert.Throws<ArgumentNullException>(() => new Monitor(anyCurrentTime, securityScanner));
+        //    Assert.Throws<ArgumentNullException>(() => new _monitor(anyCurrentTime, securityScanner));
         //}
 
         //[Test]
@@ -52,7 +52,7 @@ namespace Security.Entities.UnitTests
         //    var anyCurrentTime = new TimeSpan(12, 0, 0);
 
         //    //Act
-        //    var roomMonitor = new Monitor(anyCurrentTime, roomSecurityChecker);
+        //    var roomMonitor = new _monitor(anyCurrentTime, roomSecurityChecker);
         //    roomMonitor.Start();
 
         //    //Assert

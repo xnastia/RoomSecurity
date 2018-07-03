@@ -48,10 +48,13 @@
     <Compile Include="CheckerResponse.cs" />
     <Compile Include="IAlarmMessageHandler.cs" />
     <Compile Include="IRecognizer.cs" />
+    <Compile Include="ITimerScanInvoker.cs" />
     <Compile Include="RandomRecognizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityDashboard.cs" />
     <Compile Include="SecurityScanner.cs" />
     <Compile Include="Monitor.cs" />
+    <Compile Include="TimerScanInvoker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

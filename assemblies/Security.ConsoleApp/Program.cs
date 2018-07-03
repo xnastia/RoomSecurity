@@ -6,47 +6,20 @@ namespace Security.Example
 {
     internal class Program
     {
-        public static SecurityScanner CreateRoomSecurityChecker()
-        {
-            var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
-            var visitorAllowedTimes =
-                new List<AllowedTime> {new AllowedTime(new TimeSpan(10, 00, 00), new TimeSpan(15, 00, 00))};
-            var supportAllowedTimes =
-                new List<AllowedTime> {new AllowedTime(new TimeSpan(8, 00, 00), new TimeSpan(20, 00, 00))};
-            var securityOfficerAllowedTimes =
-                new List<AllowedTime> {new AllowedTime(new TimeSpan(00, 00, 00), new TimeSpan(24, 00, 00))};
-            var noBadgeAllowedTimes =
-                new List<AllowedTime> {new AllowedTime(new TimeSpan(0, 00, 00), new TimeSpan(0, 00, 01))};
-
-            presentRules.Add(BadgeType.Visitor, visitorAllowedTimes);
-            presentRules.Add(BadgeType.Support, supportAllowedTimes);
-            presentRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
-            presentRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
-
-            var roomSecurityChecker = new SecurityScanner();
-            roomSecurityChecker._presenseRules = presentRules;
-            roomSecurityChecker.Cameras = new List<Camera>
-            {
-                new Camera(new RandomRecognizer(123123)),
-                new Camera(new RandomRecognizer(78942584))
-            };
         
-            return roomSecurityChecker;
-        }
-
         private static void Main()
         {
-            var roomSecurityChecker = CreateRoomSecurityChecker();
-            var roomMonitor = new Monitor(new TimeSpan(12, 0, 0), roomSecurityChecker);
-            List<BadgeType> intruders = roomSecurityChecker.CheckRoom(new TimeSpan(12, 0, 0)).Intruders;
-            List<string> alarmMessages = new List<string>();
+            TimerScanInvoker timerScanInvoker = new TimerScanInvoker();
+            SecurityDashboard securityDashboard = new SecurityDashboard(timerScanInvoker);
+            securityDashboard.StartScanning();
             IAlarmMessageHandler alarmMessageHandler = new ConsoleAlarmMessageHandler();
+            /*List<string> alarmMessages = new List<string>();
+            alarmMessageHandler.HandleAlarmMessage(alarmMessages);*/
             Alarmer alarmer = new Alarmer(alarmMessageHandler);
-            roomMonitor.EventOnIntruder += alarmer.OnIntruder;
-            roomMonitor.Start();
-            Console.WriteLine("Press Enter to stop and exit");
+            securityDashboard.Monitor.EventOnIntruder += alarmer.OnIntruder;
+            timerScanInvoker.Start();
             Console.ReadLine();
-            roomMonitor.End();
         }
     }
 }
+

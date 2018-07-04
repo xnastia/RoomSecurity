@@ -13,11 +13,9 @@ namespace Security.Controllers
         // GET: SecurityDashboard
         public ActionResult Index()
         {
-            //ViewBag.rooms = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses.Keys;
-            //ViewBag.roomsSafeness = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses.Values;
+            ViewBag.currentTime = MonitorSnapshot.CurrentTime;
             ViewBag.securityScannerStatuses = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses;
             return View("SecurityDashboard");
-            //return View(MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses);
         }
     }
 }

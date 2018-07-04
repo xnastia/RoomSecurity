@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Security.Entities;
 
 namespace Security.Models
@@ -8,6 +9,8 @@ namespace Security.Models
         public Dictionary<string, bool> SecurityScannerStatuses { get; set; }
 
         private static MonitorSnapshot _monitorSnapshot;
+
+        public static TimeSpan CurrentTime { get; set; }
 
         private MonitorSnapshot()
         {
@@ -35,6 +38,7 @@ namespace Security.Models
         private void MonitorOnEventOnCheckDone(CheckerResponse checkerResponse)
         {
             SecurityScannerStatuses[checkerResponse.ScannerName] = checkerResponse.IntruderFound;
+            CurrentTime = checkerResponse.CheckTime;
         }
     }
 }

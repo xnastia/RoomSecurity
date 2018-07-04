@@ -1,19 +1,26 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "SecurityDashboard";
 }
 
 <h2>SecurityDashboard</h2>
 
+<h3>@ViewBag.currentTime</h3>
 <table>
     @foreach (var securityScannerStatuse in ViewBag.securityScannerStatuses)
+    {
+        <tr>
+            <td>@securityScannerStatuse.Key</td>
+            @if (securityScannerStatuse.Value)
             {
-                <tr>
-                <td>@securityScannerStatuse.Key</td>
-                    <td>@securityScannerStatuse.Value</td>
-                    </tr>
-                 
+                <td>Safety</td>
             }
-       
- </table>
+            else
+            {
+                <td>Intruder!</td>
+            } 
 
+           
+        </tr>
+    }
+
+</table>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Security.Models;
 
 namespace Security.Controllers
 {
@@ -12,13 +13,11 @@ namespace Security.Controllers
         // GET: SecurityDashboard
         public ActionResult Index()
         {
-            TimerScanInvoker timerScanInvoker = new TimerScanInvoker();
-            SecurityDashboard securityDashboard = new SecurityDashboard(timerScanInvoker);
-            securityDashboard.StartScanning();
-            IAlarmMessageHandler alarmMessageHandler = new AlarmMessageHandler();
-            Alarmer alarmer = new Alarmer(alarmMessageHandler);
-            securityDashboard.Monitor.EventOnIntruderDetected += alarmer.OnIntruderDetected;
-            return View();
+            //ViewBag.rooms = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses.Keys;
+            //ViewBag.roomsSafeness = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses.Values;
+            ViewBag.securityScannerStatuses = MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses;
+            return View("SecurityDashboard");
+            //return View(MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses);
         }
     }
 }

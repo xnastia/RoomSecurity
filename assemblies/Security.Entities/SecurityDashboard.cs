@@ -7,51 +7,15 @@ namespace Security.Entities
     {
         private readonly ITimerScanInvoker _timerScanInvoker;
 
-        public Monitor Monitor { get; set; }
+        public Monitor Monitor { get; }
 
-        public SecurityDashboard(ITimerScanInvoker timerScanInvoker)
+        public SecurityDashboard(ITimerScanInvoker timerScanInvoker, Monitor monitor)
         {
             _timerScanInvoker = timerScanInvoker;
-            Monitor = InitMonitor();
+            Monitor = monitor;
         }
 
-        private Monitor InitMonitor()
-        {
-            IRecognizer recognizer = new RandomRecognizer(12121213);
-            List<Camera> cameras = new List<Camera>()
-            {
-                new Camera()
-            };
-           
-            var presentRules = new Dictionary<BadgeType, List<AllowedTime>>();
-            var visitorAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(10, 00, 00), new TimeSpan(15, 00, 00)) };
-            var supportAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(8, 00, 00), new TimeSpan(20, 00, 00)) };
-            var securityOfficerAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(00, 00, 00), new TimeSpan(24, 00, 00)) };
-            var noBadgeAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(0, 00, 00), new TimeSpan(0, 00, 01)) };
-            presentRules.Add(BadgeType.Visitor, visitorAllowedTimes);
-            presentRules.Add(BadgeType.Support, supportAllowedTimes);
-            presentRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
-            presentRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
-
-            SecurityScanner dinnerRoom =
-                new SecurityScanner(presentRules, recognizer, cameras);
-            SecurityScanner conferenceRoom =
-                new SecurityScanner(presentRules, recognizer, cameras);
-            SecurityScanner armoryRoom =
-                new SecurityScanner(presentRules, recognizer, cameras);
-            var securitryScanners = new List<SecurityScanner>
-            {
-                dinnerRoom,
-                conferenceRoom,
-                armoryRoom
-            };
-
-            return new Monitor(securitryScanners);
-        }
+        
 
         public void StartScanning()
         {

@@ -10,11 +10,17 @@ namespace Security.Entities
         private readonly IRecognizer _recognizer;
         private readonly Dictionary<BadgeType, List<AllowedTime>> _presenseRules;
 
-        public SecurityScanner(Dictionary<BadgeType, List<AllowedTime>> presenseRules, IRecognizer recognizer, List<Camera>  cameras)
+        public string ScannerName { get; }
+
+        public SecurityScanner(string scannerName, Dictionary<BadgeType, List<AllowedTime>> presenseRules, IRecognizer recognizer, List<Camera>  cameras)
         {
+            if (string.IsNullOrEmpty(scannerName))
+                throw new ArgumentNullException(nameof(scannerName));
+
             _recognizer = recognizer;
             _cameras = cameras;
             _presenseRules = presenseRules;
+            ScannerName = scannerName;
         }
         
         public bool IsBadgeAllowed(BadgeType badge, TimeSpan currentTime)
@@ -36,7 +42,7 @@ namespace Security.Entities
             var intrudersBadges = new List<BadgeType>();
             foreach (var camera in _cameras)
                 intrudersBadges.AddRange(_recognizer.IdentifyBadges(camera.GetImage()).Where(badge => !IsBadgeAllowed(badge, currentTime)));
-            var checkerResponse = new CheckerResponse(intrudersBadges, currentTime);
+            var checkerResponse = new CheckerResponse(ScannerName, intrudersBadges, currentTime);
             return checkerResponse;
         }
     }

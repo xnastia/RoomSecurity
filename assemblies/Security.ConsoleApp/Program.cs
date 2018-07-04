@@ -9,26 +9,7 @@ namespace Security.Example
 {
     internal class Program
     {
-       /* public System.Timers.Timer CurrentTimer;
-        public TimeSpan CurrentTime = new TimeSpan();
-
-        public void StartTimer()
-        {
-            CurrentTimer.Enabled = true;
-            CurrentTimer.Interval = 1000;
-            CurrentTimer.Elapsed += OnScan;
-        }
-
-        private void OnScan(object sender, ElapsedEventArgs e)
-        {
-            CurrentTime += new TimeSpan(0, 30, 0);
-            if (CurrentTime.Hours >= 24)
-                CurrentTime = new TimeSpan(0, 0, 0);
-
-            OnScanInvoke?.Invoke(CurrentTime);
-        }*/
-
-        private static void Main()
+       private static void Main()
         {
 
             TimerScanInvoker timerScanInvoker = new TimerScanInvoker();

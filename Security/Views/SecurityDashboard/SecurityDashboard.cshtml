@@ -5,3 +5,15 @@
 
 <h2>SecurityDashboard</h2>
 
+<table>
+    @foreach (var securityScannerStatuse in ViewBag.securityScannerStatuses)
+            {
+                <tr>
+                <td>@securityScannerStatuse.Key</td>
+                    <td>@securityScannerStatuse.Value</td>
+                    </tr>
+                 
+            }
+       
+ </table>
+

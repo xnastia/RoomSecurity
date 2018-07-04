@@ -15,8 +15,8 @@ namespace Security.Entities
             _chanceRange = 1000;
             _badgesWithOccurencePossibility = new Dictionary<BadgeType, int>
             {
-                {BadgeType.Visitor, 1000},
-                {BadgeType.Support, 1000},
+                {BadgeType.Visitor, 100},
+                {BadgeType.Support, 15},
                 {BadgeType.SecurityOfficer, 10},
                 {BadgeType.NoBadge, 1}
             };

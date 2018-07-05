@@ -32,12 +32,17 @@ namespace Security.Models
         private MonitorSnapshot(Monitor monitor)
         {
             SecurityScannerStatuses = new Dictionary<string, bool>();
-            monitor.EventOnCheckDone += MonitorOnEventOnCheckDone;
+            monitor.EventOnCheckDone += MonitorOnEventOnCheckDoneScannerStatus;
+            monitor.EventOnCheckDone += MonitorOnEventOnCheckDoneGetCurrentTime;
         }
 
-        private void MonitorOnEventOnCheckDone(CheckerResponse checkerResponse)
+        private void MonitorOnEventOnCheckDoneScannerStatus(CheckerResponse checkerResponse)
         {
             SecurityScannerStatuses[checkerResponse.ScannerName] = checkerResponse.IntruderFound;
+        }
+
+        private void MonitorOnEventOnCheckDoneGetCurrentTime(CheckerResponse checkerResponse)
+        {
             CurrentTime = checkerResponse.CheckTime;
         }
     }

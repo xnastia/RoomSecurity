@@ -32,7 +32,7 @@ namespace Security.Entities
         private void OnScan(object sender, ElapsedEventArgs e)
         {
             CurrentTime += _timerStepSize;
-            if (CurrentTime.Hours >= 24)
+            if (CurrentTime >= new TimeSpan(23, 30, 00))
                 CurrentTime = new TimeSpan(0, 0, 0);
 
             OnScanInvoke?.Invoke(CurrentTime);

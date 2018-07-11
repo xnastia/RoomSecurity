@@ -29,7 +29,8 @@ namespace Security.WebSite.Controllers
           return View("Login");
         }
 
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Logout()
         {

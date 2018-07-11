@@ -1,0 +1,27 @@
+﻿@model Security.WebSite.Models.LoginViewModel
+
+<head>
+    <title>Login</title>
+</head>
+<body>
+<div>
+    <h2>Log In</h2>
+
+    <p>log in to access the administrative area:</p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+            
+        <div>
+            <label>Email address</label>
+            <input type="email" name="Email" placeholder="Enter email">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="Password" placeholder="Password">
+        </div>
+        <button type="submit">Login</button>
+    }
+</div>
+</body>
+

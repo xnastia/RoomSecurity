@@ -23,14 +23,13 @@ namespace Security.WebSite.Controllers
                 _securityDbContext = value;
             }
         }
+        
         [AllowAnonymous]
         public ActionResult Login()
         {
           return View("Login");
         }
 
-        //[Authorize]
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult Logout()
         {

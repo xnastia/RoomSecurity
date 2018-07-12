@@ -3,7 +3,6 @@ using Security.WebSite.Models;
 
 namespace Security.WebSite.Controllers
 {
-    [AllowAnonymous]
     public class SecurityDashboardController : Controller
     {
         // GET: SecurityDashboard

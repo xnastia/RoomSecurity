@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public static class WebApiConfig
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Security.WebSite.Controllers
+namespace Security.WebSite.Old.Controllers
 {
     public class HomeController : Controller
     {

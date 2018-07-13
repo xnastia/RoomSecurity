@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Security.WebSite.Models;
-using System.Linq;
+using Security.WebSite.Old.Models;
 
-namespace Security.WebSite.Controllers
+namespace Security.WebSite.Old.Controllers
 {
     public class AccountController : Controller
     {

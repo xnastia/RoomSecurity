@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public class FilterConfig
     {

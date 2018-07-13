@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using Security.WebSite;
+using Security.WebSite.Old;
 
 [assembly: OwinStartup(typeof(Startup))]
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public partial class Startup
     {

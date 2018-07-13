@@ -2,7 +2,7 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public class MvcApplication : System.Web.HttpApplication
     {

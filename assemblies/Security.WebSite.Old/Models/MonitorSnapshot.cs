@@ -2,7 +2,7 @@
 using System.Linq;
 using Security.Entities;
 
-namespace Security.WebSite.Models
+namespace Security.WebSite.Old.Models
 {
     public class MonitorSnapshot
     {

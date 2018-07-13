@@ -8,11 +8,24 @@
     xmlHttp.send(null);
 }
 
+function updateStatus(jsonData) {
+    updateCheckTime(jsonData);
+    buildHtmlTable(jsonData);
+}
+
+function updateCheckTime(jsonData) {
+    if (jsonData === undefined)
+        return;
+    var timeString = JSON.parse(jsonData).CheckTime;
+    var checkTime = document.getElementById("checkTime");
+    checkTime.innerText = timeString;
+}
+
 function buildHtmlTable(jsonData) {
     if (jsonData === undefined)
         return;
 
-    var myList = JSON.parse(jsonData);
+    var myList = JSON.parse(jsonData).SecurityScannerStatuses;
 
     var table = document.getElementById("securityDashboardTable");
     while (table.hasChildNodes()) {
@@ -54,33 +67,17 @@ function addAllColumnHeaders(myList) {
     return columnSet;
 }
 
-function updateCheckTime(currentTime) {
-    if (currentTime === undefined)
-        return;
-    var timeString = JSON.parse(currentTime);
-    var checkTime = document.getElementById("checkTime");
-    checkTime.innerText = timeString;
-}
 
-function refreshFirstFloorTableResult() {
+
+function refreshFloorTableResult() {
     setInterval(function () {
-        httpGetAsync("http://localhost:60099/SecurityDashboard/GetFirstFloorDashboardStatus", buildHtmlTable);
-        httpGetAsync("http://localhost:60099/SecurityDashboard/GetCheckTime", updateCheckTime);
-    }, 5000);
-}
-function refreshSecondFloorTableResult() {
-    setInterval(function () {
-        httpGetAsync("http://localhost:60099/SecurityDashboard/GetSecondFloorDashboardStatus", buildHtmlTable);
-        httpGetAsync("http://localhost:60099/SecurityDashboard/GetCheckTime", updateCheckTime);
+        RefreshSelectedFloorStatus();
     }, 5000);
 }
 
-function selectFloorToRefreshTableResult() {
-    var floor = document.getElementById("floor");
-    if (floor.value === "first floor") {
-        refreshFirstFloorTableResult();
-    } else {
-        refreshSecondFloorTableResult();
-    }
+function RefreshSelectedFloorStatus() {
+    var monitorIdElement = document.getElementById("floor");
+    var monitorId = monitorIdElement.value;
+    httpGetAsync("http://localhost:60099/SecurityDashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
 }
 

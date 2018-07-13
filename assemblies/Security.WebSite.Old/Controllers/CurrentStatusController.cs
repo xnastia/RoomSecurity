@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Security.WebSite.Models;
+using Security.WebSite.Old.Models;
 
-namespace Security.WebSite.Controllers
+namespace Security.WebSite.Old.Controllers
 {
     public class CurrentStatusController : ApiController
     {

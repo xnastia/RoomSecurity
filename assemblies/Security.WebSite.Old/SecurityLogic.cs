@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Security.Entities;
 
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public static class SecurityLogic
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Security.WebSite
+namespace Security.WebSite.Old
 {
     public class BundleConfig
     {

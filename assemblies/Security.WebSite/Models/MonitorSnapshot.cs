@@ -4,32 +4,25 @@ using Security.Entities;
 
 namespace Security.WebSite.Models
 {
-    public class FirstFloorMonitorSnapshot
+    public class MonitorSnapshot
     {
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
 
-        private static FirstFloorMonitorSnapshot _monitorSnapshot;
-
         public string CurrentTime { get; set; }
 
-        private FirstFloorMonitorSnapshot()
+        private static readonly Dictionary<Monitor, MonitorSnapshot> _monitorSnapshot = new Dictionary<Monitor, MonitorSnapshot>();
+        
+        public static MonitorSnapshot GetMonitorSnapshot(Monitor monitor)
         {
-        }
-
-        public static FirstFloorMonitorSnapshot GetMonitorSnapshot()
-        {
-            if (_monitorSnapshot == null)
+            if (!_monitorSnapshot.ContainsKey(monitor))
             {
-                Monitor monitor = FirstFloorSecurityDashboardBuilder.CreateMonitor();
-                var dashboard = FirstFloorSecurityDashboardBuilder.CreateDashboard(monitor);
-                dashboard.StartScanning();
-                _monitorSnapshot = new FirstFloorMonitorSnapshot(monitor);
+                _monitorSnapshot.Add(monitor, new MonitorSnapshot(monitor));
             }
 
-            return _monitorSnapshot;
+            return _monitorSnapshot[monitor];
         }
 
-        private FirstFloorMonitorSnapshot(Monitor monitor)
+        private MonitorSnapshot(Monitor monitor)
         {
             SecurityScannerStatuses = new List<ScannerStatus>();
             monitor.EventOnCheckDone += MonitorOnEventOnCheckDoneScannerStatus;

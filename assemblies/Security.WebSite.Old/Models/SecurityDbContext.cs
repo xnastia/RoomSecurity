@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Security.WebSite.Models
+namespace Security.WebSite.Old.Models
 {
     public class SecurityDbContext : DbContext
     {

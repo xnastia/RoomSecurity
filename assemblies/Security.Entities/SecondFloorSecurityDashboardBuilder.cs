@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace Security.Entities
 {
-    public static class SecurityDashboardBuilder
+    public static class SecondFloorSecurityDashboardBuilder
     {
         public static SecurityDashboard CreateDashboard(Monitor monitor)
         {
-            
+
             TimerScanInvoker timerScanInvoker = new TimerScanInvoker();
             SecurityDashboard securityDashboard = new SecurityDashboard(timerScanInvoker, monitor);
-            
-           return securityDashboard;
+
+            return securityDashboard;
         }
 
         public static Monitor CreateMonitor()
@@ -108,6 +108,4 @@ namespace Security.Entities
             return new SecurityScanner("Armory room", presentRules, recognizer, armoryRoomCameras);
         }
     }
-
-    
 }

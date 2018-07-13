@@ -4,32 +4,32 @@ using Security.Entities;
 
 namespace Security.WebSite.Models
 {
-    public class MonitorSnapshot
+    public class SecondFloorMonitorSnapshot
     {
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
 
-        private static MonitorSnapshot _monitorSnapshot;
+        private static SecondFloorMonitorSnapshot _monitorSnapshot;
 
         public string CurrentTime { get; set; }
 
-        private MonitorSnapshot()
+        private SecondFloorMonitorSnapshot()
         {
         }
 
-        public static MonitorSnapshot GetMonitorSnapshot()
+        public static SecondFloorMonitorSnapshot GetMonitorSnapshot()
         {
             if (_monitorSnapshot == null)
             {
-                Monitor monitor = SecurityDashboardBuilder.CreateMonitor();
-                var dashboard = SecurityDashboardBuilder.CreateDashboard(monitor);
+                Monitor monitor = SecondFloorSecurityDashboardBuilder.CreateMonitor();
+                var dashboard = SecondFloorSecurityDashboardBuilder.CreateDashboard(monitor);
                 dashboard.StartScanning();
-                _monitorSnapshot = new MonitorSnapshot(monitor);
+                _monitorSnapshot = new SecondFloorMonitorSnapshot(monitor);
             }
 
             return _monitorSnapshot;
         }
 
-        private MonitorSnapshot(Monitor monitor)
+        private SecondFloorMonitorSnapshot(Monitor monitor)
         {
             SecurityScannerStatuses = new List<ScannerStatus>();
             monitor.EventOnCheckDone += MonitorOnEventOnCheckDoneScannerStatus;
@@ -56,12 +56,6 @@ namespace Security.WebSite.Models
         {
             CurrentTime = checkerResponse.CheckTime.ToString("c");
         }
-        
-    }
 
-    public class ScannerStatus
-    {
-        public string Name { get; set; }
-        public bool IsOk { get; set; }
     }
-}
+ }

@@ -3,6 +3,19 @@
 }
 
 <h2>Security Dashboard</h2>
+<h3 id="checkTime"></h3>
+<form method="get">
+    <p>
+        <label>Select the floor:</label>
+        <select id="floor" name="floor">
+            <option value="first floor">first floor</option>
+            <option value="second floor">second floor</option>
+         </select>
+    </p>
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+</form>
 @Html.Partial("SecurityDashboardStatus")
 @Html.Partial("Logout")
   

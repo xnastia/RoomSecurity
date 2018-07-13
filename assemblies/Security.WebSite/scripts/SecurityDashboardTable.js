@@ -62,9 +62,25 @@ function updateCheckTime(currentTime) {
     checkTime.innerText = timeString;
 }
 
-function refreshTableResult() {
+function refreshFirstFloorTableResult() {
     setInterval(function () {
-        httpGetAsync("http://localhost:60099/SecurityDashboard/GetCurrentDashboardStatus", buildHtmlTable);
+        httpGetAsync("http://localhost:60099/SecurityDashboard/GetFirstFloorDashboardStatus", buildHtmlTable);
         httpGetAsync("http://localhost:60099/SecurityDashboard/GetCheckTime", updateCheckTime);
     }, 5000);
 }
+function refreshSecondFloorTableResult() {
+    setInterval(function () {
+        httpGetAsync("http://localhost:60099/SecurityDashboard/GetSecondFloorDashboardStatus", buildHtmlTable);
+        httpGetAsync("http://localhost:60099/SecurityDashboard/GetCheckTime", updateCheckTime);
+    }, 5000);
+}
+
+function selectFloorToRefreshTableResult() {
+    var floor = document.getElementById("floor");
+    if (floor.value === "first floor") {
+        refreshFirstFloorTableResult();
+    } else {
+        refreshSecondFloorTableResult();
+    }
+}
+

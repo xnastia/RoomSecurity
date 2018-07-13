@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Security.WebSite.Models;
 
 namespace Security.WebSite.Controllers
 {
+    [AllowAnonymous]
     public class SecurityDashboardController : Controller
     {
         // GET: SecurityDashboard
@@ -16,13 +18,18 @@ namespace Security.WebSite.Controllers
             return PartialView("SecurityDashboardStatus");
         }
 
-        public ActionResult GetCurrentDashboardStatus()
+        public ActionResult GetFirstFloorDashboardStatus()
         {
-            return Json(MonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses, JsonRequestBehavior.AllowGet);
+            return Json(FirstFloorMonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetSecondFloorDashboardStatus()
+        {
+            return Json(SecondFloorMonitorSnapshot.GetMonitorSnapshot().SecurityScannerStatuses, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetCheckTime()
         {
-           return Json(MonitorSnapshot.GetMonitorSnapshot().CurrentTime, JsonRequestBehavior.AllowGet);
+           return Json(FirstFloorMonitorSnapshot.GetMonitorSnapshot().CurrentTime, JsonRequestBehavior.AllowGet);
         }
     }
 }

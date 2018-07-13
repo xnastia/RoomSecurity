@@ -192,6 +192,7 @@
     </Content>
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -250,8 +251,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\MonitorSnapshot.cs" />
+    <Compile Include="Models\FirstFloorMonitorSnapshot.cs" />
+    <Compile Include="Models\ScannerStatus.cs" />
+    <Compile Include="Models\SecondFloorMonitorSnapshot.cs" />
     <Compile Include="Models\SecurityDbContext.cs" />
+    <Compile Include="Models\SelectedFloorViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

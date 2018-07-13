@@ -64,7 +64,7 @@ function updateCheckTime(currentTime) {
 
 function refreshTableResult() {
     setInterval(function () {
-        httpGetAsync("http://localhost:53823/SecurityDashboard/GetCurrentDashboardStatus", buildHtmlTable);
+        httpGetAsync("http://localhost:53823/SecurityDashboard/GetFirstFloorDashboardStatus", buildHtmlTable);
         httpGetAsync("http://localhost:53823/SecurityDashboard/GetCheckTime", updateCheckTime);
     }, 5000);
 }

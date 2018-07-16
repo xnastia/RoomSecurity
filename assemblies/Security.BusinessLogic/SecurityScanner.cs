@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Security.Entities
+namespace Security.BusinessLogic
 {
     public class SecurityScanner
     {

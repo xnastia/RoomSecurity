@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Security.WebSite.Models;
 using System.Linq;
+using Security.BusinessLogic;
+using Security.Entities;
 
 namespace Security.WebSite.Controllers
 {
@@ -42,13 +44,12 @@ namespace Security.WebSite.Controllers
         public ActionResult Login(LoginViewModel loginViewModel)
         {
           if (ModelState.IsValid)
-            {
-                var registeredUser = SecurityDbContext.Users
-                    .FirstOrDefault(user => user.Email == loginViewModel.Email && user.Password == loginViewModel.Password);
+          {
+              User user = new SecurityApi().GetUser(loginViewModel.Email, loginViewModel.Password);
 
-                if (registeredUser != null)
+                if (user != null)
                 {
-                    DoLogin(registeredUser, loginViewModel);
+                    DoLogin(user, loginViewModel);
                     return RedirectToAction("Index", "SecurityDashboard");
                 }
 

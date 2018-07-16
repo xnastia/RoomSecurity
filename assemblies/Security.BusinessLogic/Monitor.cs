@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Security.Entities
+namespace Security.BusinessLogic
 {
     public delegate void CheckDoneHandler(CheckerResponse checkerResponse);
 
@@ -30,7 +30,6 @@ namespace Security.Entities
 
                 EventOnCheckDone?.Invoke(checkerResponse);
 
-                //Console.WriteLine($"{currentTime}: Is intruder in room? {checkerResponse.IntruderFound}.");
                 if (checkerResponse.IntruderFound)
                 {
                     EventOnIntruderDetected?.Invoke(checkerResponse);

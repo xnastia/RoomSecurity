@@ -1,4 +1,4 @@
-﻿namespace Security.WebSite.Models
+﻿namespace Security.Entities
 {
     public class ScannerStatus
     {

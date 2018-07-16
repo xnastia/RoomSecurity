@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Security.Entities
+namespace Security.BusinessLogic
 {
     public interface IRecognizer
     {

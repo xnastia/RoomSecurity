@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Security.Entities
+namespace Security.BusinessLogic
 {
     public class ConsoleAlarmMessageHandler : IAlarmMessageHandler
     {

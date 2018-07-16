@@ -251,11 +251,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\MonitorSnapshot.cs" />
-    <Compile Include="Models\ScannerStatus.cs" />
-    <Compile Include="Models\SecondFloorMonitorSnapshot.cs" />
     <Compile Include="Models\SecurityDbContext.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

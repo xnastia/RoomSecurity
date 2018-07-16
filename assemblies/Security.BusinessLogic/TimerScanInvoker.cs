@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Timers;
 
-namespace Security.Entities
+namespace Security.BusinessLogic
 {
     public class TimerScanInvoker : ITimerScanInvoker
     {

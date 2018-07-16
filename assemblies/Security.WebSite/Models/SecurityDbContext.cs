@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Security.Entities;
 
 namespace Security.WebSite.Models
 {

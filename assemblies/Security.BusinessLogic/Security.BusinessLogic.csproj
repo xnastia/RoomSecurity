@@ -40,7 +40,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarmer.cs" />
+    <Compile Include="AlarmMessageHandler.cs" />
+    <Compile Include="AllowedTime.cs" />
+    <Compile Include="BadgeType.cs" />
+    <Compile Include="Camera.cs" />
+    <Compile Include="CheckerResponse.cs" />
+    <Compile Include="ConsoleAlarmMessageHandler.cs" />
+    <Compile Include="FirstFloorSecurityDashboardBuilder.cs" />
+    <Compile Include="IAlarmMessageHandler.cs" />
+    <Compile Include="IRecognizer.cs" />
+    <Compile Include="ITimerScanInvoker.cs" />
+    <Compile Include="Monitor.cs" />
+    <Compile Include="MonitorProvider.cs" />
+    <Compile Include="MonitorSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomRecognizer.cs" />
+    <Compile Include="SecondFloorSecurityDashboardBuilder.cs" />
+    <Compile Include="SecurityApi.cs" />
+    <Compile Include="SecurityDashboard.cs" />
+    <Compile Include="SecurityScanner.cs" />
+    <Compile Include="SnapshotApi.cs" />
+    <Compile Include="SnapshotProvider.cs" />
+    <Compile Include="TimerScanInvoker.cs" />
+    <Compile Include="UserProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Security.DataLayer\Security.DataLayer.csproj">
+      <Project>{04dc577c-2f14-45b2-a32d-67bfda5cff8d}</Project>
+      <Name>Security.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security.Entities\Security.Entities.csproj">
+      <Project>{30b7906d-a91f-43df-90c2-718327ad4d43}</Project>
+      <Name>Security.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

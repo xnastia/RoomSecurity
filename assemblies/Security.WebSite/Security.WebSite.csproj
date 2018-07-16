@@ -237,21 +237,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807111243433_Initial.cs" />
-    <Compile Include="Migrations\201807111243433_Initial.Designer.cs">
-      <DependentUpon>201807111243433_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807111247223_AddedAgeToUser.cs" />
-    <Compile Include="Migrations\201807111247223_AddedAgeToUser.Designer.cs">
-      <DependentUpon>201807111247223_AddedAgeToUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807111251104_DeketedAgeFromUser.cs" />
-    <Compile Include="Migrations\201807111251104_DeketedAgeFromUser.Designer.cs">
-      <DependentUpon>201807111251104_DeketedAgeFromUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\SecurityDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -263,17 +249,6 @@
       <Project>{30b7906d-a91f-43df-90c2-718327ad4d43}</Project>
       <Name>Security.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807111243433_Initial.resx">
-      <DependentUpon>201807111243433_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807111247223_AddedAgeToUser.resx">
-      <DependentUpon>201807111247223_AddedAgeToUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807111251104_DeketedAgeFromUser.resx">
-      <DependentUpon>201807111251104_DeketedAgeFromUser.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,18 +1,18 @@
-namespace Security.WebSite.Migrations
+namespace Security.DataLayer.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Security.WebSite.Models.SecurityDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Security.DataLayer.SecurityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Security.WebSite.Models.SecurityDbContext context)
+        protected override void Seed(Security.DataLayer.SecurityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

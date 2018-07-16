@@ -1,4 +1,4 @@
-namespace Security.WebSite.Migrations
+namespace Security.DataLayer.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -14,8 +14,8 @@ namespace Security.WebSite.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        Email = c.String(nullable: false),
-                        Password = c.String(nullable: false),
+                        Email = c.String(),
+                        Password = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

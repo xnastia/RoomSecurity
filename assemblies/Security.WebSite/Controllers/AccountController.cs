@@ -11,21 +11,6 @@ namespace Security.WebSite.Controllers
 {
     public class AccountController : Controller
     {
-        private SecurityDbContext _securityDbContext = new SecurityDbContext();
-
-        public SecurityDbContext SecurityDbContext
-        {
-            get
-            {
-                return _securityDbContext;
-            }
-
-            set
-            {
-                _securityDbContext = value;
-            }
-        }
-        
         [AllowAnonymous]
         public ActionResult Login()
         {

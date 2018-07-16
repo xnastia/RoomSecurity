@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
 using Security.Entities;
 
-namespace Security.WebSite.Models
+namespace Security.DataLayer
 {
-    public class SecurityDbContext : DbContext
+    internal class SecurityDbContext : DbContext
     {
         public SecurityDbContext() : base("DbConnection")
         {

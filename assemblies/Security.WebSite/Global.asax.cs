@@ -4,7 +4,7 @@ using System.Web.Routing;
 using Security.WebSite;
 using Security.WebSite.App_Start;
 
-namespace WebApplication1
+namespace Security.WebSite
 {
     public class Global : System.Web.HttpApplication
     {

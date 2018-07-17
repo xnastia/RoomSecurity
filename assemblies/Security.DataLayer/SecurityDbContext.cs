@@ -10,5 +10,7 @@ namespace Security.DataLayer
             Database.SetInitializer<SecurityDbContext>(new CreateDatabaseIfNotExists<SecurityDbContext>());
         }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Room> Rooms { get; set; }
     }
 }

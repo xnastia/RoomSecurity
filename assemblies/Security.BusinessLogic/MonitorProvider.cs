@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Security.BusinessLogic
 {
@@ -7,6 +8,8 @@ namespace Security.BusinessLogic
     {
         private static readonly Dictionary<int, Monitor> Monitors = new Dictionary<int, Monitor>();
 
+        private SecurityScannerProvider _securityScannerProvider = new SecurityScannerProvider();
+        
         public Monitor GetMonitor(int monitorId)
         {
             if (!Monitors.ContainsKey(monitorId))
@@ -14,12 +17,12 @@ namespace Security.BusinessLogic
                 switch (monitorId)
                 {
                     case 1:
-                        var monitor = FirstFloorSecurityDashboardBuilder.CreateMonitor();
-                        new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
-                        Monitors.Add(monitorId, monitor);
+                        var monitor1 = CreateMonitor1();
+                        new SecurityDashboard(new TimerScanInvoker(), monitor1).StartScanning();
+                        Monitors.Add(monitorId, monitor1);
                         break;
                     case 2:
-                        var monitor2 = SecondFloorSecurityDashboardBuilder.CreateMonitor();
+                        var monitor2 = CreateMonitor2();
                         new SecurityDashboard(new TimerScanInvoker(), monitor2).StartScanning();
                         Monitors.Add(monitorId, monitor2);
                         break;
@@ -28,6 +31,33 @@ namespace Security.BusinessLogic
                 }
             }
             return Monitors[monitorId];
+        }
+        public Monitor CreateMonitor1()
+        {
+            IRecognizer recognizer = new RandomRecognizer(12121213);
+            var hall = _securityScannerProvider.CreateHall(recognizer);
+            var conferenceRoom = _securityScannerProvider.CreateConferenceRoom(recognizer);
+            var securitryScanners = new List<SecurityScanner>
+            {
+                hall,
+                conferenceRoom,
+            };
+            return new Monitor(securitryScanners);
+        }
+
+        public Monitor CreateMonitor2()
+        {
+            IRecognizer recognizer = new RandomRecognizer(12121213);
+            var dinnerRoom = _securityScannerProvider.CreateDinnerRoom(recognizer);
+            var conferenceRoom = _securityScannerProvider.CreateConferenceRoom(recognizer);
+            var adrmoryRoom = _securityScannerProvider.CreateArmoryRoom(recognizer);
+            var securitryScanners = new List<SecurityScanner>
+            {
+                dinnerRoom,
+                conferenceRoom,
+                adrmoryRoom
+            };
+            return new Monitor(securitryScanners);
         }
     }
 }

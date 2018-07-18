@@ -5,7 +5,7 @@ namespace Security.BusinessLogic
 {
     public class PresenceRulesProvider
     {
-        public Dictionary<BadgeType, List<AllowedTime>> CreatePresenceRules(int roomId)
+        public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
         {
             var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>();
             var visitorAllowedTimes =

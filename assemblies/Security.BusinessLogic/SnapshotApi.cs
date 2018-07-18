@@ -19,9 +19,5 @@ namespace Security.BusinessLogic
             Monitor monitor = _monitorProvider.GetMonitor(monitorId);
             return _snapshotProvider.GetMonitorSnapshot(monitor);
         }
-
-
-
-        
     }
 }

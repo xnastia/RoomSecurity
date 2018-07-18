@@ -194,10 +194,12 @@
     <Content Include="scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\buildSecurityDashboardTable.js" />
+    <Content Include="scripts\httpGetAsync.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
-    <Content Include="scripts\SecurityDashboardTable.js" />
+    <Content Include="scripts\refreshSelectedFloorStatus.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

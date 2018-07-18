@@ -49,13 +49,11 @@ namespace Security.BusinessLogic
         {
             IRecognizer recognizer = new RandomRecognizer(12121213);
             var dinnerRoom = _securityScannerProvider.CreateDinnerRoom(recognizer);
-            var conferenceRoom = _securityScannerProvider.CreateConferenceRoom(recognizer);
-            var adrmoryRoom = _securityScannerProvider.CreateArmoryRoom(recognizer);
+            var armoryRoom = _securityScannerProvider.CreateArmoryRoom(recognizer);
             var securitryScanners = new List<SecurityScanner>
             {
                 dinnerRoom,
-                conferenceRoom,
-                adrmoryRoom
+                armoryRoom
             };
             return new Monitor(securitryScanners);
         }

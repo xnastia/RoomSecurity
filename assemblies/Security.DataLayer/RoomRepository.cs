@@ -17,6 +17,10 @@ namespace Security.DataLayer
                     return "Conference room";
                 case 2:
                     return "Hall";
+                case 3:
+                    return "Dinner room";
+                case 4:
+                    return "Armory room";
                 default:
                     throw new NotImplementedException(
                         "1 to 4 Ids are valid for now before DataLayer and DB has been implemented");

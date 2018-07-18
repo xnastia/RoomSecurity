@@ -1,27 +1,4 @@
-﻿function httpGetAsync(theUrl, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-            callback(xmlHttp.response);
-    }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-}
-
-function updateStatus(jsonData) {
-    updateCheckTime(jsonData);
-    buildHtmlTable(jsonData);
-}
-
-function updateCheckTime(jsonData) {
-    if (jsonData === undefined)
-        return;
-    var timeString = JSON.parse(jsonData).CheckTime;
-    var checkTime = document.getElementById("checkTime");
-    checkTime.innerText = timeString;
-}
-
-function buildHtmlTable(jsonData) {
+﻿function buildSecurityDashboardTable(jsonData) {
     if (jsonData === undefined)
         return;
 
@@ -66,18 +43,3 @@ function addAllColumnHeaders(myList) {
 
     return columnSet;
 }
-
-
-
-function refreshFloorTableResult() {
-    setInterval(function () {
-        RefreshSelectedFloorStatus();
-    }, 5000);
-}
-
-function RefreshSelectedFloorStatus() {
-    var monitorIdElement = document.getElementById("floor");
-    var monitorId = monitorIdElement.value;
-    httpGetAsync("http://localhost:60099/SecurityDashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
-}
-

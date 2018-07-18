@@ -14,7 +14,7 @@ namespace Security.BusinessLogic
         {
             string roomName = _roomProvider.GetRoomName(roomId);
             var cameras = _cameraProvider.GetRoomCameras(roomId);
-            var presenceRules = _rulesProvider.CreatePresenceRules(roomId);
+            var presenceRules = _rulesProvider.GetPresenceRules(roomId);
             return new SecurityScanner(roomName, presenceRules, recognizer, cameras);
         }
 
@@ -73,6 +73,14 @@ namespace Security.BusinessLogic
                         new Camera(6),
                         new Camera(7),
                         new Camera(8)
+                    };
+                case 2:
+                    return new List<Camera>()
+                    {
+                        new Camera(13),
+                        new Camera(14),
+                        new Camera(15),
+                        new Camera(16)
                     };
                 case 3:
                     return new List<Camera>()

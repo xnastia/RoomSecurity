@@ -12,5 +12,7 @@ namespace Security.DataLayer
         public DbSet<User> Users { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Monitor> Monitors { get; set; }
     }
 }

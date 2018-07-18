@@ -1,9 +1,8 @@
-﻿namespace Security.Entities
+﻿namespace Security.DataLayer
 {
-    public class Room
+    public class Monitor
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
     }
 }

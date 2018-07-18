@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Security.DataLayer
 {
@@ -9,9 +8,9 @@ namespace Security.DataLayer
 
         public string GetRoomName(int roomId)
         {
-            //return _securityDbContext.Rooms.Single(x => x.Id == roomId).Name;
+            return _securityDbContext.Rooms.Single(x => x.Id == roomId).Name;
 
-            switch (roomId)
+           /* switch (roomId)
             {
                 case 1:
                     return "Conference room";
@@ -24,7 +23,7 @@ namespace Security.DataLayer
                 default:
                     throw new NotImplementedException(
                         "1 to 4 Ids are valid for now before DataLayer and DB has been implemented");
-            }
+            }*/
         }
     }
 }

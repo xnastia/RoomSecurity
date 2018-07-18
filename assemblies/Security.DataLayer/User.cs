@@ -1,4 +1,4 @@
-﻿namespace Security.Entities
+﻿namespace Security.DataLayer
 {
     public class User
     {

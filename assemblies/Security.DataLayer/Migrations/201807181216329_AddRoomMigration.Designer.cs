@@ -7,13 +7,13 @@ namespace Security.DataLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class AddRoomMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddRoomMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807161426024_Initial"; }
+            get { return "201807181216329_AddRoomMigration"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,27 +3,26 @@ namespace Security.DataLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class AddMonitorsMigration : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Users",
+                "dbo.Monitors",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        Email = c.String(),
-                        Password = c.String(),
+                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
+            AddColumn("dbo.Rooms", "MonitorId", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            DropTable("dbo.Users");
+            DropColumn("dbo.Rooms", "MonitorId");
+            DropTable("dbo.Monitors");
         }
     }
 }

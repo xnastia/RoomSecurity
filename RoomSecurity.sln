@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.DataLayer", "assem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.WebSite", "assemblies\Security.WebSite\Security.WebSite.csproj", "{0CF8299E-0776-42FD-BE19-FE52FF0FD85F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.WebApi", "Security.WebApi\Security.WebApi.csproj", "{37538292-E637-421C-9B5C-C3BBFA7DBD13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{0CF8299E-0776-42FD-BE19-FE52FF0FD85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CF8299E-0776-42FD-BE19-FE52FF0FD85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CF8299E-0776-42FD-BE19-FE52FF0FD85F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37538292-E637-421C-9B5C-C3BBFA7DBD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37538292-E637-421C-9B5C-C3BBFA7DBD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37538292-E637-421C-9B5C-C3BBFA7DBD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37538292-E637-421C-9B5C-C3BBFA7DBD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

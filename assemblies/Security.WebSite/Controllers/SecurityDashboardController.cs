@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Security.BusinessLogic;
 using Security.Entities;
 
 namespace Security.WebSite.Controllers
@@ -7,6 +6,7 @@ namespace Security.WebSite.Controllers
     [AllowAnonymous]
     public class SecurityDashboardController : Controller
     {
+        /*
         // GET: SecurityDashboard
         public ActionResult Index()
         {
@@ -20,11 +20,10 @@ namespace Security.WebSite.Controllers
 
         public ActionResult GetMonitorStatus(int monitorId)
         {
-            var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);
-            var firstFloorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
-            var checkTime = monitorSnapshot.CurrentTime;
-            DashboardStatus firstFloorDashboardStatus = new DashboardStatus(checkTime, firstFloorScannerStatuses);
+            Security.WebApi.SecurityDashboardController securityDashboardController
+            DashboardStatus firstFloorDashboardStatus = GetMonitorStatus(monitorId)
             return Json(firstFloorDashboardStatus, JsonRequestBehavior.AllowGet);
         }
+        */
     }
 }

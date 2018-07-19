@@ -20,6 +20,6 @@ function refreshFloorTableResult() {
 function refreshSelectedFloorStatus() {
     var monitorIdElement = document.getElementById("floor");
     var monitorId = monitorIdElement.value;
-    httpGetAsync("http://localhost:60099/SecurityDashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
+    httpGetAsync("http://localhost:59428/SecurityDashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
 }
 

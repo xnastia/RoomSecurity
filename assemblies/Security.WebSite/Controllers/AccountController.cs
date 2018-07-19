@@ -3,16 +3,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Security.WebSite.Models;
-using System.Linq;
-using Security.BusinessLogic;
-using Security.Entities;
-using Security.DataLayer;
 
 namespace Security.WebSite.Controllers
 {
     public class AccountController : Controller
     {
-        [AllowAnonymous]
+       /* [AllowAnonymous]
         public ActionResult Login()
         {
           return View("Login");
@@ -31,17 +27,8 @@ namespace Security.WebSite.Controllers
         {
           if (ModelState.IsValid)
           {
-              User user = new SecurityApi().GetUser(loginViewModel.Email, loginViewModel.Password);
-
-                if (user != null)
-                {
-                    DoLogin(user, loginViewModel);
-                    return RedirectToAction("Index", "SecurityDashboard");
-                }
-
-                ModelState.AddModelError("", "Incorrect username or password");
-                return View("Login");
-            }
+              
+           }
 
             return View("Login");
         }
@@ -56,7 +43,7 @@ namespace Security.WebSite.Controllers
             cookie.HttpOnly = true;
             Response.Cookies.Add(cookie);
         }
-
+        */
     }
 }
     

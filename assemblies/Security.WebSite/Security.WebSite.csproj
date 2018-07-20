@@ -201,13 +201,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\SecurityDashboard\SecurityDashboard.cshtml" />
-    <Content Include="Views\SecurityDashboard\SecurityDashboardStatus.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Dashboard\SecurityDashboard.cshtml" />
+    <Content Include="Views\Dashboard\SecurityDashboardStatus.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
-    <Content Include="Views\SecurityDashboard\Logout.cshtml" />
+    <Content Include="Views\Dashboard\Logout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +228,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SecurityDashboardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -257,7 +259,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60099</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60099/</IISUrl>
+          <IISUrl>http://localhost:8181/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

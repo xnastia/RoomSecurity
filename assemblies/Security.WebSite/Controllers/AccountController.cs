@@ -1,49 +1,25 @@
-﻿using System;
-using System.Web;
+﻿using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Security;
-using Security.WebSite.Models;
 
 namespace Security.WebSite.Controllers
 {
     public class AccountController : Controller
     {
-       /* [AllowAnonymous]
-        public ActionResult Login()
+        //string email, string password
+        [System.Web.Http.AcceptVerbs("Post")]
+        public async Task<ActionResult> Post([FromBody] FormDataCollection formData)
         {
-          return View("Login");
-        }
+            HttpClient client = new HttpClient();
+            HttpContent content = new FormUrlEncodedContent(formData);
+            var response = await client.PostAsync($"http://localhost:8282/Account", content);
 
-        [HttpPost]
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Login","Account");
+            if (response.StatusCode == HttpStatusCode.OK)
+                return new HttpStatusCodeResult(200);
+            return new HttpStatusCodeResult(401);
         }
-
-        [AllowAnonymous]
-        [HttpPost]
-        public ActionResult Login(LoginViewModel loginViewModel)
-        {
-          if (ModelState.IsValid)
-          {
-              
-           }
-
-            return View("Login");
-        }
-
-        private void DoLogin(User user, LoginViewModel loginViewModel)
-        {
-            int timeout = 525600; // 525600 min = 1 year
-            var ticket = new FormsAuthenticationTicket(loginViewModel.Email, true, timeout);
-            string encrypted = FormsAuthentication.Encrypt(ticket);
-            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
-            cookie.Expires = DateTime.Now.AddMinutes(timeout);
-            cookie.HttpOnly = true;
-            Response.Cookies.Add(cookie);
-        }
-        */
     }
 }
-    

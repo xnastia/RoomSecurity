@@ -1,29 +1,25 @@
-﻿using System.Web.Mvc;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
 using Security.Entities;
 
 namespace Security.WebSite.Controllers
 {
-    [AllowAnonymous]
-    public class SecurityDashboardController : Controller
+    public class SecurityDashboardController : ApiController
     {
-        /*
-        // GET: SecurityDashboard
-        public ActionResult Index()
+        //securitydashboard/getmonitorstatus?monitorid=1
+        public async Task<DashboardStatus> GetMonitorStatus(int monitorId)
         {
-            return View("SecurityDashboard");
-        }
+            DashboardStatus result = null;
+            HttpClient client = new HttpClient();
+            var response = await client.GetAsync($"http://localhost:8282/securitydashboard/getmonitorstatus?monitorid={monitorId}");
 
-        public ActionResult GetSecurityDashboardStatus()
-        {
-            return PartialView("SecurityDashboardStatus");
-        }
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadAsAsync<DashboardStatus>();
+            }
 
-        public ActionResult GetMonitorStatus(int monitorId)
-        {
-            Security.WebApi.SecurityDashboardController securityDashboardController
-            DashboardStatus firstFloorDashboardStatus = GetMonitorStatus(monitorId)
-            return Json(firstFloorDashboardStatus, JsonRequestBehavior.AllowGet);
+            return result;
         }
-        */
     }
 }

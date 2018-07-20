@@ -1,22 +1,26 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http.Formatting;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Security.BusinessLogic;
-using Security.DataLayer;
 
 namespace Security.WebApi.Controllers
 {
     public class AccountController : ApiController
     {
         //string email, string password
-        public HttpResponseMessage Post([FromBody] string a)
+        [AcceptVerbs("Post")]
+        public IHttpActionResult Post([FromBody]FormDataCollection formData)
         {
-            //User user = new SecurityApi().GetUser(email, password);
+            var email = formData.Get("email");
+            var password = formData.Get("password");
 
-            return Request.CreateResponse(HttpStatusCode.Unauthorized, a);
+            //TODO: authenticate user
+            var isValidUser = new SecurityApi().IsValidtUser(email, password);
+
+            if (isValidUser)
+                return Ok();
+            return Unauthorized();
         }
-    
+
 
         /*private void DoLogin(User user, LoginViewModel loginViewModel)
         {

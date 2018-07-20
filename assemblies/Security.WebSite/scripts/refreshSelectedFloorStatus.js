@@ -14,7 +14,7 @@ function updateCheckTime(jsonData) {
 function refreshFloorTableResult() {
     setInterval(function () {
         refreshSelectedFloorStatus();
-    }, 5000);
+    }, 5000000);
 }
 
 function refreshSelectedFloorStatus() {

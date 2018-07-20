@@ -21,15 +21,26 @@ function httpPostAsync(theUrl, postObject, callbackOnOk, callbackOnError) {
                 callbackOnError(xmlHttp);
     }
     xmlHttp.open("POST", theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xmlHttp.send(postObject);
 }
 
-function refreshLogin() {
+function displayInvalidLogin() {
+    document.getElementById("validate error").innerText = "Incorrect email or password";
+}
+
+function redirectToSecurityDashboard() {
+    window.location.replace("api/SecurityDashboard/GetMonitorStatus");
+}
+
+function authenticateUser() {
     var emailIdElement = document.getElementById("email");
     var email = emailIdElement.value;
     var passwordIdElement = document.getElementById("password");
     var password = passwordIdElement.value;
-    httpPostAsync("http://localhost:59428/AccountControler/Login?email=" + email + "&password=" + password,
-        window.location.replace(),
-        window.location.replace());
+    var userObject = "email=" + email + "&password=" + password;
+        httpPostAsync("api/Account", userObject,
+            redirectToSecurityDashboard,
+            displayInvalidLogin);
 }
+

@@ -2,7 +2,6 @@
     <title>Login</title>
 </head>
 <body>
-    <script src="/scripts/Login.js"></script>
 <div>
     <h2>Log In</h2>
 
@@ -19,8 +18,10 @@
             <label>Password</label>
             <input type="password" id="password" name="Password" placeholder="Password">
         </div>
-        <button type="submit">Login</button>
+        <button type="button" onclick="authenticateUser()">Login</button>
     }
+    <div id ="validate error"></div>
 </div>
+<script src="/Scripts/httpGetAsync.js"></script>
 </body>
 

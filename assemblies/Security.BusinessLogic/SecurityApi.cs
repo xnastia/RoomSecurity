@@ -10,5 +10,10 @@ namespace Security.BusinessLogic
         {
             return _userProvider.GetUserByEmailAndPassword(email, password);
         }
+
+        public bool IsValidtUser(string email, string password)
+        {
+            return _userProvider.IsUserValid(email, password);
+        }
     }
 }

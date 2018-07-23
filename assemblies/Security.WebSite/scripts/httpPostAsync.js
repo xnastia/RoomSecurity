@@ -1,4 +1,4 @@
-﻿function httpGetAsync(theUrl, callbackOnOk, callbackOnError) {
+﻿function httpPostAsync(theUrl, postObject, callbackOnOk, callbackOnError) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4)
@@ -7,7 +7,7 @@
             else if (callbackOnError !== undefined)
                 callbackOnError(xmlHttp);
     }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xmlHttp.send(postObject);
 }
-

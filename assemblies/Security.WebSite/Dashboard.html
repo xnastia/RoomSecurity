@@ -1,0 +1,28 @@
+﻿<h2>Security Dashboard</h2>
+<h3 id="checkTime"></h3>
+
+  <body onLoad="buildSecurityDashboardTable()">
+ 
+  <form method="get">
+      <p>
+          <label>Select the floor:</label>
+          <select id="floor" name="floor">
+              <option value="1">first floor</option>
+              <option value="2">second floor</option>
+          </select>
+      </p>
+  </form>
+
+  <table id="securityDashboardTable" style="border: 1px;">
+    <thead></thead>
+    <tbody></tbody>
+</table>
+<script src="/Scripts/refreshSelectedFloorStatus.js"></script>
+<script src="/Scripts/buildSecurityDashboardTable.js"></script>
+<script src="/Scripts/httpGetAsync.js"></script>
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    refreshFloorTableResult();
+</script>
+</body>
+

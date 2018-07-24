@@ -151,10 +151,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\StyleSheet1.css" />
+    <Content Include="css\login.css" />
     <Content Include="Login.html" />
     <Content Include="Dashboard.html" />
     <None Include="Properties\PublishProfiles\WebSite.pubxml" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\authenticateUser.js" />

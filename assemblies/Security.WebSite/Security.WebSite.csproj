@@ -151,6 +151,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\dashboard.css" />
     <Content Include="css\login.css" />
     <Content Include="Login.html" />
     <Content Include="Dashboard.html" />

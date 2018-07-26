@@ -2,40 +2,37 @@
 <html>
 <head>
     <title>Login</title>
-    <link href="/css/login.css" rel='stylesheet' type='text/css'>
-    <script src="/Scripts/httpPostAsync.js"></script>
-    <script src="/Scripts/authenticateUser.js"></script>
-
+    
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <script src="/Scripts/httpPostAsync.js"></script>
+    <script src="/Scripts/authenticateUser.js"></script>
+
     <!--Pulling Awesome Font -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-5 col-md-3">
-                <div class="form-login">
-                    <h2>Log In</h2>
-                    <p>log in to access the administrative area:</p>
+<div class="container">
+    <div class="form-login">
+                <h2>Log In</h2>
+                <p>log in to access the administrative area:</p>
 
-                    <label>Email address</label>
-                    <input type="email" id="email" class="form-control input-sm chat-input" name="Email" placeholder="Enter email"> </br>
+                <label>Email address</label>
+                <input type="email" id="email" class="form-control input-sm chat-input" name="Email" placeholder="Enter email"> </br>
 
-                    <label>Password</label>
-                    <input type="password" id="password" class="form-control input-sm chat-input" name="Password" placeholder="Password"> </br>
-                    <div class="wrapper">
-                        <span class="group-btn">
-                            <a href="#" class="btn btn-primary btn-md" onclick="authenticateUser()">login<i class="fa fa-sign-in"></i></a>
-                        </span>
-                    </div>
+                <label>Password</label>
+                <input type="password" id="password" class="form-control input-sm chat-input" name="Password" placeholder="Password"> </br>
+                <div id="validate error"></div>
+                <div class="wrapper">
+                    <span class="group-btn">
+                        <a href="#" class="btn btn-primary btn-md" onclick="authenticateUser()">login<i class="fa fa-sign-in"></i></a>
+                    </span>
                 </div>
             </div>
-            <div id="validate error"></div>
         </div>
-    </div>
 </body>
 </html>

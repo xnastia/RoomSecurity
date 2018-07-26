@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Security.DataLayer
 {
     class MonitorRepository
     {
-        private SecurityDbContext _securityDbContext = new SecurityDbContext();
+        private readonly SecurityDbContext _securityDbContext = new SecurityDbContext();
 
         public Monitor GetMonitorById(int monitorId)
         {

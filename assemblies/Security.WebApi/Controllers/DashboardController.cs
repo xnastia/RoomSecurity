@@ -6,7 +6,7 @@ namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
-        //securitydashboard/getmonitorstatus?monitorid=1
+        [Authorize]
         public DashboardStatus GetMonitorStatus(int monitorId)
         {
             var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);

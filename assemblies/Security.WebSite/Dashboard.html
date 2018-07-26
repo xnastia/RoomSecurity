@@ -1,29 +1,46 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <link href="/css/dashboard.css" rel="stylesheet" type="text/css">
     <script src="/Scripts/refreshSelectedFloorStatus.js"></script>
     <script src="/Scripts/buildSecurityDashboardTable.js"></script>
     <script src="/Scripts/httpGetAsync.js"></script>
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <title>Dashboard</title>
+
 </head>
 <body onLoad="buildSecurityDashboardTable()">
-<h2>Security Dashboard</h2>
-<h3 id="checkTime"></h3>
-<form method="get">
-    <p>
-        <label>Select the floor:</label>
-        <select id="floor" name="floor">
-            <option value="1">first floor</option>
-            <option value="2">second floor</option>
-        </select>
-    </p>
-</form>
-
-<table id="securityDashboardTable">
-    <thead></thead>
-    <tbody></tbody>
-</table>
-<script>refreshFloorTableResult();</script>
+<header>
+    <div class="align-right">
+        <span class="group-btn">
+            <a href="/login.html" class="btn btn-primary btn-md">logout <i class="fa fa-sign-out"></i></a>
+        </span>
+    </div>
+</header>
+<div class="col-md-offset-5 col-md-3">
+<div class="dashboard">
+    <h2>Security Dashboard</h2>
+    <h3 id="checkTime"></h3>
+    <form method="get">
+        <div>
+            <label>Select the floor:</label>
+            <select id="floor" name="floor">
+                <option value="1">first floor</option>
+                <option value="2">second floor</option>
+            </select>
+        </div>
+    </form>
+    <table id="securityDashboardTable">
+        <thead></thead>
+        <tbody></tbody>
+    </table><br/>
+    <script>refreshFloorTableResult();</script>
+</div>
 </body>
 </html>

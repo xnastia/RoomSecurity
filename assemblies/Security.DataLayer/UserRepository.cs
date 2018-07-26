@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Security.Entities;
 
 namespace Security.DataLayer
 {

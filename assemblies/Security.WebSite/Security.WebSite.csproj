@@ -156,6 +156,7 @@
     <Content Include="Login.html" />
     <Content Include="Dashboard.html" />
     <None Include="Properties\PublishProfiles\WebSite.pubxml" />
+    <Content Include="scripts\Dashboard\Dashboard.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

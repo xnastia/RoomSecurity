@@ -22,7 +22,12 @@
                 if (cellValue == null) {
                     cellValue = "";
                 }
-
+                if (cellValue === true) {
+                    cellValue = "<img class='boolIcon' src='/assets/images/okIcon.jpg'>";
+                } else if(cellValue === false) {
+                    cellValue = "<img class='boolIcon' src='/assets/images/notOk.jpg'>";
+                }
+                
                 row$.append($('<td/>').html(cellValue));
             }
             $("#securityDashboardTable").append(row$);
@@ -53,7 +58,7 @@
 
     self.init = function() {
         $('#checkScanner').change(function () {
-            checkIsScannerEnabled();
+            refreshSelectedFloorStatus();
         });
     };
 

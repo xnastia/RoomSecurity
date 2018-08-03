@@ -3,8 +3,8 @@
 <head>
     <link href="/css/dashboard.css" rel="stylesheet" type="text/css">
     <script src="/Scripts/refreshSelectedFloorStatus.js"></script>
-    <script src="/Scripts/buildSecurityDashboardTable.js"></script>
     <script src="/Scripts/httpGetAsync.js"></script>
+    <script src="/Scripts/onBtnClick.js"></script>
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
     <script src="scripts/Dashboard/Dashboard.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,7 +14,6 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <title>Dashboard</title>
-
 </head>
 <body onLoad="dashboard.init()">
 <header>
@@ -27,21 +26,19 @@
 
 <div class="dashboard">
     <h2>Security Dashboard</h2>
-    <h3 id="checkTime"></h3>
     <form method="get">
-        <div>
-            <label>Select the floor:</label>
-            <select id="floor" name="floor">
-                <option value="1">first floor</option>
-                <option value="2">second floor</option>
-            </select>
+        <div class="scrollmenu" id="floor" name="floor">
+            <a href="#" onclick="onBtnClick(this, '1')">first floor</a>
+            <a href="#" onclick="onBtnClick(this, '2')">second floor</a>
         </div>
     </form>
+    <h3 id="checkTime"></h3>
     <table id="securityDashboardTable">
         <thead></thead>
         <tbody></tbody>
-    </table><br/>
-    <div id="scanner checkbox"class="checkbox" align="right">
+    </table><br />
+    <script>refreshFloorTableResult()</script>
+    <div id="scanner checkbox" class="checkbox" align="right">
         <label>Scanner is :</label>
         <label>
             <input id="checkScanner" type="checkbox" data-toggle="toggle">

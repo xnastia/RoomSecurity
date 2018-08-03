@@ -20,13 +20,13 @@ function refreshFloorTableResult() {
 function refreshSelectedFloorStatus() {
     var monitorIdElement = document.getElementById("floor");
     var monitorId = monitorIdElement.value;
-    httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
+    if (checkIsScannerEnabled())
+        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
 }
 
 function checkIsScannerEnabled() {
     var checkbox = document.getElementById("checkScanner");
-    if (checkbox.checked === true) {
-        refreshSelectedFloorStatus();
-    }
+    var scannerEnabled = checkbox.checked;
+    return scannerEnabled;
 }
 

@@ -40,13 +40,14 @@ table {
     width: 100%;
 }
 
-th, td { padding: 15px; }
+th, td { 
+    padding: 15px; 
+    padding-left: 15px;}
 
 th {
     background-color: #4CAF50;
     color: white;
 }
-
 
 .wrapper { text-align: center; }
 

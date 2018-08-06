@@ -28,8 +28,8 @@
     <h2>Security Dashboard</h2>
     <form method="get">
         <div class="scrollmenu" id="floor" name="floor">
-            <a href="#" onclick="onBtnClick(this, '1')">first floor</a>
-            <a href="#" onclick="onBtnClick(this, '2')">second floor</a>
+            <a href="#" id="firstFloorBtn" onclick="onBtnClick(this, '1')">first floor</a>
+            <a href="#" id="secondFloorBtn" onclick="onBtnClick(this, '2')">second floor</a>
         </div>
     </form>
     <h3 id="checkTime"></h3>
@@ -38,12 +38,12 @@
         <tbody></tbody>
     </table><br />
     <script>refreshFloorTableResult()</script>
-    <div id="scanner checkbox" class="checkbox" align="right">
+    <div id="scanner checkbox" class="checkbox" align="right" onclick="loadDefaultMonitor('firstFloorBtn','1')">
         <label>Scanner is :</label>
         <label>
-            <input id="checkScanner" type="checkbox" data-toggle="toggle">
+            <input id="scannerSwitcher" type="checkbox" data-toggle="toggle">
         </label>
     </div>
-</div>
+   </div>
 </body>
 </html>

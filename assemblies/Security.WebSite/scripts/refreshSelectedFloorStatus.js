@@ -25,7 +25,7 @@ function refreshSelectedFloorStatus() {
 }
 
 function checkIsScannerEnabled() {
-    var checkbox = document.getElementById("checkScanner");
+    var checkbox = document.getElementById("scannerSwitcher");
     var scannerEnabled = checkbox.checked;
     return scannerEnabled;
 }

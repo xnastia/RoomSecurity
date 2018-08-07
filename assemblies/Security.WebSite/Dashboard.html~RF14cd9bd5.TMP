@@ -37,10 +37,9 @@
     <table id="securityDashboardTable">
         <thead></thead>
         <tbody></tbody>
-    </table><br/>
-    <script>refreshFloorTableResult()
-    </script>
-    <div id="scannerCheckbox" class="checkbox" align="right" onclick="loadDefaultMonitor('firstFloorBtn', '1')">
+    </table><br />
+    <script>refreshFloorTableResult()</script>
+    <div id="scannerCheckbox" class="checkbox" align="right" onclick="loadDefaultMonitor('firstFloorBtn','1')">
         <label>Scanner is :</label>
         <label>
             <input id="scannerSwitcher" type="checkbox" data-toggle="toggle">
@@ -48,8 +47,8 @@
     </div>
 </div>
 <div id="alarmerReport" class="alarmReportHide">
-    <div class="alarmReportBackground">
-        <span class="close" onclick="switchAlarmReport()">&times;</span>
+    <div class ="alarmReportContent">
+    <span class="close" onclick="switchAlarmReport()">&times;</span>
         Danger!
     </div>
 </div>

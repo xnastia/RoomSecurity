@@ -27,13 +27,15 @@
                 } else if(cellValue === false) {
                     cellValue = "<img class='boolIcon' src='/assets/images/notOk.png'>";
                 }
-                
+                if (typeof cellValue === "string") {
+                    cellValue = "<a id='myBtn' onclick=switchAlarmReport()>" + cellValue + "</a>";
+                }
                 row$.append($('<td/>').html(cellValue));
             }
             $("#securityDashboardTable").append(row$);
         }
     }
-
+    
     function addAllColumnHeaders(myList) {
         var columnSet = [];
         var headerTr$ = $('<tr/>');

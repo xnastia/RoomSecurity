@@ -2,22 +2,27 @@
 <html>
 <head>
     <link href="/css/dashboard.css" rel="stylesheet" type="text/css">
+    
     <script src="/Scripts/Dashboard/refreshSelectedFloorStatus.js"></script>
-    <script src="/Scripts/httpGetAsync.js"></script>
+    <script src="/Scripts/httpRequests/httpGetAsync.js"></script>
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="scripts/Dashboard/showAlarmReport.js"></script>
     <script src="scripts/Dashboard/Dashboard.js"></script>
     <script src="scripts/Dashboard/onFloorBtnClick.js"></script>
     <script src="scripts/Dashboard/loadDefaultMonitor.js"></script>
+    <script src="scripts/Dashboard/showAlarmReport.js"></script>
+    <script src="scripts/Dashboard/onLoadDashboard.js"></script>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    
     <title>Dashboard</title>
 </head>
-<body onLoad="dashboard.init()">
+<body onLoad="onLoadDashboard()">  
+    <div id="block-panel" class="block-panel"></div>
 <header>
     <div class="align-right">
         <span class="group-btn">
@@ -33,25 +38,24 @@
             <a href="#" id="secondFloorBtn" onclick="onBtnClick(this, '2')">second floor</a>
         </div>
     </form>
-    <h3 id="checkTime"></h3>
+    <h3 id="check-time"></h3>
     <table id="securityDashboardTable">
         <thead></thead>
         <tbody></tbody>
     </table><br/>
-    <script>refreshFloorTableResult()
+    <script>
+        refreshFloorTableResult()
     </script>
-    <div id="scannerCheckbox" class="checkbox" align="right" onclick="loadDefaultMonitor('firstFloorBtn', '1')">
+    <div id="scanner-checkbox" class="checkbox" align="right" onclick="loadDefaultMonitor('firstFloorBtn', '1')">
         <label>Scanner is :</label>
         <label>
-            <input id="scannerSwitcher" type="checkbox" data-toggle="toggle">
+            <input id="scanner-switcher" type="checkbox" data-toggle="toggle">
         </label>
     </div>
 </div>
-<div id="alarmerReport" class="alarmReportHide">
-    <div class="alarmReportBackground">
-        <span class="close" onclick="switchAlarmReport()">&times;</span>
-        Danger!
-    </div>
+<div id="alarm-report" class="alarm-report" onclick="alarmReport.showAlarmReport()">
+    <span class="close" onclick="alarmReport.hideAlarmReportOnCloseBtnClick()">&times;</span>
+    Danger!
 </div>
 </body>
 </html>

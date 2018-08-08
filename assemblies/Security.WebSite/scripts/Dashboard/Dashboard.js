@@ -23,12 +23,12 @@
                     cellValue = "";
                 }
                 if (cellValue === true) {
-                    cellValue = "<img class='boolIcon' src='/assets/images/ok.png'>";
+                    cellValue = "<img class='bool-icon' src='/assets/images/ok.png'>";
                 } else if(cellValue === false) {
-                    cellValue = "<img class='boolIcon' src='/assets/images/notOk.png'>";
+                    cellValue = "<img class='bool-icon' src='/assets/images/notOk.png'>";
                 }
                 if (typeof cellValue === "string") {
-                    cellValue = "<a id='myBtn' onclick=switchAlarmReport()>" + cellValue + "</a>";
+                    cellValue = "<a id='myBtn' onclick=alarmReport.showAlarmReport()>" + cellValue + "</a>";
                 }
                 row$.append($('<td/>').html(cellValue));
             }
@@ -59,7 +59,7 @@
     };
 
     self.init = function() {
-        $('#scannerSwitcher').change(function () {
+        $('#scanner-switcher').change(function () {
             refreshSelectedFloorStatus();
         });
     };

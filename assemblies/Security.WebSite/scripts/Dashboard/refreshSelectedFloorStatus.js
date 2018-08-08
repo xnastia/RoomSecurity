@@ -7,7 +7,7 @@ function updateCheckTime(jsonData) {
     if (jsonData === undefined)
         return;
     var timeString = JSON.parse(jsonData).CheckTime;
-    var checkTime = document.getElementById("checkTime");
+    var checkTime = document.getElementById("check-time");
     checkTime.innerText = timeString;
 }
 
@@ -25,7 +25,7 @@ function refreshSelectedFloorStatus() {
 }
 
 function checkIsScannerEnabled() {
-    var checkbox = document.getElementById("scannerSwitcher");
+    var checkbox = document.getElementById("scanner-switcher");
     var scannerEnabled = checkbox.checked;
     return scannerEnabled;
 }

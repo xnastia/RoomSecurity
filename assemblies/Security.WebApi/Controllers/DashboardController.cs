@@ -9,9 +9,9 @@ namespace Security.WebApi.Controllers
         public DashboardStatus GetMonitorStatus(int monitorId)
         {
             var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);
-            var firstFloorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
+            var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
-            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, firstFloorScannerStatuses);
+            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);
             return floorDashboardStatus;
         }
     }

@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.WebApi", "assembli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.BusinessLogic", "assemblies\Security.BusinessLogic\Security.BusinessLogic.csproj", "{5F8BF4C6-204A-48AC-BE2E-A5B745AF7DCB}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Security.WebSite(1)", "assemblies\Security.WebSite\", "{017A2C59-024B-4CCF-B520-8B593DFBBC27}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Security.WebSite", "assemblies\Security.WebSite\", "{017A2C59-024B-4CCF-B520-8B593DFBBC27}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57936"
@@ -33,6 +33,14 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Security.WebSite(1)", "asse
 		VWDPort = "57936"
 		SlnRelativePath = "assemblies\Security.WebSite\"
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B205415A-4804-4609-98A1-822E393F2E1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomSecurityTests.Server", "tests\RoomSecurityTests\RoomSecurityTests.Server\RoomSecurityTests.Server.csproj", "{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C}"
+EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "RoomSecurityTests.HTMLClient", "tests\RoomSecurityTests\RoomSecurityTests.HTMLClient\RoomSecurityTests.HTMLClient.jsproj", "{043E4459-EAA3-40B3-A8EE-C5F14B8857C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomSecurity.UnitTests", "tests\RoomSecurity.UnitTests\RoomSecurity.UnitTests.csproj", "{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +68,18 @@ Global
 		{017A2C59-024B-4CCF-B520-8B593DFBBC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{017A2C59-024B-4CCF-B520-8B593DFBBC27}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{017A2C59-024B-4CCF-B520-8B593DFBBC27}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{043E4459-EAA3-40B3-A8EE-C5F14B8857C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{043E4459-EAA3-40B3-A8EE-C5F14B8857C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{043E4459-EAA3-40B3-A8EE-C5F14B8857C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{043E4459-EAA3-40B3-A8EE-C5F14B8857C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +90,8 @@ Global
 		{37538292-E637-421C-9B5C-C3BBFA7DBD13} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
 		{5F8BF4C6-204A-48AC-BE2E-A5B745AF7DCB} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
 		{017A2C59-024B-4CCF-B520-8B593DFBBC27} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
+		{71F9DE1B-E3ED-4E3D-86CC-CB90B577465C} = {B205415A-4804-4609-98A1-822E393F2E1B}
+		{043E4459-EAA3-40B3-A8EE-C5F14B8857C7} = {B205415A-4804-4609-98A1-822E393F2E1B}
+		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4} = {B205415A-4804-4609-98A1-822E393F2E1B}
 	EndGlobalSection
 EndGlobal

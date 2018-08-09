@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmStatusRepository.cs" />
     <Compile Include="Migrations\201807181216329_AddRoomMigration.cs" />
     <Compile Include="Migrations\201807181216329_AddRoomMigration.Designer.cs">
       <DependentUpon>201807181216329_AddRoomMigration.cs</DependentUpon>

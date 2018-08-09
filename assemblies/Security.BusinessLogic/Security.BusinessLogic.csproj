@@ -42,9 +42,12 @@
   <ItemGroup>
     <Compile Include="Alarmer.cs" />
     <Compile Include="AlarmMessageHandler.cs" />
+    <Compile Include="AlarmStatusProvider.cs" />
     <Compile Include="AllowedTime.cs" />
     <Compile Include="BadgeType.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="CameraProvider.cs" />
+    <Compile Include="CameraRepository.cs" />
     <Compile Include="CheckerResponse.cs" />
     <Compile Include="ConsoleAlarmMessageHandler.cs" />
     <Compile Include="IAlarmMessageHandler.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="PresenceRulesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomRecognizer.cs" />
+    <Compile Include="RoomProvider.cs" />
     <Compile Include="SecurityApi.cs" />
     <Compile Include="SecurityDashboard.cs" />
     <Compile Include="SecurityScanner.cs" />

@@ -1,10 +1,12 @@
-﻿using Security.DataLayer;
+﻿using System.Collections.Generic;
+using Security.DataLayer;
+using Security.Entities;
 
 namespace Security.BusinessLogic
 {
     public class AlarmStatusProvider
     {
-        private readonly AlarmStatusRepository alarmStatusRepository = new AlarmStatusRepository();
+        private readonly AlarmStatusRepository _alarmStatusRepository = new AlarmStatusRepository();
 
         public void InsertCheckerResponseIntoAlarmStatus(CheckerResponse checkerResponse)
         {
@@ -12,11 +14,21 @@ namespace Security.BusinessLogic
             {
                 string roomName = checkerResponse.ScannerName;
                 string statusTime = checkerResponse.CheckTime.ToString();
-                string intruderBadges = checkerResponse.Intruders.ToString();
+                var intruderBadges = checkerResponse.Intruders;
+                string intruders = "";
+                foreach (var inruderBadge in intruderBadges)
+                {
+                    intruders = inruderBadge + " ";
+                }
 
-                alarmStatusRepository.InsertAlarmStatus(roomName, statusTime, intruderBadges);
+                _alarmStatusRepository.InsertAlarmStatus(roomName, statusTime, intruders);
 
             }
+        }
+
+        public List<AlarmStatus> GetAlarmStatusByRoomName(string roomName)
+        {
+            return _alarmStatusRepository.AlarmStatusByRoomName(roomName);
         }
     }
 }

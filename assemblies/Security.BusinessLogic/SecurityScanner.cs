@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Security.BusinessLogic
 {
-    public class SecurityScanner
+    public class SecurityScanner : ISecurityScanner
     {
         private readonly List<Camera> _cameras;
         private readonly IRecognizer _recognizer;

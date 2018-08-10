@@ -25,7 +25,7 @@ namespace Security.BusinessLogic
             };
             monitor.EventOnCheckDone += monitorSnapshot.UpdateStatus;
             var alarmStatusProvider = new AlarmStatusProvider();
-            monitor.EventOnCheckDone += alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus;
+            monitor.EventOnIntruderDetected += alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus;
             return monitorSnapshot;
         }
     }

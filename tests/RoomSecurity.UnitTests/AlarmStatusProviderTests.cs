@@ -16,9 +16,8 @@ namespace RoomSecurity.UnitTests
             string roomName = "armory";
             CheckerResponse checkerResponse = new CheckerResponse(roomName, intruders, currentTime);
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus(checkerResponse);
             Assert.DoesNotThrow(() => 
-            alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus(checkerResponse), "fuck all bad",
+            alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus(checkerResponse), "",
                 null);
 
         }

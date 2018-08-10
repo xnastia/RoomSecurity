@@ -37,7 +37,7 @@ namespace Security.BusinessLogic
             IRecognizer recognizer = new RandomRecognizer(12121213);
             var hall = _securityScannerProvider.CreateHall(recognizer);
             var conferenceRoom = _securityScannerProvider.CreateConferenceRoom(recognizer);
-            var securitryScanners = new List<SecurityScanner>
+            var securitryScanners = new List<ISecurityScanner>
             {
                 hall,
                 conferenceRoom,
@@ -50,7 +50,7 @@ namespace Security.BusinessLogic
             IRecognizer recognizer = new RandomRecognizer(12121213);
             var dinnerRoom = _securityScannerProvider.CreateDinnerRoom(recognizer);
             var armoryRoom = _securityScannerProvider.CreateArmoryRoom(recognizer);
-            var securitryScanners = new List<SecurityScanner>
+            var securitryScanners = new List<ISecurityScanner>
             {
                 dinnerRoom,
                 armoryRoom

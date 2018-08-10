@@ -8,10 +8,14 @@ namespace Security.Entities
 
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
 
-        public DashboardStatus(string checkTime, List<ScannerStatus> securityScannerStatuses)
+        public List< AlarmStatus> AlarmStatuses { get; set; }
+
+        public DashboardStatus(string checkTime, List<ScannerStatus> securityScannerStatuses, 
+            List<AlarmStatus> alarmStatuses)
         {
             CheckTime = checkTime;
             SecurityScannerStatuses = securityScannerStatuses;
+            AlarmStatuses = alarmStatuses;
         }
     }
 }

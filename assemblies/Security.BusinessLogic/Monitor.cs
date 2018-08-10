@@ -12,9 +12,9 @@ namespace Security.BusinessLogic
         public event CheckDoneHandler EventOnIntruderDetected;
         public event CheckDoneHandler EventOnCheckDone;
 
-        private readonly List<SecurityScanner> _securityScanners;
+        private readonly List<ISecurityScanner> _securityScanners;
 
-        public Monitor(List<SecurityScanner> securityScanners)
+        public Monitor(List<ISecurityScanner> securityScanners)
         {
             if (securityScanners == null)
                 throw new ArgumentNullException(nameof(securityScanners));
@@ -35,6 +35,6 @@ namespace Security.BusinessLogic
                     EventOnIntruderDetected?.Invoke(checkerResponse);
                 }
             }
-         }
+        }
     }
 }

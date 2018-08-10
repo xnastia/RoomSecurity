@@ -6,12 +6,14 @@ namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
-        public DashboardStatus GetMonitorStatus(int monitorId)
+        public DashboardStatus GetMonitorStatus(int monitorId, string roomName)
         {
             var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
-            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);
+            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
+            var alarmStatuses = alarmStatusProvider.GetAlarmStatusByRoomName(roomName);
+            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses, alarmStatuses);
             return floorDashboardStatus;
         }
     }

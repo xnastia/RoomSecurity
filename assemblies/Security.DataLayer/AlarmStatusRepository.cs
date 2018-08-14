@@ -30,7 +30,7 @@ namespace Security.DataLayer
             }
         }
 
-        public int GetRowsNumber()
+       /* public int GetRowsNumber()
         {
             int rowsNumber=0;
             var currentRowsNumder = "Select MAX(Id) from AlarmStatus";
@@ -45,7 +45,6 @@ namespace Security.DataLayer
                 }
                 catch
                 {
-                    
                 }
             }
             return rowsNumber;
@@ -77,11 +76,10 @@ namespace Security.DataLayer
                 var command = new SqlCommand(deleteExtraAlarmStatusData, connection);
                 command.ExecuteNonQuery();
             }
-        }
+        }*/
 
         public List<AlarmStatus> AlarmStatusByRoomName(string roomName)
         {
-            CutAlarmStatuses(50);
             var AlarmStatusByRoomSqlExpression =
                 "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
 

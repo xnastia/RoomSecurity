@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Security.Entities
 {
@@ -10,10 +11,10 @@ namespace Security.Entities
 
         public List< AlarmStatus> AlarmStatuses { get; set; }
 
-        public DashboardStatus(string checkTime, List<ScannerStatus> securityScannerStatuses, 
+        public DashboardStatus(DateTime checkTime, List<ScannerStatus> securityScannerStatuses, 
             List<AlarmStatus> alarmStatuses)
         {
-            CheckTime = checkTime;
+            CheckTime = checkTime.ToString("yyyy-MM-dd HH:mm:ss");
             SecurityScannerStatuses = securityScannerStatuses;
             AlarmStatuses = alarmStatuses;
         }

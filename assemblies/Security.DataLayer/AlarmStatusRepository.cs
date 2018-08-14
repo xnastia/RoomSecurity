@@ -30,64 +30,14 @@ namespace Security.DataLayer
             }
         }
 
-        public int GetRowsNumber()
-        {
-            int rowsNumber=0;
-            var currentRowsNumder = "Select MAX(Id) from AlarmStatus";
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(currentRowsNumder, connection);
-
-                try
-                {
-                    rowsNumber = (int) command.ExecuteScalar();
-                }
-                catch
-                {
-                    
-                }
-            }
-            return rowsNumber;
-        }
-
-        public void ResetId()
-        {
-            var resetId = "DBCC CHECKIDENT (AlarmStatus, RESEED, 0)";
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(resetId, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
-        public void CutAlarmStatuses(int maxRowsNumber)
-        {
-            int rowsNumber = GetRowsNumber();
-            string deleteExtraAlarmStatusData="";
-            if (maxRowsNumber >= rowsNumber)
-            {
-                deleteExtraAlarmStatusData = "Delete from AlarmStatus where Id<@maxRowsNumber";
-                ResetId();
-            }
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(deleteExtraAlarmStatusData, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
         public List<AlarmStatus> AlarmStatusByRoomName(string roomName)
         {
-            CutAlarmStatuses(50);
             var AlarmStatusByRoomSqlExpression =
-                "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
+                "SELECT Id, CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
 
             SqlDataReader reader = null;
             var statuses = new List<AlarmStatus>();
-            var status = new AlarmStatus();
+            
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -98,8 +48,11 @@ namespace Security.DataLayer
 
                 while (reader.Read())
                 {
-                    status.Time = reader.GetString(0);
-                    status.IntruderBadge = reader.GetString(1);
+                    var status = new AlarmStatus
+                    {
+                        Time = reader.GetString(1),
+                        IntruderBadge = reader.GetString(2)
+                    };
                     statuses.Add(status);
                 }
             }

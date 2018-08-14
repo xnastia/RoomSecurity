@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
 
@@ -6,15 +7,19 @@ namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
-        public DashboardStatus GetMonitorStatus(int monitorId, string roomName)
+        public DashboardStatus GetMonitorStatus(int monitorId)
         {
             var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
-            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            var alarmStatuses = alarmStatusProvider.GetAlarmStatusByRoomName(roomName);
-            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses, alarmStatuses);
+            DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);
             return floorDashboardStatus;
+        }
+
+        public List<AlarmStatus> GetAlarmStatusHistory(string roomName)
+        {
+            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
+            return alarmStatusProvider.GetAlarmStatusByRoomName(roomName);
         }
     }
 }

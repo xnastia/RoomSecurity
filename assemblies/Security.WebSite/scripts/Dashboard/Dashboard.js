@@ -35,6 +35,34 @@
             $("#securityDashboardTable").append(row$);
         }
     }
+
+    function buildAlarmReportTable(jsonData) {
+        if (jsonData === undefined)
+            return;
+
+        var myList = JSON.parse(jsonData).AlarmStatuses;
+
+        var table = document.getElementById("alarm-report-table");
+        while (table.hasChildNodes()) {
+            table.removeChild(table.firstChild);
+        }
+
+        var columns = addAllColumnHeaders(myList);
+
+        for (var i = 0; i < myList.length; i++) {
+            var row$ = $('<tr/>');
+            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                var cellValue = myList[i][columns[colIndex]];
+
+                if (cellValue == null) {
+                    cellValue = "";
+                }
+                row$.append($('<td/>').html(cellValue));
+            }
+            $("#alarm-report-table").append(row$);
+        }
+        
+    }
     
     function addAllColumnHeaders(myList) {
         var columnSet = [];

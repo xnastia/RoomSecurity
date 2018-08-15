@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Security.Entities;
 
@@ -14,7 +15,7 @@ namespace Security.BusinessLogic
         public string CurrentTime { get; set; }
 
 
-        public MonitorSnapshot GetMonitorSnapshot(int monitorId)
+        public MonitorSnapshot GetMonitorSnapshot(Guid monitorId)
         {
             Monitor monitor = _monitorProvider.GetMonitor(monitorId);
             return _snapshotProvider.GetMonitorSnapshot(monitor);

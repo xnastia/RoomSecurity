@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Security.DataLayer;
+using Security.Entities;
 
 namespace Security.BusinessLogic
 {
@@ -10,8 +12,10 @@ namespace Security.BusinessLogic
 
         private SecurityScannerProvider _securityScannerProvider = new SecurityScannerProvider();
         
-        public Monitor GetMonitor(int monitorId)
+        public Monitor GetMonitor(Guid uiId)
         {
+            MonitorRepository monitorRepository = new MonitorRepository();
+            int monitorId = monitorRepository.GetMonitorIdByUiId(uiId);
             if (!Monitors.ContainsKey(monitorId))
             {
                 switch (monitorId)
@@ -56,6 +60,12 @@ namespace Security.BusinessLogic
                 armoryRoom
             };
             return new Monitor(securitryScanners);
+        }
+
+        public List<MonitorTab> GetMonitorsTabList()
+        {
+            MonitorRepository monitorRepository = new MonitorRepository();
+            return monitorRepository.GeMonitorTabs();
         }
     }
 }

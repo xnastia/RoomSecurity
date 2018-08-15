@@ -8,7 +8,7 @@ namespace Security.BusinessLogic
 
         public string GetRoomName(int roomId)
         {
-            return _roomRepository.GetRoomName(roomId);
+            return _roomRepository.GetRoomNameById(roomId);
         }
     }
 }

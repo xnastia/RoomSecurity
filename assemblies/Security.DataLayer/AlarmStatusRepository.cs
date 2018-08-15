@@ -33,7 +33,7 @@ namespace Security.DataLayer
         public List<AlarmStatus> AlarmStatusByRoomName(string roomName)
         {
             var AlarmStatusByRoomSqlExpression =
-                "SELECT Id, CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
+                "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
 
             SqlDataReader reader = null;
             var statuses = new List<AlarmStatus>();
@@ -50,8 +50,8 @@ namespace Security.DataLayer
                 {
                     var status = new AlarmStatus
                     {
-                        Time = reader.GetString(1),
-                        IntruderBadge = reader.GetString(2)
+                        Time = reader.GetString(0),
+                        IntruderBadge = reader.GetString(1)
                     };
                     statuses.Add(status);
                 }

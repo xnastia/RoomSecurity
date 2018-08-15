@@ -7,7 +7,7 @@
         }
     }
     if (!scannerEnabled) {
-        var anchor = document.getElementById(monitorId);
+        var anchor = document.getElementById(monitorId.toLowerCase());
         onBtnClick(anchor, monitorId);
     }
 }

@@ -6,10 +6,10 @@
         var monitorName = monitor["Name"];
         var monitorId = monitor["Id"];
         scrollMenuButtonsHtml += "<a href='#' id=" +
-            monitorId +
-            " onclick='onBtnClick(this, " +
-            monitorId +
-            ")'>" +
+            "'" + monitorId + "'" +
+            "onclick=\"onBtnClick(this, " +
+            "'" + monitorId + "'" +
+            ")\">" +
             monitorName +
             "</a> ";
     }

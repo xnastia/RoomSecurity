@@ -8,7 +8,7 @@ namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
-        public DashboardStatus GetMonitorStatus(int monitorId)
+        public DashboardStatus GetMonitorStatus(Guid monitorId)
         {
             var monitorSnapshot = new SnapshotApi().GetMonitorSnapshot(monitorId);
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
@@ -25,25 +25,22 @@ namespace Security.WebApi.Controllers
 
         public List<MonitorTab> GetMonitors()
         {
-            return new List<MonitorTab>
+            MonitorProvider monitorProvider = new MonitorProvider();
+            return monitorProvider.GetMonitorsTabList();
+            /*return new List<MonitorTab>
             {
                 new MonitorTab {Id = 1, Name = "First Floor"},
                 new MonitorTab {Id = 2, Name = "Second Floor"},
                 new MonitorTab {Id = 3, Name = "Third Floor"},
-            };
-            //return new List<MonitorTab>
-            //{
-            //    new MonitorTab {Id = Guid.NewGuid(), Name = "First Floor"},
-            //    new MonitorTab {Id = Guid.NewGuid(), Name = "Second Floor"},
-            //    new MonitorTab {Id = Guid.NewGuid(), Name = "Third Floor"},
-            //};
+            };*/
+            /*return new List<MonitorTab>
+            {
+                new MonitorTab {Id = Guid.NewGuid(), Name = "First Floor"},
+                new MonitorTab {Id = Guid.NewGuid(), Name = "Second Floor"},
+                new MonitorTab {Id = Guid.NewGuid(), Name = "Third Floor"},
+            };*/
         }
     }
 
-    public class MonitorTab
-    {
-        public string Name { get; set; }
-
-        public int Id { get; set; }
-    }
+ 
 }

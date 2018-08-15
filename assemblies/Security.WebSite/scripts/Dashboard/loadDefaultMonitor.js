@@ -1,4 +1,4 @@
-﻿function loadDefaultMonitor(defaultMonitorBtnId, value) {
+﻿function loadDefaultMonitor(monitorId) {
     var scannerEnabled = checkIsScannerEnabled();
     var buttons = document.getElementById('floor').children;
     for (let i = 0; i < buttons.length; i++) {
@@ -7,7 +7,7 @@
         }
     }
     if (!scannerEnabled) {
-        var anchor = document.getElementById(defaultMonitorBtnId);
-        onBtnClick(anchor, value);
+        var anchor = document.getElementById(monitorId);
+        onBtnClick(anchor, monitorId);
     }
 }

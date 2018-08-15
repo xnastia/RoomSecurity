@@ -18,7 +18,7 @@
         self.blockPanel.style.display = "block";
         roomName = roomName.replace("-"," ");
         self.roomName = roomName;
-        refreshSelectedRoomAlarmReport(self.roomName);
+        refreshSelectedRoomAlarmStatus(self.roomName);
     }
     
     self.hideAlarmReportOnCloseBtnClick = function() {
@@ -27,11 +27,11 @@
         event.stopPropagation();
     }
 
-    function refreshSelectedRoomAlarmReport(roomName) {
+    /*function refreshSelectedRoomAlarmReport(roomName) {
         setInterval(function () {
             refreshSelectedRoomAlarmStatus(roomName);
         }, 7000);
-    }
+    }*/
     
     function refreshSelectedRoomAlarmStatus(roomName) {
         httpGetAsync("api/dashboard/GetAlarmStatusHistory?roomName=" + roomName, updateStatus);

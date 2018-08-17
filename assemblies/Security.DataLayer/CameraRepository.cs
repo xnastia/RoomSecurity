@@ -21,9 +21,9 @@ namespace Security.DataLayer
                 connection.Open();
                 var command = new SqlCommand(getCameraEntities, connection);
                 var roomIdParameter = new SqlParameter("@roomId", roomId);
-                reader = command.ExecuteReader();
                 command.Parameters.Add(roomIdParameter);
-
+                reader = command.ExecuteReader();
+                
                 while (reader.Read())
                 {
                     var cameraEntity = new CameraEntity()

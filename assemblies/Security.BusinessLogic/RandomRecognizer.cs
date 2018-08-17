@@ -13,7 +13,7 @@ namespace Security.BusinessLogic
         private DateTime _resultGeneratedDate = DateTime.Now;
         private readonly List<BadgeType> _detectedBadges = new List<BadgeType>();
 
-        public RandomRecognizer(int seed, int delayResultChangeInSeconds = 60)
+        public RandomRecognizer(int seed, int delayResultChangeInSeconds = 0)
         {
             _delayResultChangeInSeconds = delayResultChangeInSeconds;
             _randomNumberOfBadgeType = new Random(seed);

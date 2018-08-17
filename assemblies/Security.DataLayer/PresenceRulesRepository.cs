@@ -12,7 +12,7 @@ namespace Security.DataLayer
 
         public List<PresenceRule> GetPresenceRulesByRoomId(int roomId)
         {
-            var getPresenceRules = "SELECT BadgeId, StartTime, EndTime PresenceRules WHERE roomId=@roomId";
+            var getPresenceRules = "SELECT BadgeId, StartTime, EndTime from PresenceRules WHERE RoomId=@roomId";
 
             SqlDataReader reader = null;
             List<PresenceRule> presenceRules = new List<PresenceRule>();

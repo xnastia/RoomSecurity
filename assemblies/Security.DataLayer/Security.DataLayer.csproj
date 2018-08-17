@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201807181312227_AddMonitorsMigration.Designer.cs">
       <DependentUpon>201807181312227_AddMonitorsMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808171118089_deleted monitor.cs" />
+    <Compile Include="Migrations\201808171118089_deleted monitor.Designer.cs">
+      <DependentUpon>201808171118089_deleted monitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorRepository.cs" />
     <Compile Include="PresenceRulesRepository.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807181312227_AddMonitorsMigration.resx">
       <DependentUpon>201807181312227_AddMonitorsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808171118089_deleted monitor.resx">
+      <DependentUpon>201808171118089_deleted monitor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

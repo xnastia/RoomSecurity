@@ -24,11 +24,22 @@ namespace Security.BusinessLogic
         public List<AlarmStatus> GetAlarmStatusByRoomName(string roomName)
         {
             List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomName(roomName);
-            List<string> timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).ToList();
-            foreach (var alarmStatus in alarmStatuses)
+            var alarmStatusesWithBadgesInString = new List<AlarmStatus>();
+            List<string> timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
+            foreach (var time in timeList)
             {
+                string intruders="";
+                foreach (var alarmStatus in alarmStatuses)
+                {
+                    if (time.Equals(alarmStatus.Time))
+                    {
+                        intruders += alarmStatus.IntruderBadge + ", ";
+                    }
+                }
+                var status = new AlarmStatus() {IntruderBadge = intruders, Time = time};
+                alarmStatusesWithBadgesInString.Add(status);
             }
-            return alarmStatuses;
+            return alarmStatusesWithBadgesInString;
         }
     }
 }

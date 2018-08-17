@@ -4,5 +4,6 @@
     {
         public string Time;
         public string IntruderBadge;
+
     }
 }

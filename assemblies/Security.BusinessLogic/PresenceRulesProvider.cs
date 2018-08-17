@@ -12,8 +12,7 @@ namespace Security.BusinessLogic
         {
            PresenceRulesRepository presenceRulesRepository = new PresenceRulesRepository();
            List<PresenceRule> presenceRulesList = presenceRulesRepository.GetPresenceRulesByRoomId(roomId);
-           Dictionary <BadgeType, List<AllowedTime>> presenceRulesDictionary =
-                new Dictionary<BadgeType, List<AllowedTime>>();
+           var presenceRulesDictionary = new Dictionary<BadgeType, List<AllowedTime>>();
             foreach (BadgeType badgeType in Enum.GetValues(typeof(BadgeType)))
             {
                 List<AllowedTime> allowedTimes =

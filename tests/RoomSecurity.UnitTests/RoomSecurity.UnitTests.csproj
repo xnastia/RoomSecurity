@@ -70,6 +70,10 @@
       <Project>{04dc577c-2f14-45b2-a32d-67bfda5cff8d}</Project>
       <Name>Security.DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\assemblies\Security.Entities\Security.Entities.csproj">
+      <Project>{30B7906D-A91F-43DF-90C2-718327AD4D43}</Project>
+      <Name>Security.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

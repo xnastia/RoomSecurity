@@ -38,6 +38,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B205415A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomSecurity.UnitTests", "tests\RoomSecurity.UnitTests\RoomSecurity.UnitTests.csproj", "{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{54EC89C3-665C-435E-9769-590CE13DB403}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\database.sql = scripts\database.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

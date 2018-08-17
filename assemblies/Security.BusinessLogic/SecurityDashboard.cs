@@ -12,8 +12,6 @@
             Monitor = monitor;
         }
 
-        
-
         public void StartScanning()
         {
             _timerScanInvoker.OnScanInvoke += Monitor.Scan;

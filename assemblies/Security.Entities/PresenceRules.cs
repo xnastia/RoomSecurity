@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Security.Entities
+﻿namespace Security.Entities
 {
     public class PresenceRule
     {

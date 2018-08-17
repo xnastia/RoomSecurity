@@ -7,6 +7,14 @@ namespace Security.BusinessLogic
 {
     public class CheckerResponse
     {
+        public bool IntruderFound => Intruders != null && Intruders.Any();
+
+        public string ScannerName { get; }
+
+        public List<BadgeType> Intruders { get; }
+
+        public TimeSpan CheckTime { get; }
+
         public CheckerResponse(string scannerName, List<BadgeType> intruders, TimeSpan checkTime)
         {
             ScannerName = scannerName;
@@ -16,12 +24,5 @@ namespace Security.BusinessLogic
             CheckTime = checkTime;
         }
 
-        public bool IntruderFound => Intruders != null && Intruders.Any();
-
-        public string ScannerName { get; }
-
-        public List<BadgeType> Intruders { get; }
-
-        public TimeSpan CheckTime { get; }
     }
 }

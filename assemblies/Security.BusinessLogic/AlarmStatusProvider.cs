@@ -12,17 +12,14 @@ namespace Security.BusinessLogic
         {
             if (checkerResponse.IntruderFound)
             {
-                string roomName = checkerResponse.ScannerName;
-                string statusTime = checkerResponse.CheckTime.ToString();
+                var roomName = checkerResponse.ScannerName;
+                var statusTime = checkerResponse.CheckTime.ToString();
                 var intruderBadges = checkerResponse.Intruders;
-                string intruders = "";
+                var intruders = "";
                 foreach (var inruderBadge in intruderBadges)
-                {
                     intruders = inruderBadge + " ";
-                }
 
                 _alarmStatusRepository.InsertAlarmStatus(roomName, statusTime, intruders);
-
             }
         }
 

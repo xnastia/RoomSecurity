@@ -43,11 +43,8 @@
     <Compile Include="Alarmer.cs" />
     <Compile Include="AlarmMessageHandler.cs" />
     <Compile Include="AlarmStatusProvider.cs" />
-    <Compile Include="AllowedTime.cs" />
-    <Compile Include="BadgeType.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CameraProvider.cs" />
-    <Compile Include="CameraRepository.cs" />
     <Compile Include="CheckerResponse.cs" />
     <Compile Include="ConsoleAlarmMessageHandler.cs" />
     <Compile Include="IAlarmMessageHandler.cs" />

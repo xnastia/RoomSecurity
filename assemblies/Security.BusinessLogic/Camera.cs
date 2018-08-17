@@ -1,4 +1,7 @@
-﻿namespace Security.BusinessLogic
+﻿using System;
+using Security.Entities;
+
+namespace Security.BusinessLogic
 {
     public class Camera
     {

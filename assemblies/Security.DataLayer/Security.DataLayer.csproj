@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmStatusRepository.cs" />
+    <Compile Include="CameraRepository.cs" />
     <Compile Include="Migrations\201807181216329_AddRoomMigration.cs" />
     <Compile Include="Migrations\201807181216329_AddRoomMigration.Designer.cs">
       <DependentUpon>201807181216329_AddRoomMigration.cs</DependentUpon>
@@ -60,8 +61,8 @@
       <DependentUpon>201807181312227_AddMonitorsMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Monitor.cs" />
     <Compile Include="MonitorRepository.cs" />
+    <Compile Include="PresenceRulesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RoomRepository.cs" />

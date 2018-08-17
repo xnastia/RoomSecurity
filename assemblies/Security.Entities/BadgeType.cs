@@ -1,4 +1,4 @@
-﻿namespace Security.BusinessLogic
+﻿namespace Security.Entities
 {
     public enum BadgeType
     {

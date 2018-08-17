@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Security.BusinessLogic;
 using Rhino.Mocks;
+using Security.Entities;
 
 namespace RoomSecurity.UnitTests
 {
@@ -51,6 +52,5 @@ namespace RoomSecurity.UnitTests
             //Assert
             Assert.IsTrue(invokeMethodHandlerHelper.MethodWasCalled);
         }
-
     }
 }

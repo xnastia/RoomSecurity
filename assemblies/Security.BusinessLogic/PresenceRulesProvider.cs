@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Security.DataLayer;
+using Security.Entities;
 
 namespace Security.BusinessLogic
 {
     public class PresenceRulesProvider
     {
-        public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
+       public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
         {
-            var presenseRules = new Dictionary<BadgeType, List<AllowedTime>>();
-            var visitorAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(10, 00, 00), new TimeSpan(15, 00, 00)) };
-            var supportAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(8, 00, 00), new TimeSpan(20, 00, 00)) };
-            var securityOfficerAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(00, 00, 00), new TimeSpan(24, 00, 00)) };
-            var noBadgeAllowedTimes =
-                new List<AllowedTime> { new AllowedTime(new TimeSpan(0, 00, 00), new TimeSpan(0, 00, 01)) };
-            presenseRules.Add(BadgeType.Visitor, visitorAllowedTimes);
-            presenseRules.Add(BadgeType.Support, supportAllowedTimes);
-            presenseRules.Add(BadgeType.SecurityOfficer, securityOfficerAllowedTimes);
-            presenseRules.Add(BadgeType.NoBadge, noBadgeAllowedTimes);
-            return presenseRules;
+           PresenceRulesRepository presenceRulesRepository = new PresenceRulesRepository();
+           List<PresenceRule> presenceRulesList = presenceRulesRepository.GetPresenceRulesByRoomId(roomId);
+           Dictionary <BadgeType, List<AllowedTime>> presenceRulesDictionary =
+                new Dictionary<BadgeType, List<AllowedTime>>();
+            foreach (BadgeType badgeType in Enum.GetValues(typeof(BadgeType)))
+            {
+                List<AllowedTime> allowedTimes =
+                    presenceRulesList.Where(presenceRule => presenceRule.BadgeType == badgeType)
+                    .Select(presenceRule => presenceRule.AllowedTime)
+                        .ToList();
+                presenceRulesDictionary.Add(badgeType,allowedTimes);
+            }
+
+            return presenceRulesDictionary;
         }
     }
 }

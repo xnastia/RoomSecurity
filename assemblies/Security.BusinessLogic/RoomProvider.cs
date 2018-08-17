@@ -10,5 +10,10 @@ namespace Security.BusinessLogic
         {
             return _roomRepository.GetRoomNameById(roomId);
         }
+
+        public int[] GetRoomsIdsByMonitorId(int monitorId)
+        {
+            return _roomRepository.GetRoomsIdsbyMonitorId(monitorId);
+        }
     }
 }

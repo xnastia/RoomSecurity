@@ -1,5 +1,7 @@
-﻿var dashboard = new function() {
+﻿var dashboard = new function () {
     var self = this;
+    var currentMonitorId;
+
     function buildSecurityDashboardTable(jsonData) {
         if (jsonData === undefined)
             return;
@@ -61,28 +63,6 @@
         return columnSet;
     }
 
-    /*function buildSecurityDashboardTable(jsonData) {
-        var list = JSON.parse(jsonData).SecurityScannerStatuses;
-        buildTable(list, "securityDashboardTable");
-        var table = document.getElementById("securityDashboardTable");
-        var row = table.children[0].children;
-        for (var i = 0; i < row.length; i++) {
-            for (var colIndex = 0; colIndex < row[i].children.length; colIndex++) {
-                var cell = row[i].children[colIndex];
-                var cellValue = table.children[0].children[i].children[colIndex].innerText;
-                if (cellValue === true) {
-                    cell.innerHtml = "<img class='bool-icon' src='/assets/images/ok.png'>";
-                }
-                if (cellValue === false) {
-                    cell.innerHtml = "<img class='bool-icon' src='/assets/images/notOk.png'>";
-                }
-                if (typeof cellValue === "string") {
-                    cell.innerHtml = "<a id='myBtn' onclick=alarmReport.showAlarmReport()>" + cellValue + "</a>";
-                }
-                table.children[0].children[i].children[colIndex].innerHtml = cell.innerHtml;
-            }
-        }
-     };*/
 self.buildSecurityDashboard = function(jsonData) {
     buildSecurityDashboardTable(jsonData);
 };

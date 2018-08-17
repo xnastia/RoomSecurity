@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Security.BusinessLogic
+namespace Security.Entities
 {
     public class AllowedTime
     {

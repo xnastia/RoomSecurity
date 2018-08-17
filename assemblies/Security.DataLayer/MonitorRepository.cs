@@ -2,20 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using Security.Entities;
 
 namespace Security.DataLayer
 {
     public class MonitorRepository
     {
-        /* private readonly SecurityDbContext _securityDbContext = new SecurityDbContext();
-
-         public Monitor GetMonitorById(int monitorId)
-         {
-             return _securityDbContext.Monitors.Single(monitor => monitor.Id == monitorId);
-         }*/
-
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings[1].ConnectionString;
         public int GetMonitorIdByUiId(Guid uiId)
         {

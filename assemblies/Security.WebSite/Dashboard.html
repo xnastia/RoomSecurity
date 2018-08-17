@@ -2,12 +2,11 @@
 <html>
 <head>
     <link href="/css/dashboard.css" rel="stylesheet" type="text/css">
-    
+    <script src="scripts/Dashboard/Dashboard.js"></script>
     <script src="/Scripts/Dashboard/refreshSelectedFloorStatus.js"></script>
     <script src="/Scripts/Dashboard/getScrollMenuButtonsHtml.js"></script>
     <script src="/Scripts/httpRequests/httpGetAsync.js"></script>
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="scripts/Dashboard/Dashboard.js"></script>
     <script src="/Scripts/buildTable.js"></script>
     <script src="scripts/Dashboard/onFloorBtnClick.js"></script>
     <script src="scripts/Dashboard/loadDefaultMonitor.js"></script>
@@ -47,7 +46,7 @@
     <script>
         refreshFloorTableResult()
     </script>
-    <div id="scanner-checkbox" class="checkbox" align="right" onclick="loadDefaultMonitor('EB3F2762-493B-4A9E-AD69-85ED3FABE6C4')">
+    <div id="scanner-checkbox" class="checkbox" align="right" onclick="TriggerCurrentMonitor()">
         <label>Scanner is :</label>
         <label>
             <input id="scanner-switcher" type="checkbox" data-toggle="toggle">

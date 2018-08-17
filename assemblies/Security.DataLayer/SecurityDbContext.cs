@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Threading;
 
 namespace Security.DataLayer
 {
@@ -11,7 +12,6 @@ namespace Security.DataLayer
         public DbSet<User> Users { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
-
-        public DbSet<Monitor> Monitors { get; set; }
+        
     }
 }

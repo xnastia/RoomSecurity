@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Security.BusinessLogic;
+using Security.Entities;
 
 namespace RoomSecurity.UnitTests
 {

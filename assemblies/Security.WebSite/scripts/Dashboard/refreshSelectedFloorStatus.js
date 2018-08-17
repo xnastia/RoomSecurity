@@ -18,10 +18,8 @@ function refreshFloorTableResult() {
 }
 
 function refreshSelectedFloorStatus() {
-    var monitorIdElement = document.getElementById("floor");
-    var monitorId = monitorIdElement.value;
     if (checkIsScannerEnabled())
-        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + monitorId, updateStatus);
+        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus);
 }
 
 function checkIsScannerEnabled() {

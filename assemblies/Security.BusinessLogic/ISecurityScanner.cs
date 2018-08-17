@@ -1,4 +1,5 @@
 ﻿using System;
+using Security.Entities;
 
 namespace Security.BusinessLogic
 {

@@ -27,18 +27,6 @@ namespace Security.WebApi.Controllers
         {
             MonitorProvider monitorProvider = new MonitorProvider();
             return monitorProvider.GetMonitorsTabList();
-            /*return new List<MonitorTab>
-            {
-                new MonitorTab {Id = 1, Name = "First Floor"},
-                new MonitorTab {Id = 2, Name = "Second Floor"},
-                new MonitorTab {Id = 3, Name = "Third Floor"},
-            };*/
-            /*return new List<MonitorTab>
-            {
-                new MonitorTab {Id = Guid.NewGuid(), Name = "First Floor"},
-                new MonitorTab {Id = Guid.NewGuid(), Name = "Second Floor"},
-                new MonitorTab {Id = Guid.NewGuid(), Name = "Third Floor"},
-            };*/
         }
     }
 

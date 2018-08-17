@@ -33,7 +33,7 @@ namespace Security.BusinessLogic
                 {
                     if (time.Equals(alarmStatus.Time))
                     {
-                        intruders += alarmStatus.IntruderBadge + ", ";
+                        intruders += alarmStatus.IntruderBadge + " ";
                     }
                 }
                 var status = new AlarmStatus() {IntruderBadge = intruders, Time = time};

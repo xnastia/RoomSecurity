@@ -7,8 +7,8 @@ namespace Security.BusinessLogic
     {
         string ScannerName { get; }
 
-        CheckerResponse CheckRoom(TimeSpan currentTime);
+        CheckerResponse CheckRoom(DateTime currentTime);
 
-        bool IsBadgeAllowed(BadgeType badge, TimeSpan currentTime);
+        bool IsBadgeAllowed(BadgeType badge, DateTime currentTime);
     }
 }

@@ -5,7 +5,7 @@ namespace Security.BusinessLogic
 {
     public class TimerScanInvoker : ITimerScanInvoker
     {
-        public TimeSpan CurrentTime { get; set; }
+        public DateTime CurrentTime { get; set; }
 
         public event OnScanHandler OnScanInvoke;
 
@@ -13,11 +13,9 @@ namespace Security.BusinessLogic
 
         private readonly int _checkTimerInterval;
 
-        private readonly TimeSpan _timerStepSize = new TimeSpan(0, 30, 0);
-
         public TimerScanInvoker(int checkTimerInterval = 1000)
         {
-            CurrentTime = new TimeSpan(0, 0, 0);
+            CurrentTime = DateTime.Now;
             _checkTimerInterval = checkTimerInterval;
             _checkTimer = new Timer();
         }
@@ -31,10 +29,6 @@ namespace Security.BusinessLogic
 
         private void OnScan(object sender, ElapsedEventArgs e)
         {
-            CurrentTime += _timerStepSize;
-            if (CurrentTime >= new TimeSpan(23, 30, 00))
-                CurrentTime = new TimeSpan(0, 0, 0);
-
             OnScanInvoke?.Invoke(CurrentTime);
         }
 

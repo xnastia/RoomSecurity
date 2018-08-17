@@ -5,7 +5,7 @@ namespace Security.BusinessLogic
 {
     public delegate void CheckDoneHandler(CheckerResponse checkerResponse);
 
-    public delegate void OnScanHandler(TimeSpan currentTime);
+    public delegate void OnScanHandler(DateTime currentTime);
 
     public class Monitor
     {
@@ -22,7 +22,7 @@ namespace Security.BusinessLogic
             _securityScanners = securityScanners;
         }
 
-        public void Scan(TimeSpan currentTime)
+        public void Scan(DateTime currentTime)
         {
             foreach (var securityScanner in _securityScanners)
             {

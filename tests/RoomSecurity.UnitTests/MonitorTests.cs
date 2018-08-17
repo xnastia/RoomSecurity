@@ -31,7 +31,7 @@ namespace RoomSecurity.UnitTests
             //Arrange
             InvokeMethodHandlerHelper invokeMethodHandlerHelper = new InvokeMethodHandlerHelper();
             ISecurityScanner securityScannerMock = MockRepository.GenerateMock<ISecurityScanner>();
-            var currentTime = new TimeSpan(10, 00, 00);
+            var currentTime = DateTime.Now;
             securityScannerMock.Stub(x => x.CheckRoom(currentTime))
                 .Return(new CheckerResponse("some room", 
                 new List<BadgeType>

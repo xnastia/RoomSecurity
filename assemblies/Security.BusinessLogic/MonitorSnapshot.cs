@@ -12,7 +12,7 @@ namespace Security.BusinessLogic
 
         public void UpdateStatus(CheckerResponse checkerResponse)
         {
-            CurrentTime = checkerResponse.CheckTime.ToString("c");
+            CurrentTime = checkerResponse.CheckTime.ToString("f");
             var securityScannerWithSameName = SecurityScannerStatuses.SingleOrDefault(x => x.Name == checkerResponse.ScannerName);
 
             if (securityScannerWithSameName == null)

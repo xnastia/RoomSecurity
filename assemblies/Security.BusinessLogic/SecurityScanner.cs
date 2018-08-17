@@ -24,21 +24,21 @@ namespace Security.BusinessLogic
             ScannerName = scannerName;
         }
         
-        public bool IsBadgeAllowed(BadgeType badge, TimeSpan currentTime)
+        public bool IsBadgeAllowed(BadgeType badge, DateTime currentTime)
         {
-            if (currentTime > new TimeSpan(24, 0, 0))
+            if (currentTime.TimeOfDay > new TimeSpan(24, 0, 0))
                 throw new ArgumentException($"The {nameof(currentTime)} should be in range 0 to 24 hours");
 
             if (!_presenseRules.ContainsKey(badge))
                 return false;
 
-            if (_presenseRules[badge].Any(x => x.IsTimeAllowed(currentTime)))
+            if (_presenseRules[badge].Any(x => x.IsTimeAllowed(currentTime.TimeOfDay)))
                 return true;
 
             return false;
         }
 
-        public CheckerResponse CheckRoom(TimeSpan currentTime)
+        public CheckerResponse CheckRoom(DateTime currentTime)
         {
             var intrudersBadges = new List<BadgeType>();
             foreach (var camera in _cameras)

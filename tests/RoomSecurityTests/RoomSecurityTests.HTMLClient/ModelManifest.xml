@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ModelDocumentManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Documents>
-    <Document FullPath="D:\Projects\RoomSecurity\tests\RoomSecurityTests\RoomSecurityTests.HTMLClient\Properties\Client.lsml" Checksum="A02DE051A4EF73D4D895A18535D60321CAF8F2A803495203E027894C016E0BD5" />
-    <Document FullPath="D:\Projects\RoomSecurity\tests\RoomSecurityTests\RoomSecurityTests.HTMLClient\Properties\Proxies.lsml" Checksum="46B9554CC00DDBBD1D3692937FB1103EF9AEBEE38052C1F7E301E7E83C60570F" />
-  </Documents>
-</ModelDocumentManifest>

@@ -1,4 +1,6 @@
-﻿namespace Security.Entities
+﻿using System;
+
+namespace Security.Entities
 {
     public class AlarmStatus
     {

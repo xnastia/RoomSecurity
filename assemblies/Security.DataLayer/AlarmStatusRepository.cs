@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using Security.Entities;
@@ -10,21 +11,21 @@ namespace Security.DataLayer
         // ToDo: fix indexation
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings[1].ConnectionString;
 
-        public void InsertAlarmStatus(int roomId, string statusTime, string intruderBadges)
+        public void InsertAlarmStatus(int roomId, DateTime statusTime, int intruderId)
         {
             var addAlarmStatusSqlExpression =
-                "INSERT INTO AlarmStatus (RoomId, CurrentTime, IntruderBadges) " +
-                "VALUES (@roomId, @statusTime, @intruderBadges)";
+                "INSERT INTO AlarmStatus (RoomId, Time, BadgeId) " +
+                "VALUES (@roomId, @statusTime, @intruderId)";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new SqlCommand(addAlarmStatusSqlExpression, connection);
                 var roomNameParameter = new SqlParameter("@roomId", roomId);
                 var statusTimeParameter = new SqlParameter("@statusTime", statusTime);
-                var intruderBadgesParameter = new SqlParameter("@intruderBadges", intruderBadges);
+                var intruderBadgeParameter = new SqlParameter("@intruderId", intruderId);
                 command.Parameters.Add(roomNameParameter);
                 command.Parameters.Add(statusTimeParameter);
-                command.Parameters.Add(intruderBadgesParameter);
+                command.Parameters.Add(intruderBadgeParameter);
                 command.ExecuteNonQuery();
             }
         }
@@ -32,7 +33,8 @@ namespace Security.DataLayer
         public List<AlarmStatus> AlarmStatusByRoomId(int roomId)
         {
             var AlarmStatusByRoomSqlExpression =
-                "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomId=@roomId";
+                "SELECT AlarmStatus.Time, Badges.Name " +
+                "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @roomId";
 
             SqlDataReader reader = null;
             var statuses = new List<AlarmStatus>();
@@ -49,7 +51,7 @@ namespace Security.DataLayer
                 {
                     var status = new AlarmStatus
                     {
-                        Time = reader.GetString(0),
+                        Time = (reader.GetDateTime(0)).ToString("g"),
                         IntruderBadge = reader.GetString(1)
                     };
                     statuses.Add(status);

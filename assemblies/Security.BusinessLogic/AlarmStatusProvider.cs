@@ -14,10 +14,10 @@ namespace Security.BusinessLogic
             if (checkerResponse.IntruderFound)
             {
                 var roomId = checkerResponse.ScannerId;
-                var statusTime = checkerResponse.CheckTime.ToString();
+                var statusTime = checkerResponse.CheckTime;
                 var intruderBadges = checkerResponse.Intruders;
                 foreach (var inruderBadge in intruderBadges)
-                    _alarmStatusRepository.InsertAlarmStatus(roomId, statusTime, inruderBadge.ToString());
+                    _alarmStatusRepository.InsertAlarmStatus(roomId, statusTime, inruderBadge.GetHashCode());
             }
         }
 

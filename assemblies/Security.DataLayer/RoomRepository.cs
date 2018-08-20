@@ -11,6 +11,11 @@ namespace Security.DataLayer
             return _securityDbContext.Rooms.Single(room => room.Id == roomId).Name;
         }
 
+        public int GetRoomIdByRoomName(string roomName)
+        {
+            return _securityDbContext.Rooms.Single(room => room.Name == roomName).Id;
+        }
+
         public int[] GetRoomsIdsbyMonitorId(int monitorId)
         {
             return _securityDbContext.Rooms.Where(room => room.MonitorId == monitorId)

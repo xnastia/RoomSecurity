@@ -10,16 +10,16 @@ namespace Security.DataLayer
         // ToDo: fix indexation
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings[1].ConnectionString;
 
-        public void InsertAlarmStatus(string roomName, string statusTime, string intruderBadges)
+        public void InsertAlarmStatus(int roomId, string statusTime, string intruderBadges)
         {
             var addAlarmStatusSqlExpression =
-                "INSERT INTO AlarmStatus (RoomName, CurrentTime, IntruderBadges) " +
-                "VALUES (@roomName, @statusTime, @intruderBadges)";
+                "INSERT INTO AlarmStatus (RoomId, CurrentTime, IntruderBadges) " +
+                "VALUES (@roomId, @statusTime, @intruderBadges)";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new SqlCommand(addAlarmStatusSqlExpression, connection);
-                var roomNameParameter = new SqlParameter("@roomName", roomName);
+                var roomNameParameter = new SqlParameter("@roomId", roomId);
                 var statusTimeParameter = new SqlParameter("@statusTime", statusTime);
                 var intruderBadgesParameter = new SqlParameter("@intruderBadges", intruderBadges);
                 command.Parameters.Add(roomNameParameter);
@@ -29,10 +29,10 @@ namespace Security.DataLayer
             }
         }
 
-        public List<AlarmStatus> AlarmStatusByRoomName(string roomName)
+        public List<AlarmStatus> AlarmStatusByRoomId(int roomId)
         {
             var AlarmStatusByRoomSqlExpression =
-                "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomName=@roomName";
+                "SELECT CurrentTime, IntruderBadges FROM AlarmStatus WHERE RoomId=@roomId";
 
             SqlDataReader reader = null;
             var statuses = new List<AlarmStatus>();
@@ -41,7 +41,7 @@ namespace Security.DataLayer
             {
                 connection.Open();
                 var command = new SqlCommand(AlarmStatusByRoomSqlExpression, connection);
-                var roomNameParameter = new SqlParameter("@roomName", roomName);
+                var roomNameParameter = new SqlParameter("@roomId", roomId);
                 command.Parameters.Add(roomNameParameter);
                 reader = command.ExecuteReader();
 

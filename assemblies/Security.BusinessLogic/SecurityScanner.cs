@@ -11,17 +11,17 @@ namespace Security.BusinessLogic
         private readonly IRecognizer _recognizer;
         private readonly Dictionary<BadgeType, List<AllowedTime>> _presenseRules;
 
-        public string ScannerName { get; }
+        public int ScannerId { get; }
 
-        public SecurityScanner(string scannerName, Dictionary<BadgeType, List<AllowedTime>> presenseRules, IRecognizer recognizer, List<Camera>  cameras)
+        public SecurityScanner(int scannerId, Dictionary<BadgeType, List<AllowedTime>> presenseRules, IRecognizer recognizer, List<Camera>  cameras)
         {
-            if (string.IsNullOrEmpty(scannerName))
-                throw new ArgumentNullException(nameof(scannerName));
+            if (scannerId == 0)
+                throw new ArgumentNullException(nameof(scannerId));
 
             _recognizer = recognizer;
             _cameras = cameras;
             _presenseRules = presenseRules;
-            ScannerName = scannerName;
+            ScannerId = scannerId;
         }
         
         public bool IsBadgeAllowed(BadgeType badge, DateTime currentTime)
@@ -43,7 +43,7 @@ namespace Security.BusinessLogic
             var intrudersBadges = new List<BadgeType>();
             foreach (var camera in _cameras)
                 intrudersBadges.AddRange(_recognizer.IdentifyBadges(camera.GetImage()).Where(badge => !IsBadgeAllowed(badge, currentTime)));
-            var checkerResponse = new CheckerResponse(ScannerName, intrudersBadges, currentTime);
+            var checkerResponse = new CheckerResponse(ScannerId, intrudersBadges, currentTime);
             return checkerResponse;
         }
     }

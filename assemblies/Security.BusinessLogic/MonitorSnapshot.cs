@@ -13,13 +13,15 @@ namespace Security.BusinessLogic
         public void UpdateStatus(CheckerResponse checkerResponse)
         {
             CurrentTime = checkerResponse.CheckTime.ToString("f");
-            var securityScannerWithSameName = SecurityScannerStatuses.SingleOrDefault(x => x.Name == checkerResponse.ScannerName);
+            RoomProvider roomProvider = new RoomProvider();
+            string roomName = roomProvider.GetRoomName(checkerResponse.ScannerId);
+            var securityScannerWithSameName = SecurityScannerStatuses.SingleOrDefault(x => x.RoomName == roomName);
 
             if (securityScannerWithSameName == null)
             {
                 securityScannerWithSameName = new ScannerStatus
                 {
-                    Name = checkerResponse.ScannerName
+                    RoomName = roomName,
                 };
                 SecurityScannerStatuses.Add(securityScannerWithSameName);
             }

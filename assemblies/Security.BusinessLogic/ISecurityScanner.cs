@@ -5,7 +5,7 @@ namespace Security.BusinessLogic
 {
     public interface ISecurityScanner
     {
-        string ScannerName { get; }
+        int ScannerId { get; }
 
         CheckerResponse CheckRoom(DateTime currentTime);
 

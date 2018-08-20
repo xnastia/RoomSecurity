@@ -19,8 +19,10 @@ namespace Security.WebApi.Controllers
 
         public List<AlarmStatus> GetAlarmStatusHistory(string roomName)
         {
+            RoomProvider roomProvider = new RoomProvider();
+            int roomId = roomProvider.GetRoomIdbyRoomName(roomName);
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            return alarmStatusProvider.GetAlarmStatusByRoomName(roomName);
+            return alarmStatusProvider.GetAlarmStatusByRoomId(roomId);
         }
 
         public List<MonitorTab> GetMonitors()

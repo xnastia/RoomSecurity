@@ -10,10 +10,9 @@ namespace Security.BusinessLogic
 
         public SecurityScanner GetRoomScanner(int roomId, IRecognizer recognizer)
         {
-            string roomName = _roomProvider.GetRoomName(roomId);
             List<Camera> cameras = _cameraProvider.GetRoomCameras(roomId);
             var presenceRules = _rulesProvider.GetPresenceRules(roomId);
-            return new SecurityScanner(roomName, presenceRules, recognizer, cameras);
+            return new SecurityScanner(roomId, presenceRules, recognizer, cameras);
         }
     }
 }

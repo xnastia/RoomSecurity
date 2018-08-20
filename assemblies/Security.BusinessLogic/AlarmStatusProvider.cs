@@ -13,17 +13,17 @@ namespace Security.BusinessLogic
         {
             if (checkerResponse.IntruderFound)
             {
-                var roomName = checkerResponse.ScannerName;
+                var roomId = checkerResponse.ScannerId;
                 var statusTime = checkerResponse.CheckTime.ToString();
                 var intruderBadges = checkerResponse.Intruders;
                 foreach (var inruderBadge in intruderBadges)
-                    _alarmStatusRepository.InsertAlarmStatus(roomName, statusTime, inruderBadge.ToString());
+                    _alarmStatusRepository.InsertAlarmStatus(roomId, statusTime, inruderBadge.ToString());
             }
         }
 
-        public List<AlarmStatus> GetAlarmStatusByRoomName(string roomName)
+        public List<AlarmStatus> GetAlarmStatusByRoomId(int roomId)
         {
-            List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomName(roomName);
+            List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomId(roomId);
             var alarmStatusesWithBadgesInString = new List<AlarmStatus>();
             List<string> timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
             foreach (var time in timeList)

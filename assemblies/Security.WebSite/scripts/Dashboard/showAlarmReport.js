@@ -4,7 +4,7 @@
     self.init = function() {
         self.blockPanel = document.getElementById("block-panel");
         self.alarmReport = document.getElementById("alarm-report");
-        self.roomName = "";
+        self.Id = "";
     };
 
     window.onclick = function(event) {
@@ -13,12 +13,12 @@
             self.blockPanel.style.display = "none";
         }
     }
-    self.showAlarmReport = function (roomName) {
+
+    self.showAlarmReport = function (roomId) {
         self.alarmReport.style.display = "block";
         self.blockPanel.style.display = "block";
-        roomName = roomName.replace("-"," ");
-        self.roomName = roomName;
-        refreshSelectedRoomAlarmStatus(self.roomName);
+        self.roomId = roomId;
+        refreshSelectedRoomAlarmStatus(self.roomId);
     }
     
     self.hideAlarmReportOnCloseBtnClick = function() {
@@ -27,14 +27,14 @@
         event.stopPropagation();
     }
 
-    /*function refreshSelectedRoomAlarmReport(roomName) {
+    /*function refreshSelectedRoomAlarmReport(roomId) {
         setInterval(function () {
-            refreshSelectedRoomAlarmStatus(roomName);
+            refreshSelectedRoomAlarmStatus(roomId);
         }, 7000);
     }*/
     
-    function refreshSelectedRoomAlarmStatus(roomName) {
-        httpGetAsync("api/dashboard/GetAlarmStatusHistory?roomName=" + roomName, updateStatus);
+    function refreshSelectedRoomAlarmStatus(roomId) {
+        httpGetAsync("api/dashboard/GetAlarmStatusHistory?roomId=" + roomId, updateStatus);
     }
 
     function updateStatus(jsonData) {

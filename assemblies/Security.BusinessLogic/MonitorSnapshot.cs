@@ -14,19 +14,20 @@ namespace Security.BusinessLogic
         {
             CurrentTime = checkerResponse.CheckTime.ToString("f");
             RoomProvider roomProvider = new RoomProvider();
-            string roomName = roomProvider.GetRoomName(checkerResponse.ScannerId);
-            var securityScannerWithSameName = SecurityScannerStatuses.SingleOrDefault(x => x.RoomName == roomName);
+            RoomShortInfo roomInfo = roomProvider.GetRoomInfoById(checkerResponse.ScannerId);
+            var securityScannerWithSameUiId = SecurityScannerStatuses
+                .SingleOrDefault(scannerStatus => scannerStatus.RoomInfo.UiId == roomInfo.UiId);
 
-            if (securityScannerWithSameName == null)
+            if (securityScannerWithSameUiId == null)
             {
-                securityScannerWithSameName = new ScannerStatus
+                securityScannerWithSameUiId = new ScannerStatus
                 {
-                    RoomName = roomName,
+                    RoomInfo = new RoomShortInfo() { Name = roomInfo.Name, UiId = roomInfo.UiId}
                 };
-                SecurityScannerStatuses.Add(securityScannerWithSameName);
+                SecurityScannerStatuses.Add(securityScannerWithSameUiId);
             }
 
-            securityScannerWithSameName.IsOk = !checkerResponse.IntruderFound;
+            securityScannerWithSameUiId.IsOk = !checkerResponse.IntruderFound;
         }
     }
 }

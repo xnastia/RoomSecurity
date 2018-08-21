@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Security.DataLayer;
 using Security.Entities;
@@ -21,9 +22,9 @@ namespace Security.BusinessLogic
             }
         }
 
-        public List<AlarmStatus> GetAlarmStatusByRoomId(int roomId)
+        public List<AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId)
         {
-            List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomId(roomId);
+            List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
             var alarmStatusesWithBadgesInString = new List<AlarmStatus>();
             List<string> timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
             foreach (var time in timeList)

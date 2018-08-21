@@ -4,8 +4,8 @@
     }, 10000);
 }
 
-function refreshSelectedRoomAlarmStatus(roomName) {
-    httpGetAsync("api/dashboard/GetAlarmStatusHistory?roomName=" + roomName, updateStatus);
+function refreshSelectedRoomAlarmStatus(roomId) {
+    httpGetAsync("api/dashboard/GetAlarmStatusHistory?roomId=" + roomId, updateStatus);
 }
 
 function updateStatus(jsonData) {

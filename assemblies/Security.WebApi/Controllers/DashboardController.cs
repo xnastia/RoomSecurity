@@ -17,12 +17,10 @@ namespace Security.WebApi.Controllers
             return floorDashboardStatus;
         }
 
-        public List<AlarmStatus> GetAlarmStatusHistory(string roomName)
+        public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId)
         {
-            RoomProvider roomProvider = new RoomProvider();
-            int roomId = roomProvider.GetRoomIdbyRoomName(roomName);
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            return alarmStatusProvider.GetAlarmStatusByRoomId(roomId);
+            return alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId);
         }
 
         public List<MonitorTab> GetMonitors()
@@ -31,6 +29,4 @@ namespace Security.WebApi.Controllers
             return monitorProvider.GetMonitorsTabList();
         }
     }
-
- 
 }

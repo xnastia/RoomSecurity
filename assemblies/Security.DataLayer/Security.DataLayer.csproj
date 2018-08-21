@@ -52,17 +52,13 @@
   <ItemGroup>
     <Compile Include="AlarmStatusRepository.cs" />
     <Compile Include="CameraRepository.cs" />
-    <Compile Include="Migrations\201807181216329_AddRoomMigration.cs" />
-    <Compile Include="Migrations\201807181216329_AddRoomMigration.Designer.cs">
-      <DependentUpon>201807181216329_AddRoomMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201808201244094_added Guid to Room.cs" />
+    <Compile Include="Migrations\201808201244094_added Guid to Room.Designer.cs">
+      <DependentUpon>201808201244094_added Guid to Room.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807181312227_AddMonitorsMigration.cs" />
-    <Compile Include="Migrations\201807181312227_AddMonitorsMigration.Designer.cs">
-      <DependentUpon>201807181312227_AddMonitorsMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808171118089_deleted monitor.cs" />
-    <Compile Include="Migrations\201808171118089_deleted monitor.Designer.cs">
-      <DependentUpon>201808171118089_deleted monitor.cs</DependentUpon>
+    <Compile Include="Migrations\201808201506380_renamed Room property.cs" />
+    <Compile Include="Migrations\201808201506380_renamed Room property.Designer.cs">
+      <DependentUpon>201808201506380_renamed Room property.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorRepository.cs" />
@@ -85,14 +81,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807181216329_AddRoomMigration.resx">
-      <DependentUpon>201807181216329_AddRoomMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808201244094_added Guid to Room.resx">
+      <DependentUpon>201808201244094_added Guid to Room.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807181312227_AddMonitorsMigration.resx">
-      <DependentUpon>201807181312227_AddMonitorsMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808171118089_deleted monitor.resx">
-      <DependentUpon>201808171118089_deleted monitor.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808201506380_renamed Room property.resx">
+      <DependentUpon>201808201506380_renamed Room property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

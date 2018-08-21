@@ -7,13 +7,13 @@ namespace Security.DataLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class deletedmonitor : IMigrationMetadata
+    public sealed partial class renamedRoomproperty : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deletedmonitor));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(renamedRoomproperty));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808171118089_deleted monitor"; }
+            get { return "201808201506380_renamed Room property"; }
         }
         
         string IMigrationMetadata.Source

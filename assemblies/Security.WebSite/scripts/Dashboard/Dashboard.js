@@ -6,61 +6,37 @@
         if (jsonData === undefined)
             return;
 
-        var myList = JSON.parse(jsonData).SecurityScannerStatuses;
+        var scannerStatuses = JSON.parse(jsonData).SecurityScannerStatuses;
 
         var table = document.getElementById("securityDashboardTable");
+        
         while (table.hasChildNodes()) {
             table.removeChild(table.firstChild);
         }
 
-        var columns = addAllColumnHeaders(myList);
+        //header
+        $("#securityDashboardTable").append($('<tr/>')
+            .append($('<th/>').html("Room Name"))
+            .append($('<th/>').html("Status")));
 
-        for (var i = 0; i < myList.length; i++) {
+        //body
+        for (var i = 0; i < scannerStatuses.length; i++) {
+            var currentRoom = scannerStatuses[i];
+
             var row$ = $('<tr/>');
-            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-                var cellValue = myList[i][columns[colIndex]];
+            row$.append($('<td/>').html("<a onclick=alarmReport.showAlarmReport(this.id) id=" + currentRoom.RoomInfo.UiId + ">"
+                + currentRoom.RoomInfo.Name + "</a>"));
 
-                if (cellValue == null) {
-                    cellValue = "";
-                }
-                
-                if (typeof cellValue === "string") {
-                    var parsedCellValue = cellValue.split(' ');
-                    if (parsedCellValue[1] != null) {
-                        parsedCellValue = parsedCellValue[0] +"-"+ parsedCellValue[1];
-                    }
-                    cellValue = "<a onclick=alarmReport.showAlarmReport(this.id) id=" + parsedCellValue + ">"
-                        + cellValue + "</a>";
-                }
+            if (currentRoom.IsOk) {
+                row$.append($('<td/>').html("<img class='bool-icon' src='/assets/images/ok.png'>"));
+            }
+            else {
+                row$.append($('<td/>').html("<img class='bool-icon' src='/assets/images/notOk.png'>"));
+            }
+            
 
-                if (cellValue === true) {
-                    cellValue = "<img class='bool-icon' src='/assets/images/ok.png'>";
-                } else if(cellValue === false) {
-                    cellValue = "<img class='bool-icon' src='/assets/images/notOk.png'>";
-                }
-
-                row$.append($('<td/>').html(cellValue));
-                
-               }
             $("#securityDashboardTable").append(row$);
         }
-    }
-    function addAllColumnHeaders(myList) {
-        var columnSet = [];
-        var headerTr$ = $('<tr/>');
-
-        for (var i = 0; i < myList.length; i++) {
-            var rowHash = myList[i];
-            for (var key in rowHash) {
-                if ($.inArray(key, columnSet) === -1) {
-                    columnSet.push(key);
-                    headerTr$.append($('<th/>').html(key));
-                }
-            }
-        }
-        $("#securityDashboardTable").append(headerTr$);
-
-        return columnSet;
     }
 
 self.buildSecurityDashboard = function(jsonData) {
@@ -72,5 +48,6 @@ self.init = function() {
         refreshSelectedFloorStatus();
     });
 };
+
 return self;
 }

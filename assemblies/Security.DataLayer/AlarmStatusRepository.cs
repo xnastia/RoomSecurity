@@ -30,11 +30,13 @@ namespace Security.DataLayer
             }
         }
 
-        public List<AlarmStatus> AlarmStatusByRoomId(int roomId)
+        public List<AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
         {
+            RoomRepository roomRepository = new RoomRepository();
+            int id = roomRepository.GetIdByUiId(roomId);
             var AlarmStatusByRoomSqlExpression =
                 "SELECT AlarmStatus.Time, Badges.Name " +
-                "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @roomId";
+                "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @id";
 
             SqlDataReader reader = null;
             var statuses = new List<AlarmStatus>();
@@ -43,7 +45,7 @@ namespace Security.DataLayer
             {
                 connection.Open();
                 var command = new SqlCommand(AlarmStatusByRoomSqlExpression, connection);
-                var roomNameParameter = new SqlParameter("@roomId", roomId);
+                var roomNameParameter = new SqlParameter("@id", id);
                 command.Parameters.Add(roomNameParameter);
                 reader = command.ExecuteReader();
 

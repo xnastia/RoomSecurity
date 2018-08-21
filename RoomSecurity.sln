@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{54EC
 		scripts\database.sql = scripts\database.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.DataLayer.Entity", "assemblies\Security.DataLayer.Entity\Security.DataLayer.Entity.csproj", "{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +90,6 @@ Global
 		{5F8BF4C6-204A-48AC-BE2E-A5B745AF7DCB} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
 		{017A2C59-024B-4CCF-B520-8B593DFBBC27} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
 		{0F69C904-8DAE-47E3-AA9C-E5428BB26FF4} = {B205415A-4804-4609-98A1-822E393F2E1B}
+		{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC} = {B4195108-30B0-4FB5-A2EB-F2CAE2D26122}
 	EndGlobalSection
 EndGlobal

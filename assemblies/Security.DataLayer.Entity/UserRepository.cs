@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Security.DataLayer
+namespace Security.DataLayer.Entity
 {
     public class UserRepository
     {

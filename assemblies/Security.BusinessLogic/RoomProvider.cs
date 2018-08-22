@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Security.DataLayer;
 using Security.Entities;
 
@@ -10,19 +11,14 @@ namespace Security.BusinessLogic
 
         public int GetRoomIdByUiId(Guid uiId)
         {
-            return _roomRepository.GetIdByUiId(uiId);
+            return _roomRepository.GetRoomIdByUiId(uiId);
         }
 
-        public int[] GetRoomsIdsByMonitorId(int monitorId)
+        public List<int> GetRoomsIdsByMonitorId(int monitorId)
         {
             return _roomRepository.GetRoomsIdsbyMonitorId(monitorId);
         }
-
-        public int GetRoomIdbyRoomName(string roomName)
-        {
-            return _roomRepository.GetRoomIdByRoomName(roomName);
-        }
-
+        
         public RoomShortInfo GetRoomInfoById(int roomId)
         {
             return _roomRepository.GetRoomInfoById(roomId);

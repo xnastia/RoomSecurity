@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Security.DataLayer
+namespace Security.DataLayer.Entity
 {
     public class Room
     {

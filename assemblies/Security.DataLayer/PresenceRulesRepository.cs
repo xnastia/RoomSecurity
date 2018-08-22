@@ -8,7 +8,7 @@ namespace Security.DataLayer
     public class PresenceRulesRepository
     {
         private readonly string _connectionString 
-            = ConfigurationManager.ConnectionStrings[1].ConnectionString;
+            = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
 
         public List<PresenceRule> GetPresenceRulesByRoomId(int roomId)
         {

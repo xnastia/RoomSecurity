@@ -33,33 +33,33 @@ namespace Security.DataLayer
         public List<AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
         {
             RoomRepository roomRepository = new RoomRepository();
-            int id = roomRepository.GetIdByUiId(roomId);
+            int id = roomRepository.GetRoomIdByUiId(roomId);
             var AlarmStatusByRoomSqlExpression =
                 "SELECT AlarmStatus.Time, Badges.Name " +
                 "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @id";
-
-            SqlDataReader reader = null;
-            var statuses = new List<AlarmStatus>();
             
+            var statuses = new List<AlarmStatus>();
+
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new SqlCommand(AlarmStatusByRoomSqlExpression, connection);
                 var roomNameParameter = new SqlParameter("@id", id);
                 command.Parameters.Add(roomNameParameter);
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = command.ExecuteReader())
                 {
-                    var status = new AlarmStatus
+                    while (reader.Read())
                     {
-                        Time = (reader.GetDateTime(0)).ToString("g"),
-                        IntruderBadge = reader.GetString(1)
-                    };
-                    statuses.Add(status);
+                        var status = new AlarmStatus
+                        {
+                            Time = (reader.GetDateTime(0)).ToString("g"),
+                            IntruderBadge = reader.GetString(1)
+                        };
+                        statuses.Add(status);
+                    }
                 }
             }
-            reader.Close();
+
             return statuses;
         }
     }

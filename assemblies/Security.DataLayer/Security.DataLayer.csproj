@@ -52,22 +52,10 @@
   <ItemGroup>
     <Compile Include="AlarmStatusRepository.cs" />
     <Compile Include="CameraRepository.cs" />
-    <Compile Include="Migrations\201808201244094_added Guid to Room.cs" />
-    <Compile Include="Migrations\201808201244094_added Guid to Room.Designer.cs">
-      <DependentUpon>201808201244094_added Guid to Room.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808201506380_renamed Room property.cs" />
-    <Compile Include="Migrations\201808201506380_renamed Room property.Designer.cs">
-      <DependentUpon>201808201506380_renamed Room property.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorRepository.cs" />
     <Compile Include="PresenceRulesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs" />
     <Compile Include="RoomRepository.cs" />
-    <Compile Include="SecurityDbContext.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,14 +67,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808201244094_added Guid to Room.resx">
-      <DependentUpon>201808201244094_added Guid to Room.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808201506380_renamed Room property.resx">
-      <DependentUpon>201808201506380_renamed Room property.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

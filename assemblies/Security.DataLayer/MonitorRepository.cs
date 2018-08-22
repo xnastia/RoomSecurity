@@ -8,7 +8,8 @@ namespace Security.DataLayer
 {
     public class MonitorRepository
     {
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings[1].ConnectionString;
+        private readonly string _connectionString = ConfigurationManager
+            .ConnectionStrings["DBConnection"].ConnectionString;
         public int GetMonitorIdByUiId(Guid uiId)
         {
             int id;

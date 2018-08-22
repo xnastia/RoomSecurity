@@ -8,7 +8,7 @@ namespace Security.DataLayer
     public class CameraRepository
     {
         private readonly string _connectionString = 
-            ConfigurationManager.ConnectionStrings[1].ConnectionString;
+            ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
         public List<CameraEntity> GetCamerasbyRoomId(int roomId)
         {
             var getCameraEntities = "SELECT Id FROM Cameras WHERE RoomId = @roomId";

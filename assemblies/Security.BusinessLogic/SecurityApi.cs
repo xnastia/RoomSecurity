@@ -1,4 +1,5 @@
 ﻿using Security.DataLayer;
+using Security.Entities;
 
 namespace Security.BusinessLogic
 {
@@ -6,12 +7,7 @@ namespace Security.BusinessLogic
     {
         private readonly UserProvider _userProvider = new UserProvider();
 
-        public User GetUser(string email, string password)
-        {
-            return _userProvider.GetUserByEmailAndPassword(email, password);
-        }
-
-        public bool IsValidtUser(string email, string password)
+        public bool IsValidUser(string email, string password)
         {
             return _userProvider.IsUserValid(email, password);
         }

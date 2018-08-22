@@ -28,7 +28,7 @@ namespace Security.BusinessLogic
         {
             IRecognizer recognizer = new RandomRecognizer(12121213);
             RoomProvider roomProvider = new RoomProvider();
-            int[] roomsIds = roomProvider.GetRoomsIdsByMonitorId(monitorId);
+            List<int> roomsIds = roomProvider.GetRoomsIdsByMonitorId(monitorId);
             var securitryScanners = new List<ISecurityScanner>();
             foreach (var roomId in roomsIds)
             {

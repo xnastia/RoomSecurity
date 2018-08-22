@@ -1,34 +1,41 @@
-﻿using System.Linq;
+﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Security.DataLayer
 {
     public class UserRepository
     {
-        //private SecurityDbContext _securityDbContext = new SecurityDbContext();
+        private readonly string _connectionString = ConfigurationManager
+            .ConnectionStrings["DBConnection"]
+            .ConnectionString;
 
-        public User UserByEmailAndPassword(string email, string password)
+        public bool UserExistsByEmailAndPassword(string email, string password)
         {
-            //TODO: replace with correct request and validation
-            //return _securityDbContext.Users.FirstOrDefault(x => x.Email == email && password == x.Password);
-            //_securityDbContext.Dispose();
-            User user = null;
-            using (var db = new SecurityDbContext())
+            if(String.IsNullOrEmpty(email))
+                throw new ArgumentException("email is null");
+            if (String.IsNullOrEmpty(password))
+                throw new ArgumentException("password is null");
+
+            var userexists = false;
+            int numberOfUsers;
+            var userExistsByEmailAndPassword = "Select count(*) from Users Where Email=@email and Password=@password";
+            using (var connection = new SqlConnection(_connectionString))
             {
-                user = db.Users.FirstOrDefault(x => x.Email == email && password == x.Password);
+                var command = new SqlCommand(userExistsByEmailAndPassword, connection);
+                var emailParameter = new SqlParameter("@email", email);
+                var passwordParameter = new SqlParameter("@password", password);
+                command.Parameters.Add(emailParameter);
+                command.Parameters.Add(passwordParameter);
+                connection.Open();
+                numberOfUsers = (int)command.ExecuteScalar();
             }
 
-            return user;
-        }
+            if (numberOfUsers > 0)
+                userexists = true;
 
-        public bool IsUserExistsByEmailAndPassword(string email, string password)
-        {
-            //TODO: replace with correct request and validation
-            bool userExists;
-            using (var securityDbContext = new SecurityDbContext())
-            {
-                userExists = securityDbContext.Users.Count(x => x.Email == email && password == x.Password) > 0;
-            }
-            return userExists;
+            return userexists;
         }
     }
 }

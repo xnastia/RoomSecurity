@@ -13,7 +13,7 @@ namespace Security.WebApi.Controllers
             var password = formData.Get("password");
 
             //TODO: authenticate user
-            var isValidUser = new SecurityApi().IsValidtUser(email, password);
+            var isValidUser = new SecurityApi().IsValidUser(email, password);
 
             if (isValidUser)
                 return Ok();

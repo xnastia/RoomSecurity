@@ -1,20 +1,30 @@
 ﻿using System.Collections.Generic;
 using Security.DataLayer;
-using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
     public class CameraProvider
     {
-        readonly CameraRepository _cameraRepository = new CameraRepository();
+        private readonly ICameraRepository _cameraRepository;
+
+        public CameraProvider(ICameraRepository cameraRepository)
+        {
+            _cameraRepository = cameraRepository;
+        }
+
+        public CameraProvider()
+        {
+            _cameraRepository = new CameraRepository();
+        }
 
         public List<Camera> GetRoomCameras(int roomId)
         {
-            List<CameraEntity> camerasEntities = _cameraRepository.GetCamerasbyRoomId(roomId);
-            List<Camera> cameras = new List<Camera>();
+            var camerasEntities = _cameraRepository.GetCamerasbyRoomId(roomId);
+            var cameras = new List<Camera>();
             foreach (var cameraEntity in camerasEntities)
             {
-                Camera camera = new Camera(cameraEntity.Id);
+                var camera = new Camera(cameraEntity.Id);
                 cameras.Add(camera);
             }
 

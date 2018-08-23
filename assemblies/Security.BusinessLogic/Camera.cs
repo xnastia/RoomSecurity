@@ -8,6 +8,7 @@
         {
             Id = cameraId;
         }
+
         public byte[] GetImage()
         {
             return null;

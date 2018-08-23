@@ -2,10 +2,11 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.DataLayer
 {
-    public class CameraRepository
+    public class CameraRepository : ICameraRepository
     {
         private readonly string _connectionString = 
             ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;

@@ -1,41 +1,41 @@
 ﻿using System;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
+using Security.Entities.DB;
 
 namespace Security.DataLayer
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly string _connectionString = ConfigurationManager
-            .ConnectionStrings["DBConnection"]
-            .ConnectionString;
+    private readonly string _connectionString = ConfigurationManager
+        .ConnectionStrings["DBConnection"]
+        .ConnectionString;
 
-        public bool UserExistsByEmailAndPassword(string email, string password)
+    public bool UserExistsByEmailAndPassword(string email, string password)
+    {
+        if (string.IsNullOrEmpty(email))
+            throw new ArgumentException("email is null");
+        if (string.IsNullOrEmpty(password))
+            throw new ArgumentException("password is null");
+
+        var userexists = false;
+        int numberOfUsers;
+        var userExistsByEmailAndPassword = "Select count(*) from Users Where Email=@email and Password=@password";
+        using (var connection = new SqlConnection(_connectionString))
         {
-            if(String.IsNullOrEmpty(email))
-                throw new ArgumentException("email is null");
-            if (String.IsNullOrEmpty(password))
-                throw new ArgumentException("password is null");
-
-            var userexists = false;
-            int numberOfUsers;
-            var userExistsByEmailAndPassword = "Select count(*) from Users Where Email=@email and Password=@password";
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                var command = new SqlCommand(userExistsByEmailAndPassword, connection);
-                var emailParameter = new SqlParameter("@email", email);
-                var passwordParameter = new SqlParameter("@password", password);
-                command.Parameters.Add(emailParameter);
-                command.Parameters.Add(passwordParameter);
-                connection.Open();
-                numberOfUsers = (int)command.ExecuteScalar();
-            }
-
-            if (numberOfUsers > 0)
-                userexists = true;
-
-            return userexists;
+            var command = new SqlCommand(userExistsByEmailAndPassword, connection);
+            var emailParameter = new SqlParameter("@email", email);
+            var passwordParameter = new SqlParameter("@password", password);
+            command.Parameters.Add(emailParameter);
+            command.Parameters.Add(passwordParameter);
+            connection.Open();
+            numberOfUsers = (int) command.ExecuteScalar();
         }
+
+        if (numberOfUsers > 0)
+            userexists = true;
+
+        return userexists;
+    }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.DataLayer
 {
-    public class MonitorRepository
+    public class MonitorRepository : IMonitorRepository
     {
         private readonly string _connectionString = ConfigurationManager
             .ConnectionStrings["DBConnection"].ConnectionString;

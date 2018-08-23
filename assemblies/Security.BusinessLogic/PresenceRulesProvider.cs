@@ -3,23 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using Security.DataLayer;
 using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
     public class PresenceRulesProvider
     {
-       public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
+        private readonly IPresenceRulesRepository _presenceRulesRepository;
+
+        public PresenceRulesProvider(IPresenceRulesRepository presenceRulesRepository)
         {
-           PresenceRulesRepository presenceRulesRepository = new PresenceRulesRepository();
-           List<PresenceRule> presenceRulesList = presenceRulesRepository.GetPresenceRulesByRoomId(roomId);
-           var presenceRulesDictionary = new Dictionary<BadgeType, List<AllowedTime>>();
+            _presenceRulesRepository = presenceRulesRepository;
+        }
+
+        public PresenceRulesProvider()
+        {
+            _presenceRulesRepository = new PresenceRulesRepository();
+        }
+
+        public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
+        {
+            var presenceRulesList = _presenceRulesRepository.GetPresenceRulesByRoomId(roomId);
+            var presenceRulesDictionary = new Dictionary<BadgeType, List<AllowedTime>>();
             foreach (BadgeType badgeType in Enum.GetValues(typeof(BadgeType)))
             {
-                List<AllowedTime> allowedTimes =
+                var allowedTimes =
                     presenceRulesList.Where(presenceRule => presenceRule.BadgeType == badgeType)
-                    .Select(presenceRule => presenceRule.AllowedTime)
+                        .Select(presenceRule => presenceRule.AllowedTime)
                         .ToList();
-                presenceRulesDictionary.Add(badgeType,allowedTimes);
+                presenceRulesDictionary.Add(badgeType, allowedTimes);
             }
 
             return presenceRulesDictionary;

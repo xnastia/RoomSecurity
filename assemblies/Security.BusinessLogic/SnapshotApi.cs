@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Security.Entities;
 
 namespace Security.BusinessLogic
 {
     public class SnapshotApi
     {
-        private MonitorProvider _monitorProvider = new MonitorProvider();
-        private SnapshotProvider _snapshotProvider = new SnapshotProvider();
+        private MonitorProvider _monitorProvider;
+        private SnapshotProvider _snapshotProvider;
+
+        public SnapshotApi()
+        {
+            _monitorProvider = new MonitorProvider();
+            _snapshotProvider = new SnapshotProvider();
+        }
 
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
 

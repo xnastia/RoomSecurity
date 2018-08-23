@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using Security.Entities;
+using Security.Entities.DB;
+using Security.DataLayer.Entity;
 
 namespace Security.DataLayer
 {
-    public class AlarmStatusRepository
+    public class AlarmStatusRepository : IAlarmStatusRepository
     {
+        private readonly IRoomRepository _roomRepository;
         // ToDo: fix indexation
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings[1].ConnectionString;
+
+        public AlarmStatusRepository(IRoomRepository roomRepository)
+        {
+            _roomRepository = roomRepository;
+        }
+
+        public AlarmStatusRepository()
+        {
+            _roomRepository = new RoomRepository();
+        }
 
         public void InsertAlarmStatus(int roomId, DateTime statusTime, int intruderId)
         {
@@ -30,15 +43,15 @@ namespace Security.DataLayer
             }
         }
 
-        public List<AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
+        public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
         {
-            RoomRepository roomRepository = new RoomRepository();
-            int id = roomRepository.GetRoomIdByUiId(roomId);
+            //RoomRepository roomRepository = new RoomRepository();
+            int id = _roomRepository.GetRoomIdByUiId(roomId);
             var AlarmStatusByRoomSqlExpression =
                 "SELECT AlarmStatus.Time, Badges.Name " +
                 "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @id";
             
-            var statuses = new List<AlarmStatus>();
+            var statuses = new List<Entities.AlarmStatus>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -50,7 +63,7 @@ namespace Security.DataLayer
                 {
                     while (reader.Read())
                     {
-                        var status = new AlarmStatus
+                        var status = new Entities.AlarmStatus
                         {
                             Time = (reader.GetDateTime(0)).ToString("g"),
                             IntruderBadge = reader.GetString(1)

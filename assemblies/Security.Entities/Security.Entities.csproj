@@ -44,14 +44,18 @@
     <Compile Include="AllowedTime.cs" />
     <Compile Include="BadgeType.cs" />
     <Compile Include="CameraEntity.cs" />
+    <Compile Include="DB\IAlarmStatusRepository.cs" />
+    <Compile Include="DB\ICameraRepository.cs" />
+    <Compile Include="DB\IPresenceRulesRepository.cs" />
+    <Compile Include="DB\IRoomRepository.cs" />
+    <Compile Include="DB\IMonitorRepository.cs" />
+    <Compile Include="DB\IUserRepository.cs" />
     <Compile Include="MonitorTab.cs" />
     <Compile Include="DashboardStatus.cs" />
     <Compile Include="PresenceRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs" />
     <Compile Include="RoomShortInfo.cs" />
     <Compile Include="ScannerStatus.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Responses\" />

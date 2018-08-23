@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Security.DataLayer.Entity;
 using Security.Entities;
+using Security.Entities.DB;
 
-namespace Security.DataLayer
+namespace Security.DataLayer.Entity
 {
-    public class RoomRepository
+    public class RoomRepository : IRoomRepository
     {
-        private SecurityDbContext _securityDbContext = new SecurityDbContext();
+        private readonly SecurityDbContext _securityDbContext = new SecurityDbContext();
 
-        public int GetIdByUiId(Guid roomId)
+        public int GetRoomIdByUiId(Guid roomId)
         {
             return _securityDbContext.Rooms.Single(room => room.UiId == roomId).Id;
         }
 
-       public RoomShortInfo GetRoomInfoById(int roomId)
+        public RoomShortInfo GetRoomInfoById(int roomId)
         {
             var room = _securityDbContext.Rooms.Single(x => x.Id == roomId);
-            RoomShortInfo roomShortInfo = new RoomShortInfo() {Name = room.Name, UiId = room.UiId};
+            var roomShortInfo = new RoomShortInfo {Name = room.Name, UiId = room.UiId};
             return roomShortInfo;
         }
 
@@ -26,10 +27,11 @@ namespace Security.DataLayer
             return _securityDbContext.Rooms.Single(room => room.Name == roomName).Id;
         }
 
-        public int[] GetRoomsIdsbyMonitorId(int monitorId)
+        public List<int> GetRoomsIdsbyMonitorId(int monitorId)
         {
             return _securityDbContext.Rooms.Where(room => room.MonitorId == monitorId)
-                .Select(room => room.Id).ToArray();
+                .Select(room => room.Id)
+                .ToList();
         }
     }
 }

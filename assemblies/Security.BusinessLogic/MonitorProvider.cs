@@ -2,26 +2,37 @@
 using System.Collections.Generic;
 using Security.DataLayer;
 using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
     public class MonitorProvider
     {
-        private static readonly Dictionary<int, Monitor> Monitors = new Dictionary<int, Monitor>();
-
+        private readonly Dictionary<int, Monitor> _monitors = new Dictionary<int, Monitor>();
         private readonly SecurityScannerProvider _securityScannerProvider = new SecurityScannerProvider();
-        
+        private IMonitorRepository _monitorRepository;
+
+        public MonitorProvider(IMonitorRepository monitorRepository)
+        {
+            _monitorRepository = monitorRepository;
+        }
+
+        public MonitorProvider()
+        {
+            _monitorRepository = new MonitorRepository();
+        }
+
         public Monitor GetMonitor(Guid uiId)
         {
-            MonitorRepository monitorRepository = new MonitorRepository();
+            IMonitorRepository monitorRepository = new MonitorRepository();
             int monitorId = monitorRepository.GetMonitorIdByUiId(uiId);
-            if (!Monitors.ContainsKey(monitorId))
+            if (!_monitors.ContainsKey(monitorId))
             {
                 var monitor = CreateMonitor(monitorId);
                 new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
-                Monitors.Add(monitorId, monitor);
+                _monitors.Add(monitorId, monitor);
             }
-            return Monitors[monitorId];
+            return _monitors[monitorId];
         }
         
         public Monitor CreateMonitor(int monitorId)
@@ -40,7 +51,7 @@ namespace Security.BusinessLogic
 
         public List<MonitorTab> GetMonitorsTabList()
         {
-            MonitorRepository monitorRepository = new MonitorRepository();
+            IMonitorRepository monitorRepository = new MonitorRepository();
             return monitorRepository.GeMonitorTabs();
         }
     }

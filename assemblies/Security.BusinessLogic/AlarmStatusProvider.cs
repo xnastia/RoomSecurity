@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Security.DataLayer;
 using Security.Entities;
+using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
     public class AlarmStatusProvider
     {
-        private readonly AlarmStatusRepository _alarmStatusRepository = new AlarmStatusRepository();
+        private readonly IAlarmStatusRepository _alarmStatusRepository;
 
+        public AlarmStatusProvider(IAlarmStatusRepository alarmStatusRepository)
+        {
+            _alarmStatusRepository = alarmStatusRepository;
+        }
+
+        public AlarmStatusProvider()
+        {
+            _alarmStatusRepository = new AlarmStatusRepository();
+        }
         public void InsertCheckerResponseIntoAlarmStatus(CheckerResponse checkerResponse)
         {
             if (checkerResponse.IntruderFound)
@@ -24,20 +34,16 @@ namespace Security.BusinessLogic
 
         public List<AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId)
         {
-            List<AlarmStatus> alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
+            var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
             var alarmStatusesWithBadgesInString = new List<AlarmStatus>();
-            List<string> timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
+            var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
             foreach (var time in timeList)
             {
-                string intruders="";
+                var intruders = "";
                 foreach (var alarmStatus in alarmStatuses)
-                {
                     if (time.Equals(alarmStatus.Time))
-                    {
                         intruders += alarmStatus.IntruderBadge + " ";
-                    }
-                }
-                var status = new AlarmStatus() {IntruderBadge = intruders, Time = time};
+                var status = new AlarmStatus {IntruderBadge = intruders, Time = time};
                 alarmStatusesWithBadgesInString.Add(status);
             }
             return alarmStatusesWithBadgesInString;

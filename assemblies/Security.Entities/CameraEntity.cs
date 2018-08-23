@@ -3,6 +3,5 @@
     public class CameraEntity
     {
         public int Id { get; set; }
-        
     }
 }

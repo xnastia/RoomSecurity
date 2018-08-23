@@ -5,13 +5,13 @@ namespace Security.BusinessLogic
 {
     public class TimerScanInvoker : ITimerScanInvoker
     {
-        public DateTime CurrentTime { get; set; }
-
-        public event OnScanHandler OnScanInvoke;
-
         private readonly Timer _checkTimer;
 
         private readonly int _checkTimerInterval;
+
+        public DateTime CurrentTime { get; set; }
+
+        public event OnScanHandler OnScanInvoke;
 
         public TimerScanInvoker(int checkTimerInterval = 1000)
         {
@@ -20,6 +20,16 @@ namespace Security.BusinessLogic
             _checkTimer = new Timer();
         }
         
+        public void Start()
+        {
+            InitTimer();
+        }
+
+        public void End()
+        {
+            _checkTimer.Enabled = false;
+        }
+
         private void InitTimer()
         {
             _checkTimer.Enabled = true;
@@ -30,16 +40,6 @@ namespace Security.BusinessLogic
         private void OnScan(object sender, ElapsedEventArgs e)
         {
             OnScanInvoke?.Invoke(CurrentTime);
-        }
-
-        public void Start()
-        {
-            InitTimer();
-        }
-
-        public void End()
-        {
-            _checkTimer.Enabled = false;
         }
     }
 }

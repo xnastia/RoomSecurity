@@ -7,7 +7,7 @@ namespace Security.WebApi.Controllers
     public class LoginController : ApiController
     {
         [AcceptVerbs("Post")]
-        public IHttpActionResult Post([FromBody]FormDataCollection formData)
+        public IHttpActionResult Post([FromBody] FormDataCollection formData)
         {
             var email = formData.Get("email");
             var password = formData.Get("password");

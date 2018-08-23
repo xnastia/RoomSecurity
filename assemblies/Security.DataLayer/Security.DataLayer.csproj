@@ -59,6 +59,10 @@
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Security.DataLayer.Entity\Security.DataLayer.Entity.csproj">
+      <Project>{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}</Project>
+      <Name>Security.DataLayer.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Security.Entities\Security.Entities.csproj">
       <Project>{30b7906d-a91f-43df-90c2-718327ad4d43}</Project>
       <Name>Security.Entities</Name>

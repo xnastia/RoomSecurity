@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Security.DataLayer;
+using Security.DataLayer.EF;
 using Security.Entities;
 using Security.Entities.DB;
 
@@ -32,10 +32,10 @@ namespace Security.BusinessLogic
             }
         }
 
-        public List<AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId)
+        public List<Entities.AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId)
         {
             var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
-            var alarmStatusesWithBadgesInString = new List<AlarmStatus>();
+            var alarmStatusesWithBadgesInString = new List<Entities.AlarmStatus>();
             var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
             foreach (var time in timeList)
             {
@@ -43,7 +43,7 @@ namespace Security.BusinessLogic
                 foreach (var alarmStatus in alarmStatuses)
                     if (time.Equals(alarmStatus.Time))
                         intruders += alarmStatus.IntruderBadge + " ";
-                var status = new AlarmStatus {IntruderBadge = intruders, Time = time};
+                var status = new Entities.AlarmStatus {IntruderBadge = intruders, Time = time};
                 alarmStatusesWithBadgesInString.Add(status);
             }
             return alarmStatusesWithBadgesInString;

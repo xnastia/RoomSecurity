@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Security.DataLayer;
+using Security.DataLayer.EF;
 using Security.Entities;
 using Security.Entities.DB;
 

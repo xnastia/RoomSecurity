@@ -114,6 +114,14 @@
     <Compile Include="Migrations\201808231335114_initial migration.Designer.cs">
       <DependentUpon>201808231335114_initial migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808271300353_added some more repositories.cs" />
+    <Compile Include="Migrations\201808271300353_added some more repositories.Designer.cs">
+      <DependentUpon>201808271300353_added some more repositories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808271344131_changed time type in PresenceRules.cs" />
+    <Compile Include="Migrations\201808271344131_changed time type in PresenceRules.Designer.cs">
+      <DependentUpon>201808271344131_changed time type in PresenceRules.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="MonitorRepository.cs" />
@@ -138,6 +146,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808231335114_initial migration.resx">
       <DependentUpon>201808231335114_initial migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808271300353_added some more repositories.resx">
+      <DependentUpon>201808271300353_added some more repositories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808271344131_changed time type in PresenceRules.resx">
+      <DependentUpon>201808271344131_changed time type in PresenceRules.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

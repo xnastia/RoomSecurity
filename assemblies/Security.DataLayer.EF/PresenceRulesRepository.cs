@@ -19,7 +19,7 @@ namespace Security.DataLayer.EF
                 foreach (var presenceRule in presenceRules)
                 {
                     var presenceRuleEntityType = new PresenceRule(presenceRule.BadgeId,
-                        presenceRule.StartTime.TimeOfDay, presenceRule.EndTime.TimeOfDay);
+                        presenceRule.StartTime, presenceRule.EndTime);
                     presenceRulesList.Add(presenceRuleEntityType);
                 }
 

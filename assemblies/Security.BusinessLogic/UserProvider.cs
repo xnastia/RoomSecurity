@@ -1,4 +1,4 @@
-﻿using Security.DataLayer;
+﻿using Security.DataLayer.EF;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic

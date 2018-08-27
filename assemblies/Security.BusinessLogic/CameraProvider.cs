@@ -20,11 +20,11 @@ namespace Security.BusinessLogic
 
         public List<Camera> GetRoomCameras(int roomId)
         {
-            var camerasEntities = _cameraRepository.GetCamerasbyRoomId(roomId);
+            var camerasIds = _cameraRepository.GetCamerasbyRoomId(roomId);
             var cameras = new List<Camera>();
-            foreach (var cameraEntity in camerasEntities)
+            foreach (var cameraId in camerasIds)
             {
-                var camera = new Camera(cameraEntity.Id);
+                var camera = new Camera(cameraId);
                 cameras.Add(camera);
             }
 

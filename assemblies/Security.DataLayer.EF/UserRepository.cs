@@ -1,12 +1,10 @@
 ﻿using System.Linq;
 using Security.Entities.DB;
 
-namespace Security.DataLayer.Entity
+namespace Security.DataLayer.EF
 {
     public class UserRepository : IUserRepository
     {
-        private SecurityDbContext _securityDbContext = new SecurityDbContext();
-
         public bool UserExistsByEmailAndPassword(string email, string password)
         {
             //TODO: replace with correct request and validation

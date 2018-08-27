@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using Security.Entities;
@@ -28,12 +29,11 @@ namespace Security.DataLayer
 
                 while (reader.Read())
                 {
-                    var presenceRule = new PresenceRule()
-                    {
-                        BadgeType = (BadgeType)reader.GetInt32(0),
-                        AllowedTime = new AllowedTime(reader.GetTimeSpan(1),
-                            reader.GetTimeSpan(2))
-                    };
+                    int badgeId = reader.GetInt32(0);
+                    TimeSpan startTime = reader.GetTimeSpan(1);
+                    TimeSpan endTime = reader.GetTimeSpan(2);
+                    var presenceRule = new PresenceRule(badgeId, startTime, endTime);
+                    
                     presenceRules.Add(presenceRule);
                 }
             }

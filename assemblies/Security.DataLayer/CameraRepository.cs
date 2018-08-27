@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.DataLayer
@@ -10,12 +9,12 @@ namespace Security.DataLayer
     {
         private readonly string _connectionString = 
             ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
-        public List<CameraEntity> GetCamerasbyRoomId(int roomId)
+        public List<int> GetCamerasbyRoomId(int roomId)
         {
             var getCameraEntities = "SELECT Id FROM Cameras WHERE RoomId = @roomId";
 
             SqlDataReader reader = null;
-            var cameraEntities = new List<CameraEntity>();
+            var camerasIds = new List<int>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -27,15 +26,12 @@ namespace Security.DataLayer
                 
                 while (reader.Read())
                 {
-                    var cameraEntity = new CameraEntity()
-                    {
-                        Id = reader.GetInt32(0)
-                    };
-                    cameraEntities.Add(cameraEntity);
+                     int id = reader.GetInt32(0);
+                     camerasIds.Add(id);
                 }
             }
             reader.Close();
-            return cameraEntities;
+            return camerasIds;
         }
     }
 }

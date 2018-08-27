@@ -29,8 +29,8 @@ namespace Security.BusinessLogic
             if (!_monitors.ContainsKey(monitorId))
             {
                 var monitor = CreateMonitor(monitorId);
-                new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
                 _monitors.Add(monitorId, monitor);
+                new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
             }
             return _monitors[monitorId];
         }

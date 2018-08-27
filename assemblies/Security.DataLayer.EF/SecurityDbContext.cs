@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Security.DataLayer.Entity
+namespace Security.DataLayer.EF
 {
     internal class SecurityDbContext : DbContext
     {

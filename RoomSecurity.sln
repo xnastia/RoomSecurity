@@ -43,7 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{54EC
 		scripts\database.sql = scripts\database.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.DataLayer.Entity", "assemblies\Security.DataLayer.Entity\Security.DataLayer.Entity.csproj", "{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.DataLayer.EF", "assemblies\Security.DataLayer.EF\Security.DataLayer.EF.csproj", "{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

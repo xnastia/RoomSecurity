@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using Security.Entities;
 using Security.Entities.DB;
-using Security.DataLayer.Entity;
 
 namespace Security.DataLayer
 {

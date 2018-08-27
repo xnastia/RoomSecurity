@@ -13,7 +13,7 @@ namespace Security.BusinessLogic
 
         public event OnScanHandler OnScanInvoke;
 
-        public TimerScanInvoker(int checkTimerInterval = 1000)
+        public TimerScanInvoker(int checkTimerInterval = 3000)
         {
             CurrentTime = DateTime.Now;
             _checkTimerInterval = checkTimerInterval;

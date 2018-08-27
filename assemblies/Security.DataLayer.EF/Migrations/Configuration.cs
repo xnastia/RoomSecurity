@@ -1,18 +1,15 @@
-namespace Security.DataLayer.Entity.Migrations
+namespace Security.DataLayer.EF.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Security.DataLayer.Entity.SecurityDbContext>
+    
+    internal sealed class Configuration : DbMigrationsConfiguration<Security.DataLayer.EF.SecurityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Security.DataLayer.Entity.SecurityDbContext context)
+        protected override void Seed(Security.DataLayer.EF.SecurityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

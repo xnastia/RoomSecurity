@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Security.DataLayer.Entity
+namespace Security.DataLayer.EF
 {
     public class User
     {

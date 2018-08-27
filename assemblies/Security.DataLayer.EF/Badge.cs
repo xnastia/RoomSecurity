@@ -1,4 +1,4 @@
-﻿namespace Security.DataLayer.Entity
+﻿namespace Security.DataLayer.EF
 {
     public class Badge
     {

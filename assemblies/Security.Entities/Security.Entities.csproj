@@ -43,7 +43,6 @@
     <Compile Include="AlarmStatus.cs" />
     <Compile Include="AllowedTime.cs" />
     <Compile Include="BadgeType.cs" />
-    <Compile Include="CameraEntity.cs" />
     <Compile Include="DB\IAlarmStatusRepository.cs" />
     <Compile Include="DB\ICameraRepository.cs" />
     <Compile Include="DB\IPresenceRulesRepository.cs" />

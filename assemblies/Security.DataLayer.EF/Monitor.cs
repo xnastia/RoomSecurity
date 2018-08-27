@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Security.DataLayer.Entity
+namespace Security.DataLayer.EF
 {
     public class Monitor
     {

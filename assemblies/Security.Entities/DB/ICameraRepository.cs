@@ -4,6 +4,6 @@ namespace Security.Entities.DB
 {
     public interface ICameraRepository
     {
-        List<CameraEntity> GetCamerasbyRoomId(int roomId);
+        List<int> GetCamerasbyRoomId(int roomId);
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Security.DataLayer.EF;
-using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
@@ -32,7 +31,7 @@ namespace Security.BusinessLogic
             }
         }
 
-        public List<Entities.AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId)
+        public List<Entities.AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId, int page = 1, int pageSize = 4)
         {
             var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
             var alarmStatusesWithBadgesInString = new List<Entities.AlarmStatus>();
@@ -46,7 +45,9 @@ namespace Security.BusinessLogic
                 var status = new Entities.AlarmStatus {IntruderBadge = intruders, Time = time};
                 alarmStatusesWithBadgesInString.Add(status);
             }
-            return alarmStatusesWithBadgesInString;
+            var alarmStatusesPaged = alarmStatusesWithBadgesInString.OrderByDescending(alarmStatus => alarmStatus.Time)
+                .Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return alarmStatusesPaged;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Security.DataLayer.EF
             }
         }
 
-        public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomUiId, int page = 1, int pageSize = 4)
+        public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomUiId)
         {
             var alarmStatusesEntities = new List<Entities.AlarmStatus>();
             using (var securityDbContext = new SecurityDbContext())
@@ -37,9 +37,9 @@ namespace Security.DataLayer.EF
                 var roomId = _roomRepository.GetRoomIdByUiId(roomUiId);
                 var alarmStatuses = securityDbContext.AlarmStatuses
                     .Where(alarmStatus => alarmStatus.RoomId == roomId)
-                    .Select(alarmStatus => new {alarmStatus.Time, alarmStatus.BadgeId})
-                    .OrderByDescending(alarmStatus => alarmStatus.Time)
-                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                    .Select(alarmStatus => new {alarmStatus.Time, alarmStatus.BadgeId});
+                    /*.OrderByDescending(alarmStatus => alarmStatus.Time)
+                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();*/
                 foreach (var alarmStatus in alarmStatuses)
                 {
                     var alarmStatusEntities = new Entities.AlarmStatus()

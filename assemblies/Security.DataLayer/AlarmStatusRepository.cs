@@ -41,7 +41,7 @@ namespace Security.DataLayer
             }
         }
 
-        public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomId, int page = 1, int pageSize = 4)
+        public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
         {
             //RoomRepository roomRepository = new RoomRepository();
             int id = _roomRepository.GetRoomIdByUiId(roomId);

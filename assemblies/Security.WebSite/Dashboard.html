@@ -53,12 +53,15 @@
         </label>
     </div>
 </div>
-<div id="alarm-report" class="alarm-report" onclick="alarmReport.showAlarmReport()">
+<div id="alarm-report" class="alarm-report">
     <span class="close" onclick="alarmReport.hideAlarmReportOnCloseBtnClick()">&times;</span>
     <table id="alarm-report-table">
         <thead></thead>
         <tbody></tbody>
     </table><br />
+    <div class="pagination" id="alarm-status-pagination">
+        <script>alarmReport.buldPaginationMenu()</script>
+    </div>
 </div>
 </body>
 </html>

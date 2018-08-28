@@ -24,10 +24,10 @@ namespace Security.WebApi.Controllers
             return floorDashboardStatus;
         }
 
-        public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId)
+        public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)
         {
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            return alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId);
+            return alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId,page);
         }
 
         public List<MonitorTab> GetMonitors()

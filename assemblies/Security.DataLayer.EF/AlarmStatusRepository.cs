@@ -38,8 +38,6 @@ namespace Security.DataLayer.EF
                 var alarmStatuses = securityDbContext.AlarmStatuses
                     .Where(alarmStatus => alarmStatus.RoomId == roomId)
                     .Select(alarmStatus => new {alarmStatus.Time, alarmStatus.BadgeId});
-                    /*.OrderByDescending(alarmStatus => alarmStatus.Time)
-                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();*/
                 foreach (var alarmStatus in alarmStatuses)
                 {
                     var alarmStatusEntities = new Entities.AlarmStatus()
@@ -52,5 +50,6 @@ namespace Security.DataLayer.EF
             }
             return alarmStatusesEntities;
         }
-    }
+
+     }
 }

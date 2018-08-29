@@ -30,6 +30,12 @@ namespace Security.WebApi.Controllers
             return alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId,page);
         }
 
+        public int GetAlarmStatusesNumber(Guid roomId)
+        {
+            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
+            return alarmStatusProvider.CountAlarmStatuses(roomId);
+        }
+
         public List<MonitorTab> GetMonitors()
         {
             MonitorProvider monitorProvider = new MonitorProvider();

@@ -38,16 +38,22 @@ namespace Security.BusinessLogic
             var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
             foreach (var time in timeList)
             {
-                var intruders = "";
+                var intruder = "";
                 foreach (var alarmStatus in alarmStatuses)
                     if (time.Equals(alarmStatus.Time))
-                        intruders += alarmStatus.IntruderBadge + " ";
-                var status = new Entities.AlarmStatus {IntruderBadge = intruders, Time = time};
+                        intruder= alarmStatus.IntruderBadge;
+                var status = new Entities.AlarmStatus {IntruderBadge = intruder, Time = time};
                 alarmStatusesWithBadgesInString.Add(status);
             }
             var alarmStatusesPaged = alarmStatusesWithBadgesInString.OrderByDescending(alarmStatus => alarmStatus.Time)
                 .Skip((page - 1) * pageSize).Take(pageSize).ToList();
             return alarmStatusesPaged;
+        }
+
+        public int CountAlarmStatuses(Guid roomId)
+        {
+            var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
+            return alarmStatuses.Count();
         }
     }
 }

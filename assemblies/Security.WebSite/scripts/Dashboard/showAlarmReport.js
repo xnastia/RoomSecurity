@@ -29,7 +29,7 @@
         self.alarmReport.style.display = "none";
         self.blockPanel.style.display = "none";
         $(".pagination").empty();
-
+        self.page = 1;
         event.stopPropagation();
     }
 

@@ -134,4 +134,10 @@ div.scrollmenu a:hover {
 .pagination a.active {
     background-color: #4CAF50;
     color: white;
+    display: inline-block !important;
+    border: 2px solid #ddd;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
 }

@@ -46,6 +46,7 @@
     <Compile Include="CheckerResponse.cs" />
     <Compile Include="IRecognizer.cs" />
     <Compile Include="ISecurityScanner.cs" />
+    <Compile Include="ISnapshotApi.cs" />
     <Compile Include="ITimerScanInvoker.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="MonitorProvider.cs" />

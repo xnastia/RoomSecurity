@@ -1,5 +1,5 @@
 ﻿using Ninject.Modules;
-using Security.Entities.DB;
+using Security.BusinessLogic;
 
 namespace Security.WebApi.Ninject
 {
@@ -7,7 +7,9 @@ namespace Security.WebApi.Ninject
     {
         public override void Load()
         {
-            //Bind<IRoomRepository>().To<>();
+            SnapshotApi sn = new SnapshotApi();
+            Bind<ISnapshotApi>().ToConstant(sn);
+            //Bind<ISnapshotApi>().To<SnapshotApi>().InSingletonScope();
         }
     }
 }

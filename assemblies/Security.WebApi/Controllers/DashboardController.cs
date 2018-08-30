@@ -4,19 +4,24 @@ using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
 
-public static class Test
+/*public static class Test
 {
     public static readonly SnapshotApi _snapshotApi = new SnapshotApi();
-}
+}*/
 
 namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
-        private readonly SnapshotApi _snapshotApi = new SnapshotApi();
+        private readonly ISnapshotApi _snapshotApi;
+        public DashboardController(ISnapshotApi snapshotApi)
+        {
+            _snapshotApi = snapshotApi;
+        }
+
         public DashboardStatus GetMonitorStatus(Guid monitorId)
         {
-            var monitorSnapshot = Test._snapshotApi.GetMonitorSnapshot(monitorId);
+            var monitorSnapshot = _snapshotApi.GetMonitorSnapshot(monitorId);
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
             DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);

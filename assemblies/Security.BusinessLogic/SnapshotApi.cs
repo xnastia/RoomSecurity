@@ -4,7 +4,7 @@ using Security.Entities;
 
 namespace Security.BusinessLogic
 {
-    public class SnapshotApi
+    public class SnapshotApi : ISnapshotApi
     {
         private MonitorProvider _monitorProvider;
         private SnapshotProvider _snapshotProvider;

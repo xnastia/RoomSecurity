@@ -6,19 +6,16 @@ namespace Security.BusinessLogic
 {
     public class SnapshotApi : ISnapshotApi
     {
-        private MonitorProvider _monitorProvider;
-        private SnapshotProvider _snapshotProvider;
-
-        public SnapshotApi()
-        {
-            _monitorProvider = new MonitorProvider();
-            _snapshotProvider = new SnapshotProvider();
-        }
-
+        private IMonitorProvider _monitorProvider;
+        private ISnapshotProvider _snapshotProvider;
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
-
         public string CurrentTime { get; set; }
 
+        public SnapshotApi(IMonitorProvider monitorProvider, ISnapshotProvider snapshotProvider)
+        {
+            _monitorProvider = monitorProvider;
+            _snapshotProvider = snapshotProvider;
+        }
 
         public MonitorSnapshot GetMonitorSnapshot(Guid monitorId)
         {

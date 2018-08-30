@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Security.DataLayer.EF;
 using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class RoomProvider
+    public class RoomProvider : IRoomProvider
     {
         private readonly IRoomRepository _roomRepository;
 
         public RoomProvider(IRoomRepository roomRepository)
         {
             _roomRepository = roomRepository;
-        }
-
-        public RoomProvider()
-        {
-            _roomRepository = new RoomRepository();
         }
 
         public int GetRoomIdByUiId(Guid uiId)

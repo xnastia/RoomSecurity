@@ -2,7 +2,7 @@
 {
     public class SecurityApi
     {
-        private readonly UserProvider _userProvider = new UserProvider();
+        private readonly UserProvider _userProvider;
 
         public bool IsValidUser(string email, string password)
         {

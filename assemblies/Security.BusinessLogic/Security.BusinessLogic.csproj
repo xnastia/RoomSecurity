@@ -44,10 +44,19 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CameraProvider.cs" />
     <Compile Include="CheckerResponse.cs" />
+    <Compile Include="IAlarmStatusProvider.cs" />
+    <Compile Include="ICameraProvider.cs" />
+    <Compile Include="IMonitor.cs" />
+    <Compile Include="IMonitorProvider.cs" />
+    <Compile Include="IPresenceRulesProvider.cs" />
     <Compile Include="IRecognizer.cs" />
+    <Compile Include="IRoomProvider.cs" />
     <Compile Include="ISecurityScanner.cs" />
+    <Compile Include="ISecurityScannerProvider.cs" />
     <Compile Include="ISnapshotApi.cs" />
+    <Compile Include="ISnapshotProvider.cs" />
     <Compile Include="ITimerScanInvoker.cs" />
+    <Compile Include="IUserProvider.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="MonitorProvider.cs" />
     <Compile Include="MonitorSnapshot.cs" />
@@ -65,12 +74,8 @@
     <Compile Include="UserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Security.DataLayer.EF\Security.DataLayer.EF.csproj">
-      <Project>{e16c68ab-83cc-4be9-955f-e8b667fd9cbc}</Project>
-      <Name>Security.DataLayer.EF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Security.DataLayer\Security.DataLayer.csproj">
-      <Project>{04dc577c-2f14-45b2-a32d-67bfda5cff8d}</Project>
+      <Project>{04DC577C-2F14-45B2-A32D-67BFDA5CFF8D}</Project>
       <Name>Security.DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Security.Entities\Security.Entities.csproj">

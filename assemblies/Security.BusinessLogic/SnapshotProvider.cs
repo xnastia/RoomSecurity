@@ -1,31 +1,37 @@
 ﻿using System.Collections.Generic;
+using Security.DataLayer;
 using Security.Entities;
-using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    internal class SnapshotProvider
+    public class SnapshotProvider : ISnapshotProvider
     {
-        private static readonly Dictionary<Monitor, MonitorSnapshot> MonitorSnapshot =
+        private readonly Dictionary<Monitor, MonitorSnapshot> _monitorSnapshot =
             new Dictionary<Monitor, MonitorSnapshot>();
+
+        private readonly IAlarmStatusProvider _alarmStatusProvider;
+        
+        public SnapshotProvider(IAlarmStatusProvider alarmStatusProvider)
+        {
+            _alarmStatusProvider = alarmStatusProvider;
+        }
 
         public MonitorSnapshot GetMonitorSnapshot(Monitor monitor)
         {
-            if (!MonitorSnapshot.ContainsKey(monitor))
-                MonitorSnapshot.Add(monitor, CreateMonitorSnapshot(monitor));
+            if (!_monitorSnapshot.ContainsKey(monitor))
+                _monitorSnapshot.Add(monitor, CreateMonitorSnapshot(monitor));
 
-            return MonitorSnapshot[monitor];
+            return _monitorSnapshot[monitor];
         }
 
-        private static MonitorSnapshot CreateMonitorSnapshot(Monitor monitor)
+        private MonitorSnapshot CreateMonitorSnapshot(IMonitor monitor)
         {
-            var monitorSnapshot = new MonitorSnapshot
+            var monitorSnapshot = new MonitorSnapshot(new RoomProvider(new RoomRepository()))
             {
                 SecurityScannerStatuses = new List<ScannerStatus>()
             };
             monitor.EventOnCheckDone += monitorSnapshot.UpdateStatus;
-            var alarmStatusProvider = new AlarmStatusProvider();
-            monitor.EventOnIntruderDetected += alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus;
+            monitor.EventOnIntruderDetected += _alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus;
             
             return monitorSnapshot;
         }

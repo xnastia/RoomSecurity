@@ -4,17 +4,21 @@ using Security.Entities;
 
 namespace Security.BusinessLogic
 {
-    public class MonitorSnapshot
+    public class MonitorSnapshot : IMonitorSnapshot
     {
         public List<ScannerStatus> SecurityScannerStatuses { get; set; }
-
+        public IRoomProvider RoomProvider { get; set; }
         public string CurrentTime { get; set; }
+
+        public MonitorSnapshot(IRoomProvider roomProvider)
+        {
+            RoomProvider = roomProvider;
+        }
 
         public void UpdateStatus(CheckerResponse checkerResponse)
         {
             CurrentTime = checkerResponse.CheckTime.ToString("f");
-            RoomProvider roomProvider = new RoomProvider();
-            RoomShortInfo roomInfo = roomProvider.GetRoomInfoById(checkerResponse.ScannerId);
+           RoomShortInfo roomInfo = RoomProvider.GetRoomInfoById(checkerResponse.ScannerId);
             var securityScannerWithSameUiId = SecurityScannerStatuses
                 .SingleOrDefault(scannerStatus => scannerStatus.RoomInfo.UiId == roomInfo.UiId);
 
@@ -29,5 +33,10 @@ namespace Security.BusinessLogic
 
             securityScannerWithSameUiId.IsOk = !checkerResponse.IntruderFound;
         }
+    }
+
+    public interface IMonitorSnapshot
+    {
+        void UpdateStatus(CheckerResponse checkerResponse);
     }
 }

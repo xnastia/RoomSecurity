@@ -33,7 +33,7 @@ namespace RoomSecurity.UnitTests
             ISecurityScanner securityScannerMock = MockRepository.GenerateMock<ISecurityScanner>();
             var currentTime = DateTime.Now;
             securityScannerMock.Stub(x => x.CheckRoom(currentTime))
-                .Return(new CheckerResponse("some room", 
+                .Return(new CheckerResponse(1, 
                 new List<BadgeType>
                 {
                     BadgeType.NoBadge

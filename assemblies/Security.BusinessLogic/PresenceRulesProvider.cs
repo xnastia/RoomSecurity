@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Security.DataLayer.EF;
 using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class PresenceRulesProvider
+    public class PresenceRulesProvider : IPresenceRulesProvider
     {
         private readonly IPresenceRulesRepository _presenceRulesRepository;
 
@@ -15,12 +14,7 @@ namespace Security.BusinessLogic
         {
             _presenceRulesRepository = presenceRulesRepository;
         }
-
-        public PresenceRulesProvider()
-        {
-            _presenceRulesRepository = new PresenceRulesRepository();
-        }
-
+        
         public Dictionary<BadgeType, List<AllowedTime>> GetPresenceRules(int roomId)
         {
             var presenceRulesList = _presenceRulesRepository.GetPresenceRulesByRoomId(roomId);

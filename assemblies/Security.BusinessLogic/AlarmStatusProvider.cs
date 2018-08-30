@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Security.DataLayer.EF;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class AlarmStatusProvider
+    public class AlarmStatusProvider : IAlarmStatusProvider
     {
         private readonly IAlarmStatusRepository _alarmStatusRepository;
 
@@ -15,10 +14,6 @@ namespace Security.BusinessLogic
             _alarmStatusRepository = alarmStatusRepository;
         }
 
-        public AlarmStatusProvider()
-        {
-            _alarmStatusRepository = new AlarmStatusRepository();
-        }
         public void InsertCheckerResponseIntoAlarmStatus(CheckerResponse checkerResponse)
         {
             if (checkerResponse.IntruderFound)

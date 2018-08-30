@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
-
-/*public static class Test
-{
-    public static readonly SnapshotApi _snapshotApi = new SnapshotApi();
-}*/
+using Security.Entities.DB;
 
 namespace Security.WebApi.Controllers
 {
     public class DashboardController : ApiController
     {
         private readonly ISnapshotApi _snapshotApi;
-        public DashboardController(ISnapshotApi snapshotApi)
+        private IAlarmStatusProvider _alarmStatusProvider;
+        private IMonitorProvider _monitorProvider;
+
+        public DashboardController(ISnapshotApi snapshotApi, IAlarmStatusProvider alarmStatusProvider,
+            IMonitorProvider monitorProvider)
         {
             _snapshotApi = snapshotApi;
+            _alarmStatusProvider = alarmStatusProvider;
+            _monitorProvider = monitorProvider;
         }
-
+        
         public DashboardStatus GetMonitorStatus(Guid monitorId)
         {
             var monitorSnapshot = _snapshotApi.GetMonitorSnapshot(monitorId);
@@ -31,20 +33,17 @@ namespace Security.WebApi.Controllers
 
         public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)
         {
-            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            return alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId,page);
+            return _alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId,page);
         }
 
         public int GetAlarmStatusesNumber(Guid roomId)
         {
-            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider();
-            return alarmStatusProvider.CountAlarmStatuses(roomId);
+            return _alarmStatusProvider.CountAlarmStatuses(roomId);
         }
 
         public List<MonitorTab> GetMonitors()
         {
-            MonitorProvider monitorProvider = new MonitorProvider();
-            return monitorProvider.GetMonitorsTabList();
+            return _monitorProvider.GetMonitorsTabList();
         }
     }
 }

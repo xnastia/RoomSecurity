@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using Security.DataLayer.EF;
 using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class MonitorProvider
+    public class MonitorProvider : IMonitorProvider
     {
         private readonly Dictionary<int, Monitor> _monitors = new Dictionary<int, Monitor>();
-        private readonly SecurityScannerProvider _securityScannerProvider = new SecurityScannerProvider();
+        private readonly ISecurityScannerProvider _securityScannerProvider;
         private IMonitorRepository _monitorRepository;
+        private IRoomProvider _roomProvider;
 
-        public MonitorProvider(IMonitorRepository monitorRepository)
+        public MonitorProvider(IMonitorRepository monitorRepository, IRoomProvider roomProvider,
+            ISecurityScannerProvider securityScannerProvider)
         {
             _monitorRepository = monitorRepository;
+            _roomProvider = roomProvider;
+            _securityScannerProvider = securityScannerProvider;
         }
-
-        public MonitorProvider()
-        {
-            _monitorRepository = new MonitorRepository();
-        }
-
+        
         public Monitor GetMonitor(Guid uiId)
         {
-            IMonitorRepository monitorRepository = new MonitorRepository();
-            int monitorId = monitorRepository.GetMonitorIdByUiId(uiId);
+            int monitorId = _monitorRepository.GetMonitorIdByUiId(uiId);
             if (!_monitors.ContainsKey(monitorId))
             {
                 var monitor = CreateMonitor(monitorId);
@@ -38,8 +35,7 @@ namespace Security.BusinessLogic
         public Monitor CreateMonitor(int monitorId)
         {
             IRecognizer recognizer = new RandomRecognizer(12121213);
-            RoomProvider roomProvider = new RoomProvider();
-            List<int> roomsIds = roomProvider.GetRoomsIdsByMonitorId(monitorId);
+            List<int> roomsIds = _roomProvider.GetRoomsIdsByMonitorId(monitorId);
             var securitryScanners = new List<ISecurityScanner>();
             foreach (var roomId in roomsIds)
             {
@@ -51,8 +47,7 @@ namespace Security.BusinessLogic
 
         public List<MonitorTab> GetMonitorsTabList()
         {
-            IMonitorRepository monitorRepository = new MonitorRepository();
-            return monitorRepository.GeMonitorTabs();
+            return _monitorRepository.GeMonitorTabs();
         }
     }
 }

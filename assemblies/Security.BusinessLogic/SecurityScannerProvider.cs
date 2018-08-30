@@ -1,24 +1,17 @@
 ﻿using System.Collections.Generic;
-using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-   public class SecurityScannerProvider
+   public class SecurityScannerProvider : ISecurityScannerProvider
    {
-       private readonly CameraProvider _cameraProvider;
-       private readonly PresenceRulesProvider _rulesProvider;
+       private readonly ICameraProvider _cameraProvider;
+       private readonly IPresenceRulesProvider _rulesProvider;
 
-       public SecurityScannerProvider(ICameraRepository cameraRepository, 
-           IPresenceRulesRepository presenceRulesRepository)
+       public SecurityScannerProvider(ICameraProvider cameraProvider, 
+           IPresenceRulesProvider presenceRulesProvider)
        {
-           _cameraProvider = new CameraProvider(cameraRepository);
-           _rulesProvider = new PresenceRulesProvider(presenceRulesRepository);
-       }
-
-       public SecurityScannerProvider()
-       {
-           _cameraProvider = new CameraProvider();
-           _rulesProvider = new PresenceRulesProvider();
+           _cameraProvider = cameraProvider;
+           _rulesProvider = presenceRulesProvider;
        }
 
         public SecurityScanner GetRoomScanner(int roomId, IRecognizer recognizer)

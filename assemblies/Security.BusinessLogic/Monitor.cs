@@ -7,7 +7,7 @@ namespace Security.BusinessLogic
 
     public delegate void OnScanHandler(DateTime currentTime);
 
-    public class Monitor
+    public class Monitor : IMonitor
     {
         public event CheckDoneHandler EventOnIntruderDetected;
         public event CheckDoneHandler EventOnCheckDone;

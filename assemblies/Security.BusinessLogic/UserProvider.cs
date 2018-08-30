@@ -1,20 +1,14 @@
-﻿using Security.DataLayer.EF;
-using Security.Entities.DB;
+﻿using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class UserProvider
+    public class UserProvider : IUserProvider
     {
         private readonly IUserRepository _userRepository;
 
         public UserProvider(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-        }
-
-        public UserProvider()
-        {
-            _userRepository = new UserRepository();
         }
 
         public bool IsUserValid(string email, string password)

@@ -1,21 +1,15 @@
 ﻿using System.Collections.Generic;
-using Security.DataLayer.EF;
 using Security.Entities.DB;
 
 namespace Security.BusinessLogic
 {
-    public class CameraProvider
+    public class CameraProvider : ICameraProvider
     {
         private readonly ICameraRepository _cameraRepository;
 
         public CameraProvider(ICameraRepository cameraRepository)
         {
             _cameraRepository = cameraRepository;
-        }
-
-        public CameraProvider()
-        {
-            _cameraRepository = new CameraRepository();
         }
 
         public List<Camera> GetRoomCameras(int roomId)

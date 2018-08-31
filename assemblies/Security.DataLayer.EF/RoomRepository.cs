@@ -13,7 +13,18 @@ namespace Security.DataLayer.EF
             int id;
             using (var securityDbContext = new SecurityDbContext())
             {
-                id = securityDbContext.Rooms.Single(room => room.UiId == roomId).Id;
+                Room roomByUiId;
+                try
+                {
+                    roomByUiId = securityDbContext.Rooms.First(room => room.UiId == roomId);
+                }
+
+                catch (Exception exception)
+                {
+                    throw new ArgumentNullException(exception.Message);
+                }
+
+                id = roomByUiId.Id;
             }
             return id;
         }
@@ -27,16 +38,6 @@ namespace Security.DataLayer.EF
                 roomShortInfo = new RoomShortInfo {Name = room.Name, UiId = room.UiId};
             }
             return roomShortInfo;
-        }
-
-        public int GetRoomIdByRoomName(string roomName)
-        {
-            int id;
-            using (var securityDbContext = new SecurityDbContext())
-            {
-                id = securityDbContext.Rooms.Single(room => room.Name == roomName).Id;
-            }
-            return id;
         }
 
         public List<int> GetRoomsIdsbyMonitorId(int monitorId)

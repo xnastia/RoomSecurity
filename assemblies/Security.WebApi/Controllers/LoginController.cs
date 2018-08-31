@@ -6,6 +6,11 @@ namespace Security.WebApi.Controllers
 {
     public class LoginController : ApiController
     {
+        private IUserProvider _userProvider;
+        public LoginController(IUserProvider userProvider)
+        {
+            _userProvider = userProvider;
+        }
         [AcceptVerbs("Post")]
         public IHttpActionResult Post([FromBody] FormDataCollection formData)
         {
@@ -13,7 +18,7 @@ namespace Security.WebApi.Controllers
             var password = formData.Get("password");
 
             //TODO: authenticate user
-            var isValidUser = new SecurityApi().IsValidUser(email, password);
+            var isValidUser = new SecurityApi(_userProvider).IsValidUser(email, password);
 
             if (isValidUser)
                 return Ok();

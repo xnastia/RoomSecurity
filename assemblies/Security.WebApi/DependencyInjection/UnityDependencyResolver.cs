@@ -31,6 +31,9 @@ namespace Security.WebApi.DependencyInjection
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider(alarmStatusRepository);
             SnapshotProvider snapshotProvider = new SnapshotProvider(alarmStatusProvider);
             ISnapshotApi snapshotApi = new SnapshotApi(monitorProvider, snapshotProvider);
+            IUserRepository userRepository = new UserRepository();
+            userRepository.AddUser("Ivan", "Ivanov", "ivanov@ukr.net", "1234");
+            IUserProvider userProvider = new UserProvider(userRepository);
             container.RegisterInstance<ISnapshotApi>(snapshotApi);
             container.RegisterType<IAlarmStatusRepository, DataLayer.EF.AlarmStatusRepository>();
             container.RegisterType<ICameraRepository, DataLayer.EF.CameraRepository>();

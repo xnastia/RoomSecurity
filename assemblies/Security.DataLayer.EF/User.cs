@@ -30,12 +30,20 @@ namespace Security.DataLayer.EF
             SHA1 md5 = SHA1.Create();
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
             byte[] hash = md5.ComputeHash(inputBytes);
-            StringBuilder sb = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
             {
-                sb.Append(i.ToString("X2"));
+                stringBuilder.Append(i.ToString("X2"));
             }
-            return sb.ToString();
+            return stringBuilder.ToString();
+        }
+
+        public User(string firstName, string lastName, string email, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
         }
     }
 }

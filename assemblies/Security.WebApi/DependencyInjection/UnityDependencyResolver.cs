@@ -25,7 +25,7 @@ namespace Security.WebApi.DependencyInjection
             PresenceRulesRepository presenceRulesRepository = new PresenceRulesRepository();
             PresenceRulesProvider presenceRulesProvider = new PresenceRulesProvider(presenceRulesRepository);
             SecurityScannerProvider securityScannerProvider =
-                new SecurityScannerProvider(cameraProvider, presenceRulesProvider);
+            new SecurityScannerProvider(cameraProvider, presenceRulesProvider);
             MonitorProvider monitorProvider = new MonitorProvider(monitorRepository, roomProvider, securityScannerProvider);
             AlarmStatusRepository alarmStatusRepository = new AlarmStatusRepository();
             AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider(alarmStatusRepository);

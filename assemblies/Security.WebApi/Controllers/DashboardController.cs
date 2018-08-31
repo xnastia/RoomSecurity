@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
-using Security.Entities.DB;
 
 namespace Security.WebApi.Controllers
 {

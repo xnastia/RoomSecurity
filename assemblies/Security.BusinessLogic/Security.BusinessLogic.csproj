@@ -74,6 +74,10 @@
     <Compile Include="UserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Security.DataLayer.EF\Security.DataLayer.EF.csproj">
+      <Project>{e16c68ab-83cc-4be9-955f-e8b667fd9cbc}</Project>
+      <Name>Security.DataLayer.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Security.DataLayer\Security.DataLayer.csproj">
       <Project>{04DC577C-2F14-45B2-A32D-67BFDA5CFF8D}</Project>
       <Name>Security.DataLayer</Name>

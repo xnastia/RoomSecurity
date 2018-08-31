@@ -121,22 +121,24 @@ div.scrollmenu a:hover {
 
 .pagination {
     display: inline-block;
+    position: absolute;
+    top: 190px;
+    right: 30px;
 }
 
 .pagination a {
-    border: 2px solid #ddd;
+    border: 2px solid #ababab;
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
 }
 
-.pagination a.active {
+.active {
     background-color: #4CAF50;
     color: white;
-    display: inline-block !important;
-    border: 2px solid #ddd;
-    color: black;
+    display: inline-block;
+    border: 2px solid #ababab;
     float: left;
     padding: 8px 16px;
     text-decoration: none;

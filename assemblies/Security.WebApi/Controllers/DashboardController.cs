@@ -32,7 +32,7 @@ namespace Security.WebApi.Controllers
 
         public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)
         {
-            return _alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId,page);
+            return _alarmStatusProvider.GetAlarmStatusByRoomUiId(roomId, page);
         }
 
         public int GetAlarmStatusesNumber(Guid roomId)

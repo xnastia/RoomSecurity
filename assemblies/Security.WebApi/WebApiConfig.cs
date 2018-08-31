@@ -19,7 +19,7 @@ namespace Security.WebApi
         {
             config.Routes.MapHttpRoute(
                 "Default2",
-                "{controller}/{id}",
+                "{controller}/{action}/{id}",
                 new {id = RouteParameter.Optional}
             );
         }

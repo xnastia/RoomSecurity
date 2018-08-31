@@ -30,7 +30,7 @@ namespace Security.BusinessLogic
         {
             var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
             var alarmStatusesWithBadgesInString = new List<Entities.AlarmStatus>();
-            var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).Distinct().ToList();
+            var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).ToList();
             foreach (var time in timeList)
             {
                 var intruder = "";

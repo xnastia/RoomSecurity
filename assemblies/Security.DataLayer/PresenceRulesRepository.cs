@@ -14,7 +14,7 @@ namespace Security.DataLayer
 
         public List<PresenceRule> GetPresenceRulesByRoomId(int roomId)
         {
-            var getPresenceRules = "SELECT BadgeId, StartTime, EndTime from PresenceRules WHERE RoomId=@roomId";
+            var getPresenceRules = "sp_GetPresenceRulesByRoomId";
 
             SqlDataReader reader = null;
             List<PresenceRule> presenceRules = new List<PresenceRule>();
@@ -23,6 +23,7 @@ namespace Security.DataLayer
             {
                 connection.Open();
                 var command = new SqlCommand(getPresenceRules, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var roomIdParameter = new SqlParameter("@roomId", roomId);
                 command.Parameters.Add(roomIdParameter);
                 reader = command.ExecuteReader();
@@ -40,6 +41,5 @@ namespace Security.DataLayer
             reader.Close();
             return presenceRules;
         }
-
     }
 }

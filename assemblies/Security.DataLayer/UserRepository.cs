@@ -22,10 +22,11 @@ namespace Security.DataLayer
             var userexists = false;
             int numberOfUsers;
             password = HashCalculator.CalculateHash(password);
-            var userExistsByEmailAndPassword = "Select count(*) from Users Where Email=@email and Password=@password";
+            var userExistsByEmailAndPassword = "sp_UserExistsByEmailAndPassword";
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand(userExistsByEmailAndPassword, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var emailParameter = new SqlParameter("@email", email);
                 var passwordParameter = new SqlParameter("@password", password);
                 command.Parameters.Add(emailParameter);

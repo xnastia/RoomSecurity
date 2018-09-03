@@ -15,10 +15,14 @@ namespace Security.DataLayer
         public int GetRoomIdByUiId(Guid uiId)
         {
             int id;
-            var getRoomIdByUiId = "Select Id from Rooms where UiId = @uiId";
+            var getRoomIdByUiIdExpression = "sp_GetRoomIdByUiId";
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand(getRoomIdByUiId, connection);
+                var command =
+                    new SqlCommand(getRoomIdByUiIdExpression, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure
+                    };
                 var uiIdParameter = new SqlParameter("@uiId", uiId);
                 command.Parameters.Add(uiIdParameter);
                 try
@@ -37,11 +41,12 @@ namespace Security.DataLayer
         public RoomShortInfo GetRoomInfoById(int roomId)
         {
             var roomShortInfo = new RoomShortInfo();
-            var getRoomInfoById = "Select Name, UiId from Rooms where Id = @roomId";
+            var getRoomInfoById = "sp_GetRoomInfoById";
             using (var connection = new SqlConnection(_connectionString))
             {
                 SqlDataReader reader = null;
                 var command = new SqlCommand(getRoomInfoById, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var roomIdParameter = new SqlParameter("@roomId", roomId);
                 command.Parameters.Add(roomIdParameter);
                 connection.Open();
@@ -59,10 +64,11 @@ namespace Security.DataLayer
         public List<int> GetRoomsIdsbyMonitorId(int monitorId)
         {
             var ids = new List<int>();
-            var getRoomsIdsByMonitorId = "Select Id from Rooms where MonitorId = @monitorId";
+            var getRoomsIdsByMonitorId = "sp_GetRoomsIdsbyMonitorId";
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand(getRoomsIdsByMonitorId, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var uiIdParameter = new SqlParameter("@monitorId", monitorId);
                 command.Parameters.Add(uiIdParameter);
                 connection.Open();

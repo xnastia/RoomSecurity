@@ -11,7 +11,7 @@ namespace Security.DataLayer
             ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
         public List<int> GetCamerasbyRoomId(int roomId)
         {
-            var getCameraEntities = "SELECT Id FROM Cameras WHERE RoomId = @roomId";
+            var getCameraEntitiesExpression = "sp_GetCamerasByRoomId";
 
             SqlDataReader reader = null;
             var camerasIds = new List<int>();
@@ -19,7 +19,8 @@ namespace Security.DataLayer
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var command = new SqlCommand(getCameraEntities, connection);
+                var command = new SqlCommand(getCameraEntitiesExpression, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var roomIdParameter = new SqlParameter("@roomId", roomId);
                 command.Parameters.Add(roomIdParameter);
                 reader = command.ExecuteReader();

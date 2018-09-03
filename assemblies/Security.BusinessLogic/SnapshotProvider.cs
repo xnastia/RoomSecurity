@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Security.DataLayer.EF;
+using Security.DataLayer;
 using Security.Entities;
 
 namespace Security.BusinessLogic

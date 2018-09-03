@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.DataLayer
@@ -20,6 +21,7 @@ namespace Security.DataLayer
 
             var userexists = false;
             int numberOfUsers;
+            password = HashCalculator.CalculateHash(password);
             var userExistsByEmailAndPassword = "Select count(*) from Users Where Email=@email and Password=@password";
             using (var connection = new SqlConnection(_connectionString))
             {

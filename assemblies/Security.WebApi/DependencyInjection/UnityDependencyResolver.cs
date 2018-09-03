@@ -1,6 +1,6 @@
 ﻿using System.Web.Http.Dependencies;
 using Security.BusinessLogic;
-using Security.DataLayer.EF;
+using Security.DataLayer;
 using Security.Entities.DB;
 using Unity;
 
@@ -35,13 +35,13 @@ namespace Security.WebApi.DependencyInjection
             userRepository.AddUser("Ivan", "Ivanov", "ivanov@ukr.net", "1234");
             IUserProvider userProvider = new UserProvider(userRepository);
             container.RegisterInstance<ISnapshotApi>(snapshotApi);
-            container.RegisterType<IAlarmStatusRepository, DataLayer.EF.AlarmStatusRepository>();
-            container.RegisterType<ICameraRepository, DataLayer.EF.CameraRepository>();
+            container.RegisterType<IAlarmStatusRepository, DataLayer.AlarmStatusRepository>();
+            container.RegisterType<ICameraRepository, DataLayer.CameraRepository>();
             container.RegisterType<ISecurityScannerProvider, SecurityScannerProvider>();
-            container.RegisterType<IMonitorRepository, DataLayer.EF.MonitorRepository>();
-            container.RegisterType<IPresenceRulesRepository, DataLayer.EF.PresenceRulesRepository>();
-            container.RegisterType<IRoomRepository, DataLayer.EF.RoomRepository>();
-            container.RegisterType<IUserRepository, DataLayer.EF.UserRepository>();
+            container.RegisterType<IMonitorRepository, DataLayer.MonitorRepository>();
+            container.RegisterType<IPresenceRulesRepository, DataLayer.PresenceRulesRepository>();
+            container.RegisterType<IRoomRepository, DataLayer.RoomRepository>();
+            container.RegisterType<IUserRepository, DataLayer.UserRepository>();
             container.RegisterType<IAlarmStatusProvider, AlarmStatusProvider>();
             container.RegisterType<ICameraProvider, CameraProvider>();
             container.RegisterType<IMonitorProvider, MonitorProvider>();

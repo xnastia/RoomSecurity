@@ -233,9 +233,9 @@
       <Project>{5f8bf4c6-204a-48ac-be2e-a5b745af7dcb}</Project>
       <Name>Security.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Security.DataLayer.EF\Security.DataLayer.EF.csproj">
-      <Project>{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}</Project>
-      <Name>Security.DataLayer.EF</Name>
+    <ProjectReference Include="..\Security.DataLayer\Security.DataLayer.csproj">
+      <Project>{04dc577c-2f14-45b2-a32d-67bfda5cff8d}</Project>
+      <Name>Security.DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Security.Entities\Security.Entities.csproj">
       <Project>{30b7906d-a91f-43df-90c2-718327ad4d43}</Project>

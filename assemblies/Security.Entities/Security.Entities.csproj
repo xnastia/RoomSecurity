@@ -49,6 +49,7 @@
     <Compile Include="DB\IRoomRepository.cs" />
     <Compile Include="DB\IMonitorRepository.cs" />
     <Compile Include="DB\IUserRepository.cs" />
+    <Compile Include="HashCalculator.cs" />
     <Compile Include="MonitorTab.cs" />
     <Compile Include="DashboardStatus.cs" />
     <Compile Include="PresenceRules.cs" />

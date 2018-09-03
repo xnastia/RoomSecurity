@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Security.Entities;
 using Security.Entities.DB;
 
 namespace Security.DataLayer.EF
@@ -9,7 +10,7 @@ namespace Security.DataLayer.EF
         {
             //TODO: replace with correct request and validation
             bool userExists;
-            var hashedPass = User.CalculateHash(password);
+            var hashedPass = HashCalculator.CalculateHash(password);
             using (var securityDbContext = new SecurityDbContext())
             {
                 userExists = securityDbContext.Users.Count(x => x.Email == email && hashedPass == x.Password) > 0;

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
-using System.Text;
+using Security.Entities;
 
 namespace Security.DataLayer.EF
 {
@@ -21,23 +20,9 @@ namespace Security.DataLayer.EF
         public string Password
         {
             get { return _password; }
-            set { _password = User.CalculateHash(value); }
+            set { _password = HashCalculator.CalculateHash(value); }
         }
-
-
-        public static string CalculateHash(string input)
-        {
-            SHA1 md5 = SHA1.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hash = md5.ComputeHash(inputBytes);
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                stringBuilder.Append(i.ToString("X2"));
-            }
-            return stringBuilder.ToString();
-        }
-
+        
         public User(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;

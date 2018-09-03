@@ -25,12 +25,12 @@ namespace Security.DataLayer
         public void InsertAlarmStatus(int roomId, DateTime statusTime, int intruderId)
         {
             var addAlarmStatusSqlExpression =
-                "INSERT INTO AlarmStatus (RoomId, Time, BadgeId) " +
-                "VALUES (@roomId, @statusTime, @intruderId)";
+                "sp_InsertAlarmStatus";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new SqlCommand(addAlarmStatusSqlExpression, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var roomNameParameter = new SqlParameter("@roomId", roomId);
                 var statusTimeParameter = new SqlParameter("@statusTime", statusTime);
                 var intruderBadgeParameter = new SqlParameter("@intruderId", intruderId);
@@ -45,16 +45,14 @@ namespace Security.DataLayer
         {
             //RoomRepository roomRepository = new RoomRepository();
             int id = _roomRepository.GetRoomIdByUiId(roomId);
-            var AlarmStatusByRoomSqlExpression =
-                "SELECT AlarmStatus.Time, Badges.Name " +
-                "FROM AlarmStatus JOIN Badges on AlarmStatus.BadgeId = Badges.Id WHERE RoomId = @id";
-            
+            var AlarmStatusByRoomSqlExpression = "sp_AlarmStatusByRoomUiId";
             var statuses = new List<Entities.AlarmStatus>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 var command = new SqlCommand(AlarmStatusByRoomSqlExpression, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var roomNameParameter = new SqlParameter("@id", id);
                 command.Parameters.Add(roomNameParameter);
                 using (var reader = command.ExecuteReader())

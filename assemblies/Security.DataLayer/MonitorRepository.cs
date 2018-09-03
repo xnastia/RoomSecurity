@@ -14,10 +14,11 @@ namespace Security.DataLayer
         public int GetMonitorIdByUiId(Guid uiId)
         {
             int id;
-            var getMonitorIdByUiId = "Select Id from Monitors where UiId = @uiId";
+            var getMonitorIdByUiId = "sp_GetMonitorIdByUiId";
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand(getMonitorIdByUiId, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 var uiIdParameter = new SqlParameter("@uiId", uiId);
                 command.Parameters.Add(uiIdParameter);
                 try
@@ -37,7 +38,7 @@ namespace Security.DataLayer
 
         public List<MonitorTab> GeMonitorTabs()
         {
-            var getMonitorTabs = "SELECT UiId, Name FROM Monitors";
+            var getMonitorTabs = "sp_GeMonitorTabs";
 
             SqlDataReader reader = null;
             var monitorTabs = new List<MonitorTab>();
@@ -46,6 +47,7 @@ namespace Security.DataLayer
             {
                 connection.Open();
                 var command = new SqlCommand(getMonitorTabs, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 reader = command.ExecuteReader();
 
                 while (reader.Read())

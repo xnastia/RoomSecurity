@@ -20,6 +20,9 @@ namespace Security.BusinessLogic
         public MonitorSnapshot GetMonitorSnapshot(Guid monitorId)
         {
             Monitor monitor = _monitorProvider.GetMonitor(monitorId);
+            if (monitor == null)
+                return null;
+
             return _snapshotProvider.GetMonitorSnapshot(monitor);
         }
     }

@@ -11,9 +11,9 @@ namespace Security.DataLayer
     {
         private readonly string _connectionString = ConfigurationManager
             .ConnectionStrings["DBConnection"].ConnectionString;
-        public int GetMonitorIdByUiId(Guid uiId)
+        public int? GetMonitorIdByUiId(Guid uiId)
         {
-            int id;
+            int? id;
             var getMonitorIdByUiId = "sp_GetMonitorIdByUiId";
             using (var connection = new SqlConnection(_connectionString))
             {

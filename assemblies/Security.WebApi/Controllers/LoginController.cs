@@ -6,11 +6,12 @@ namespace Security.WebApi.Controllers
 {
     public class LoginController : ApiController
     {
-        private IUserProvider _userProvider;
+        private readonly IUserProvider _userProvider;
         public LoginController(IUserProvider userProvider)
         {
             _userProvider = userProvider;
         }
+
         [AcceptVerbs("Post")]
         public IHttpActionResult Post([FromBody] FormDataCollection formData)
         {

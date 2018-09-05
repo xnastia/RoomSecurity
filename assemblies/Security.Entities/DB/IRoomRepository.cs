@@ -5,7 +5,7 @@ namespace Security.Entities.DB
 {
     public interface IRoomRepository
     {
-        int GetRoomIdByUiId(Guid uiId);
+        int? GetRoomIdByUiId(Guid uiId);
         RoomShortInfo GetRoomInfoById(int roomId);
         List<int> GetRoomsIdsbyMonitorId(int monitorId);
     }

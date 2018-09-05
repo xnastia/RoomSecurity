@@ -22,14 +22,18 @@ namespace Security.BusinessLogic
         
         public Monitor GetMonitor(Guid uiId)
         {
-            int monitorId = _monitorRepository.GetMonitorIdByUiId(uiId);
-            if (!_monitors.ContainsKey(monitorId))
+            int? monitorId = _monitorRepository.GetMonitorIdByUiId(uiId);
+
+            if (!monitorId.HasValue)
+                return null;
+
+            if (!_monitors.ContainsKey(monitorId.Value))
             {
-                var monitor = CreateMonitor(monitorId);
-                _monitors.Add(monitorId, monitor);
+                var monitor = CreateMonitor(monitorId.Value);
+                _monitors.Add(monitorId.Value, monitor);
                 new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
             }
-            return _monitors[monitorId];
+            return _monitors[monitorId.Value];
         }
         
         public Monitor CreateMonitor(int monitorId)

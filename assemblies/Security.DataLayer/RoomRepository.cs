@@ -12,9 +12,8 @@ namespace Security.DataLayer
         private readonly string _connectionString = ConfigurationManager
             .ConnectionStrings["DBConnection"].ConnectionString;
 
-        public int GetRoomIdByUiId(Guid uiId)
+        public int? GetRoomIdByUiId(Guid uiId)
         {
-            int id;
             var getRoomIdByUiIdExpression = "sp_GetRoomIdByUiId";
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -25,17 +24,9 @@ namespace Security.DataLayer
                     };
                 var uiIdParameter = new SqlParameter("@uiId", uiId);
                 command.Parameters.Add(uiIdParameter);
-                try
-                {
-                    connection.Open();
-                    id = (int) command.ExecuteScalar();
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(ex.Message);
-                }
+                connection.Open();
+                return (int?) command.ExecuteScalar();
             }
-            return id;
         }
 
         public RoomShortInfo GetRoomInfoById(int roomId)
@@ -63,6 +54,7 @@ namespace Security.DataLayer
 
         public List<int> GetRoomsIdsbyMonitorId(int monitorId)
         {
+
             var ids = new List<int>();
             var getRoomsIdsByMonitorId = "sp_GetRoomsIdsbyMonitorId";
             using (var connection = new SqlConnection(_connectionString))

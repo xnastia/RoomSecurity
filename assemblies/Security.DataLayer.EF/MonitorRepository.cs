@@ -10,9 +10,9 @@ namespace Security.DataLayer.EF
     {
         private readonly SecurityDbContext _securityDbContext = new SecurityDbContext();
 
-        public int GetMonitorIdByUiId(Guid uiId)
+        public int? GetMonitorIdByUiId(Guid uiId)
         {
-            int id;
+            int? id;
             using (var securityDbContext = new SecurityDbContext())
             {
                 id = _securityDbContext.Monitors.Single(monitor => monitor.UiId == uiId).Id;

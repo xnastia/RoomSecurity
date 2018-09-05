@@ -20,14 +20,20 @@ namespace Security.WebApi.Controllers
             _monitorProvider = monitorProvider;
         }
         
-        public DashboardStatus GetMonitorStatus(Guid monitorId)
+        public IHttpActionResult GetMonitorStatus(Guid monitorId)
         {
             var monitorSnapshot = _snapshotApi.GetMonitorSnapshot(monitorId);
+
+            if (monitorSnapshot == null)
+            {
+                return NotFound();
+            }
+
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
             DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);
             
-            return floorDashboardStatus;
+            return Ok(floorDashboardStatus);
         }
 
         public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)

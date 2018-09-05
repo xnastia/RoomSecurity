@@ -15,4 +15,6 @@ function authenticateUser() {
     httpPostAsync("api/login", userObject,
         redirectToSecurityDashboard,
         displayInvalidLogin);
+    var headers = new window.Headers();
+    headers.append("Authorization",email+password);
 }

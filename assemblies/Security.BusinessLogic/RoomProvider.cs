@@ -14,7 +14,7 @@ namespace Security.BusinessLogic
             _roomRepository = roomRepository;
         }
 
-        public int GetRoomIdByUiId(Guid uiId)
+        public int? GetRoomIdByUiId(Guid uiId)
         {
             return _roomRepository.GetRoomIdByUiId(uiId);
         }

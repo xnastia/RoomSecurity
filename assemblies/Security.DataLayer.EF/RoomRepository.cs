@@ -8,7 +8,7 @@ namespace Security.DataLayer.EF
 {
     public class RoomRepository : IRoomRepository
     {
-        public int GetRoomIdByUiId(Guid roomId)
+        public int? GetRoomIdByUiId(Guid roomId)
         {
             int id;
             using (var securityDbContext = new SecurityDbContext())

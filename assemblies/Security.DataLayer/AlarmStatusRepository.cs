@@ -43,8 +43,6 @@ namespace Security.DataLayer
 
         public List<Entities.AlarmStatus> AlarmStatusByRoomUiId(Guid roomId)
         {
-            //RoomRepository roomRepository = new RoomRepository();
-            int id = _roomRepository.GetRoomIdByUiId(roomId);
             var AlarmStatusByRoomSqlExpression = "sp_AlarmStatusByRoomUiId";
             var statuses = new List<Entities.AlarmStatus>();
 
@@ -53,7 +51,7 @@ namespace Security.DataLayer
                 connection.Open();
                 var command = new SqlCommand(AlarmStatusByRoomSqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-                var roomNameParameter = new SqlParameter("@id", id);
+                var roomNameParameter = new SqlParameter("@id", roomId);
                 command.Parameters.Add(roomNameParameter);
                 using (var reader = command.ExecuteReader())
                 {

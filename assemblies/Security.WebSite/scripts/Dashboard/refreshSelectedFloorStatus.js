@@ -19,7 +19,7 @@ function refreshFloorTableResult() {
 
 function refreshSelectedFloorStatus() {
     if (checkIsScannerEnabled())
-        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus);
+        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus, showError);
 }
 
 function checkIsScannerEnabled() {
@@ -28,3 +28,6 @@ function checkIsScannerEnabled() {
     return scannerEnabled;
 }
 
+function showError(obj) {
+    alert("some error");
+}

@@ -29,18 +29,7 @@ namespace Security.BusinessLogic
         public List<Entities.AlarmStatus> GetAlarmStatusByRoomUiId(Guid roomId, int page = 1, int pageSize = 4)
         {
             var alarmStatuses = _alarmStatusRepository.AlarmStatusByRoomUiId(roomId);
-            var alarmStatusesWithBadgesInString = new List<Entities.AlarmStatus>();
-            var timeList = alarmStatuses.Select(alarmStatus => alarmStatus.Time).ToList();
-            foreach (var time in timeList)
-            {
-                var intruder = "";
-                foreach (var alarmStatus in alarmStatuses)
-                    if (time.Equals(alarmStatus.Time))
-                        intruder= alarmStatus.IntruderBadge;
-                var status = new Entities.AlarmStatus {IntruderBadge = intruder, Time = time};
-                alarmStatusesWithBadgesInString.Add(status);
-            }
-            var alarmStatusesPaged = alarmStatusesWithBadgesInString.OrderByDescending(alarmStatus => alarmStatus.Time)
+            var alarmStatusesPaged = alarmStatuses.OrderByDescending(alarmStatus => alarmStatus.Time)
                 .Skip((page - 1) * pageSize).Take(pageSize).ToList();
             return alarmStatusesPaged;
         }

@@ -25,13 +25,14 @@ namespace RoomSecurity.UnitTests
             }
         }
 
+        ISecurityScanner securityScannerMock = MockRepository.GenerateMock<ISecurityScanner>();
+        DateTime currentTime = DateTime.Now;
+
         [Test]
         public void Scan_OnEventOnIntruder_InvokesEventOnIntruderDetectedHandler()
         {
             //Arrange
             InvokeMethodHandlerHelper invokeMethodHandlerHelper = new InvokeMethodHandlerHelper();
-            ISecurityScanner securityScannerMock = MockRepository.GenerateMock<ISecurityScanner>();
-            var currentTime = DateTime.Now;
             securityScannerMock.Stub(x => x.CheckRoom(currentTime))
                 .Return(new CheckerResponse(1, 
                 new List<BadgeType>
@@ -45,6 +46,48 @@ namespace RoomSecurity.UnitTests
             };
             Monitor monitor = new Monitor(scanners);
             monitor.EventOnIntruderDetected += invokeMethodHandlerHelper.MethodHandler;
+
+            //Act
+            monitor.Scan(currentTime);
+
+            //Assert
+            Assert.IsTrue(invokeMethodHandlerHelper.MethodWasCalled);
+        }
+
+        [Test]
+        public void Scan_OnEventOnIntruder_NotInvokesOnNoIntruderFound()
+        {
+            //Arrange
+            InvokeMethodHandlerHelper invokeMethodHandlerHelper = new InvokeMethodHandlerHelper();
+            securityScannerMock.Stub(x => x.CheckRoom(currentTime))
+                .Return(new CheckerResponse(1, new List<BadgeType>(), currentTime));
+            List<ISecurityScanner> scanners = new List<ISecurityScanner>
+            {
+                securityScannerMock
+            };
+            Monitor monitor = new Monitor(scanners);
+            monitor.EventOnIntruderDetected += invokeMethodHandlerHelper.MethodHandler;
+
+            //Act
+            monitor.Scan(currentTime);
+
+            //Assert
+            Assert.IsFalse(invokeMethodHandlerHelper.MethodWasCalled);
+        }
+
+        [Test]
+        public void Scan_OnEventOnCheckDone_Invokes()
+        {
+            //Arrange
+            InvokeMethodHandlerHelper invokeMethodHandlerHelper = new InvokeMethodHandlerHelper();
+            securityScannerMock.Stub(x => x.CheckRoom(currentTime))
+                .Return(new CheckerResponse(1, new List<BadgeType>(), currentTime));
+            List<ISecurityScanner> scanners = new List<ISecurityScanner>
+            {
+                securityScannerMock
+            };
+            Monitor monitor = new Monitor(scanners);
+            monitor.EventOnCheckDone += invokeMethodHandlerHelper.MethodHandler;
 
             //Act
             monitor.Scan(currentTime);

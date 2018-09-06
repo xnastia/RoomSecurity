@@ -48,6 +48,7 @@
     <Compile Include="ICameraProvider.cs" />
     <Compile Include="IMonitor.cs" />
     <Compile Include="IMonitorProvider.cs" />
+    <Compile Include="IMonitorSnapshot.cs" />
     <Compile Include="IPresenceRulesProvider.cs" />
     <Compile Include="IRecognizer.cs" />
     <Compile Include="IRoomProvider.cs" />

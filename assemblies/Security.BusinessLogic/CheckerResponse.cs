@@ -19,10 +19,7 @@ namespace Security.BusinessLogic
         {
             ScannerId = scannerId;
             Intruders = intruders;
-            /*if (checkTime > new TimeSpan(24, 0, 0))
-                throw new ArgumentException($"The {nameof(checkTime)} should be in range 0 to 24 hours");*/
             CheckTime = checkTime;
         }
-
     }
 }

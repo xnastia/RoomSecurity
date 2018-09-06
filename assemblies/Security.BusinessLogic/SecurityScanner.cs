@@ -26,9 +26,6 @@ namespace Security.BusinessLogic
         
         public bool IsBadgeAllowed(BadgeType badge, DateTime currentTime)
         {
-            if (currentTime.TimeOfDay > new TimeSpan(24, 0, 0))
-                throw new ArgumentException($"The {nameof(currentTime)} should be in range 0 to 24 hours");
-
             if (!_presenseRules.ContainsKey(badge))
                 return false;
 

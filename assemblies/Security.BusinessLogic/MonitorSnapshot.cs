@@ -18,7 +18,7 @@ namespace Security.BusinessLogic
         public void UpdateStatus(CheckerResponse checkerResponse)
         {
             CurrentTime = checkerResponse.CheckTime.ToString("f");
-           RoomShortInfo roomInfo = RoomProvider.GetRoomInfoById(checkerResponse.ScannerId);
+            RoomShortInfo roomInfo = RoomProvider.GetRoomInfoById(checkerResponse.ScannerId);
             var securityScannerWithSameUiId = SecurityScannerStatuses
                 .SingleOrDefault(scannerStatus => scannerStatus.RoomInfo.UiId == roomInfo.UiId);
 
@@ -33,10 +33,5 @@ namespace Security.BusinessLogic
 
             securityScannerWithSameUiId.IsOk = !checkerResponse.IntruderFound;
         }
-    }
-
-    public interface IMonitorSnapshot
-    {
-        void UpdateStatus(CheckerResponse checkerResponse);
     }
 }

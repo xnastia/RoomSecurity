@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
-using Security.BusinessLogic;
-using Rhino.Mocks;
 using Security.DataLayer;
 
 namespace RoomSecurity.UnitTests

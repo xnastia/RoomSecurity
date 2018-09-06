@@ -5,6 +5,10 @@
     function buildSecurityDashboardTable(jsonData) {
         if (jsonData === undefined)
             return;
+        var securityId = retrieveQueryString("securityId");
+
+        if (securityId !== "ivanov@ukr.net1234")
+            return;
 
         var scannerStatuses = JSON.parse(jsonData).SecurityScannerStatuses;
 

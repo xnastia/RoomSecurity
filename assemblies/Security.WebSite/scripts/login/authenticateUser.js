@@ -2,8 +2,8 @@
     document.getElementById("validate error").innerText = "Incorrect email or password";
 }
 
-function redirectToSecurityDashboard() {
-    window.location.replace("dashboard.html");
+function redirectToSecurityDashboard(headers) {
+    window.location.replace("dashboard.html?securityId=" + headers.get("Authorization"));
 }
 
 function authenticateUser() {
@@ -12,9 +12,9 @@ function authenticateUser() {
     var passwordIdElement = document.getElementById("password");
     var password = passwordIdElement.value;
     var userObject = "email=" + email + "&password=" + password;
-    httpPostAsync("api/login", userObject,
-        redirectToSecurityDashboard,
-        displayInvalidLogin);
     var headers = new window.Headers();
-    headers.append("Authorization",email+password);
+    headers.append("Authorization", email + password);
+    httpPostAsync("api/login", userObject,
+        redirectToSecurityDashboard(headers),
+        displayInvalidLogin);
 }

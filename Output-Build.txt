@@ -1,9 +1,0 @@
-﻿------ Build started: Project: Security.WebSite, Configuration: Debug Any CPU ------
-Validating Web Site
-Building directory '/account/login/scripts/Dashboard/'.
-Building directory '/account/login/scripts/httpRequests/'.
-Building directory '/account/login/scripts/login/'.
-Building directory '/account/login/scripts/'.
-
-Validation Complete
-========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

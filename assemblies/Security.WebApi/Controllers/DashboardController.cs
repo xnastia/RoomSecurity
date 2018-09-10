@@ -6,6 +6,7 @@ using Security.Entities;
 
 namespace Security.WebApi.Controllers
 {
+    [MyAuthentication]
     public class DashboardController : ApiController
     {
         private readonly ISnapshotApi _snapshotApi;

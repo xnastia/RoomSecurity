@@ -22,7 +22,11 @@ namespace Security.WebApi.Controllers
             var isValidUser = new SecurityApi(_userProvider).IsValidUser(email, password);
 
             if (isValidUser)
+            {
+                Request.Headers.Add("Authorization", password);
                 return Ok();
+            }
+                
             return Unauthorized();
         }
     }

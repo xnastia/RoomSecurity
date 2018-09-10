@@ -13,7 +13,6 @@ function authenticateUser() {
     var password = passwordIdElement.value;
     var userObject = "email=" + email + "&password=" + password;
     var headers = new window.Headers();
-    headers.append("Authorization", email + password);
     httpPostAsync("api/login", userObject,
         redirectToSecurityDashboard(headers),
         displayInvalidLogin);

@@ -9,6 +9,7 @@
     }
     xmlHttp.open("POST", theUrl, true); // true for asynchronous
     xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xmlHttp.setRequestHeader("Authorization", "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
+    var token = xmlHttp.response;
+    xmlHttp.setRequestHeader("AuthToken", token);
     xmlHttp.send(postObject);
 }

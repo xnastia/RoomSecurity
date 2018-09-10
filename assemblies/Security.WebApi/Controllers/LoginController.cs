@@ -23,8 +23,7 @@ namespace Security.WebApi.Controllers
 
             if (isValidUser)
             {
-                Request.Headers.Add("Authorization", password);
-                return Ok();
+               return Ok("zzzz");
             }
                 
             return Unauthorized();

@@ -16,6 +16,7 @@ header {
 }
 
 .dashboard {
+    display: block;
     background-color: #EDEDED;
     border-color: #d2d2d2;
     border-radius: 15px;
@@ -51,7 +52,10 @@ th {
 
 .wrapper { text-align: center; }
 
-.align-right { text-align: right; }
+.header-align {
+     text-align: right;
+     display: block;
+}
 
 div.scrollmenu {
     background-color: #333;

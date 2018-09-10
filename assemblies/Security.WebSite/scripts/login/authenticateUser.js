@@ -2,8 +2,19 @@
     document.getElementById("validate error").innerText = "Incorrect email or password";
 }
 
-function redirectToSecurityDashboard(headers) {
-    window.location.replace("dashboard.html?securityId=" + headers.get("Authorization"));
+var token;
+
+function showSecurityDashboard(responseToken) {
+    token = responseToken;
+    dashboard.init();
+    alarmReport.init();
+    /*var header = document.getElementById("header");
+    header.display = "block";
+    var login = document.getElementById("login");
+    login.display = "none";
+    var board = document.getElementById("dashboard");
+    board.display = "block";*/
+
 }
 
 function authenticateUser() {
@@ -12,8 +23,7 @@ function authenticateUser() {
     var passwordIdElement = document.getElementById("password");
     var password = passwordIdElement.value;
     var userObject = "email=" + email + "&password=" + password;
-    var headers = new window.Headers();
     httpPostAsync("api/login", userObject,
-        redirectToSecurityDashboard(headers),
+        showSecurityDashboard,
         displayInvalidLogin);
 }

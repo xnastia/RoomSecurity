@@ -16,9 +16,8 @@ namespace Security.WebApi
         {
             HttpRequestMessage request = context.Request;
             IEnumerable<string> authenticationHeaders;
-            string token;
             request.Headers.TryGetValues("AuthToken", out authenticationHeaders);
-            token = authenticationHeaders?.FirstOrDefault();
+            var token = authenticationHeaders?.FirstOrDefault();
             if (string.IsNullOrEmpty(token))
             {
                 context.ErrorResult = new AuthenticationFailureResult("Unauthorized", request);

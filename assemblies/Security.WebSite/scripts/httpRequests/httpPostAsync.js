@@ -9,7 +9,6 @@
     }
     xmlHttp.open("POST", theUrl, true); // true for asynchronous
     xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    var token = xmlHttp.response;
     xmlHttp.setRequestHeader("AuthToken", token);
     xmlHttp.send(postObject);
 }

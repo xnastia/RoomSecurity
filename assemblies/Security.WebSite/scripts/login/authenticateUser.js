@@ -4,17 +4,17 @@
 
 var token;
 
-function showSecurityDashboard(responseToken) {
-    token = responseToken;
+function onUserAuthenticated(responseToken) {
+    token = JSON.parse(responseToken);
     dashboard.init();
     alarmReport.init();
-    /*var header = document.getElementById("header");
-    header.display = "block";
+    var header = document.getElementById("header");
+    header.style.display = "block";
     var login = document.getElementById("login");
-    login.display = "none";
+    login.style.display = "none";
     var board = document.getElementById("dashboard");
-    board.display = "block";*/
-
+    board.style.display = "block";
+    getScrollMenuButtonsHtml();
 }
 
 function authenticateUser() {
@@ -24,6 +24,6 @@ function authenticateUser() {
     var password = passwordIdElement.value;
     var userObject = "email=" + email + "&password=" + password;
     httpPostAsync("api/login", userObject,
-        showSecurityDashboard,
+        onUserAuthenticated,
         displayInvalidLogin);
 }

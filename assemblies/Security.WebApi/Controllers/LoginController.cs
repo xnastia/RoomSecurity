@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Formatting;
 using System.Web.Http;
+using Newtonsoft.Json;
 using Security.BusinessLogic;
 
 namespace Security.WebApi.Controllers
@@ -7,12 +8,15 @@ namespace Security.WebApi.Controllers
     public class LoginController : ApiController
     {
         private readonly IUserProvider _userProvider;
-        public LoginController(IUserProvider userProvider)
+        private readonly IAuthenticationProvider _authenticationProvider;
+
+        public LoginController(IUserProvider userProvider, IAuthenticationProvider authenticationProvider)
         {
             _userProvider = userProvider;
+            _authenticationProvider = authenticationProvider;
         }
 
-        [AcceptVerbs("Post")]
+        [System.Web.Http.AcceptVerbs("Post")]
         public IHttpActionResult Post([FromBody] FormDataCollection formData)
         {
             var email = formData.Get("email");
@@ -23,7 +27,8 @@ namespace Security.WebApi.Controllers
 
             if (isValidUser)
             {
-               return Ok("zzzz");
+                var token = _authenticationProvider.GetNewUserToken(email);
+                return Json(token, new JsonSerializerSettings());
             }
                 
             return Unauthorized();

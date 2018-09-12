@@ -32,9 +32,11 @@ namespace Security.WebApi.DependencyInjection
             SnapshotProvider snapshotProvider = new SnapshotProvider(alarmStatusProvider);
             ISnapshotApi snapshotApi = new SnapshotApi(monitorProvider, snapshotProvider);
             IUserRepository userRepository = new UserRepository();
+            IAuthenticationProvider authenticationProvider = new AuthenticationProvider();
             userRepository.AddUser("Ivan", "Ivanov", "ivanov@ukr.net", "1234");
-            IUserProvider userProvider = new UserProvider(userRepository);
+            //IUserProvider userProvider = new UserProvider(userRepository);
             container.RegisterInstance<ISnapshotApi>(snapshotApi);
+            container.RegisterInstance<IAuthenticationProvider>(authenticationProvider);
             container.RegisterType<IAlarmStatusRepository, DataLayer.AlarmStatusRepository>();
             container.RegisterType<ICameraRepository, DataLayer.CameraRepository>();
             container.RegisterType<ISecurityScannerProvider, SecurityScannerProvider>();

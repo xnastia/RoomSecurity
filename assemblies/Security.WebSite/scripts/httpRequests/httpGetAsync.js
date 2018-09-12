@@ -8,6 +8,7 @@
                 callbackOnError(xmlHttp);
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader("AuthToken", token);
     xmlHttp.send(null);
 }
 

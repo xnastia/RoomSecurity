@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
@@ -12,13 +13,15 @@ namespace Security.WebApi.Controllers
         private readonly ISnapshotApi _snapshotApi;
         private IAlarmStatusProvider _alarmStatusProvider;
         private IMonitorProvider _monitorProvider;
-
+        private readonly IAuthenticationProvider _authenticationProvider;
+        
         public DashboardController(ISnapshotApi snapshotApi, IAlarmStatusProvider alarmStatusProvider,
-            IMonitorProvider monitorProvider)
+            IMonitorProvider monitorProvider, IAuthenticationProvider authenticationProvider)
         {
             _snapshotApi = snapshotApi;
             _alarmStatusProvider = alarmStatusProvider;
             _monitorProvider = monitorProvider;
+            _authenticationProvider = authenticationProvider;
         }
         
         public IHttpActionResult GetMonitorStatus(Guid monitorId)
@@ -49,7 +52,15 @@ namespace Security.WebApi.Controllers
 
         public List<MonitorTab> GetMonitors()
         {
-            return _monitorProvider.GetMonitorsTabList();
+            List<MonitorTab> monitorTabs = new List<MonitorTab>();
+            var token = RequestContext.Principal.Identity.Name.Trim('"');
+            string email = _authenticationProvider.GetUserByToken(token);
+            if (email == "ivanov@ukr.net")
+            {
+                monitorTabs = _monitorProvider.GetMonitorsTabList();
+            }
+            //_monitorProvider.SetUserTokenSession(token);
+            return monitorTabs;
         }
     }
 }

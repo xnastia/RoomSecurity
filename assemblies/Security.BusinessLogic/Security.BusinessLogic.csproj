@@ -41,10 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmStatusProvider.cs" />
+    <Compile Include="AuthenticationProvider.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CameraProvider.cs" />
     <Compile Include="CheckerResponse.cs" />
     <Compile Include="IAlarmStatusProvider.cs" />
+    <Compile Include="IAuthenticationProvider.cs" />
     <Compile Include="ICameraProvider.cs" />
     <Compile Include="IMonitor.cs" />
     <Compile Include="IMonitorProvider.cs" />

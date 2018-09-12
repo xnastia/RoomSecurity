@@ -26,6 +26,6 @@
 }
 
 function getScrollMenuButtonsHtml() {
-    httpGetAsync("api/dashboard/GetMonitors", createScrollMenuButtonsHtml);
+    httpGetAsync("api/dashboard/GetMonitors",  createScrollMenuButtonsHtml);
 }
 

@@ -36,8 +36,8 @@
     </span>
 </header>
 <div id="block-panel" class="block-panel"></div>
-<div class="container" id="login">
-    <div class="form-login">
+<div class="container">
+    <div class="form-login" id="login">
         <h2>Log In</h2>
         <p>log in to access the administrative area:</p>
 
@@ -56,18 +56,13 @@
 <div class="dashboard" id="dashboard">
     <h2>Security Dashboard</h2>
     <form method="get">
-        <div class="scrollmenu" id="floor" name="floor">
-            <script>getScrollMenuButtonsHtml()</script>
-        </div>
+        <div class="scrollmenu" id="floor" name="floor"></div>
     </form>
     <h3 id="check-time"></h3>
     <table id="securityDashboardTable">
         <thead></thead>
         <tbody></tbody>
     </table><br/>
-    <script>
-        refreshFloorTableResult()
-    </script>
     <div id="scanner-checkbox" class="checkbox" align="right" onclick="TriggerCurrentMonitor()">
         <label>Scanner is :</label>
         <label>

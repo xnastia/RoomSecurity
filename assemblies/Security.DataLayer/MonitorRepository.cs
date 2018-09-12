@@ -39,7 +39,7 @@ namespace Security.DataLayer
 
         public List<MonitorTab> GeMonitorTabs(string user)
         {
-            var getMonitorTabs = "sp_GeMonitorTabs";
+            var getMonitorTabs = "sp_GetMonitorTabsbyEmail";
 
             SqlDataReader reader = null;
             var monitorTabs = new List<MonitorTab>();
@@ -49,33 +49,21 @@ namespace Security.DataLayer
                 connection.Open();
                 var command = new SqlCommand(getMonitorTabs, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
+                var emailParameter = new SqlParameter("@email", user);
+                command.Parameters.Add(emailParameter);
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
                     var monitorTab = new MonitorTab
                     {
-                        Id = reader.GetGuid(0),
-                        Name = reader.GetString(1)
+                        Id = reader.GetGuid(1),
+                        Name = reader.GetString(0)
                     };
                     monitorTabs.Add(monitorTab);
                 }
             }
             reader.Close();
-            if (user == "ivanov@ukr.net")
-            {
-                monitorTabs = monitorTabs.Take(2).ToList();
-            }
-
-            if (user == "petrov@ukr.net")
-            {
-                monitorTabs = monitorTabs.Take(1).ToList();
-            }
-
-            if (user == "sidorov@ukr.net")
-            {
-                monitorTabs = monitorTabs.Skip(1).Take(1).ToList();
-            }
             return monitorTabs;
         }
     }

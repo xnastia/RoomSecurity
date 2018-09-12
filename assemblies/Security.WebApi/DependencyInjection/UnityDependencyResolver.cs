@@ -33,8 +33,8 @@ namespace Security.WebApi.DependencyInjection
             ISnapshotApi snapshotApi = new SnapshotApi(monitorProvider, snapshotProvider);
             IUserRepository userRepository = new UserRepository();
             IAuthenticationProvider authenticationProvider = new AuthenticationProvider();
-            userRepository.AddUser("Ivan", "Ivanov", "ivanov@ukr.net", "1234");
-            //IUserProvider userProvider = new UserProvider(userRepository);
+            userRepository.AddUser("Sidor", "Sidorov", "sidorov@ukr.net", "9012");
+            IUserProvider userProvider = new UserProvider(userRepository);
             container.RegisterInstance<ISnapshotApi>(snapshotApi);
             container.RegisterInstance<IAuthenticationProvider>(authenticationProvider);
             container.RegisterType<IAlarmStatusRepository, DataLayer.AlarmStatusRepository>();

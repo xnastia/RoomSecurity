@@ -20,8 +20,9 @@ namespace Security.DataLayer.EF
 
         public void AddUser(string firstName, string lastName, string email, string password)
         {
+            password = HashCalculator.CalculateHash(password);
             User user = new User(firstName, lastName, email, password);
-            if (UserExistsByEmailAndPassword(email, password))
+            if (!UserExistsByEmailAndPassword(email, password))
             {
                 using (var securityDbContext = new SecurityDbContext())
                 {

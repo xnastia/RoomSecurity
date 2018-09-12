@@ -43,7 +43,27 @@ namespace Security.DataLayer
 
         public void AddUser(string firstName, string lastName, string email, string password)
         {
-            
+            password = HashCalculator.CalculateHash(password);
+            var addUser = "sp_InserUser";
+
+            if (!UserExistsByEmailAndPassword(email, password))
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(addUser, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    var firstNameParameter = new SqlParameter("@firstName", firstName);
+                    var lastNameParameter = new SqlParameter("@lastName", lastName);
+                    var emailParameter = new SqlParameter("@email", email);
+                    var passwordParameter = new SqlParameter("@password", password);
+                    command.Parameters.Add(firstNameParameter);
+                    command.Parameters.Add(lastNameParameter);
+                    command.Parameters.Add(emailParameter);
+                    command.Parameters.Add(passwordParameter);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

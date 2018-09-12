@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 using Security.Entities;
 using Security.Entities.DB;
 
@@ -36,7 +37,7 @@ namespace Security.DataLayer
             return id;
         }
 
-        public List<MonitorTab> GeMonitorTabs()
+        public List<MonitorTab> GeMonitorTabs(string user)
         {
             var getMonitorTabs = "sp_GeMonitorTabs";
 
@@ -61,6 +62,20 @@ namespace Security.DataLayer
                 }
             }
             reader.Close();
+            if (user == "ivanov@ukr.net")
+            {
+                monitorTabs = monitorTabs.Take(2).ToList();
+            }
+
+            if (user == "petrov@ukr.net")
+            {
+                monitorTabs = monitorTabs.Take(1).ToList();
+            }
+
+            if (user == "sidorov@ukr.net")
+            {
+                monitorTabs = monitorTabs.Skip(1).Take(1).ToList();
+            }
             return monitorTabs;
         }
     }

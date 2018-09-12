@@ -49,9 +49,9 @@ namespace Security.BusinessLogic
             return new Monitor(securitryScanners);
         }
 
-        public List<MonitorTab> GetMonitorsTabList()
+        public List<MonitorTab> GetMonitorsTabList(string user)
         {
-            return _monitorRepository.GeMonitorTabs();
+            return _monitorRepository.GeMonitorTabs(user);
         }
     }
 }

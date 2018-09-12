@@ -20,7 +20,7 @@ namespace Security.DataLayer.EF
             return id;
         }
 
-        public List<MonitorTab> GeMonitorTabs()
+        public List<MonitorTab> GeMonitorTabs(string user)
         {
             List<MonitorTab> monitorTabs = new List<MonitorTab>();
             using (var securityDbContext = new SecurityDbContext())

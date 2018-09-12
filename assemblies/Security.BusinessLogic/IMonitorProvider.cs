@@ -8,6 +8,6 @@ namespace Security.BusinessLogic
     {
         Monitor GetMonitor(Guid uiId);
         Monitor CreateMonitor(int monitorId);
-        List<MonitorTab> GetMonitorsTabList();
+        List<MonitorTab> GetMonitorsTabList(string user);
     }
 }

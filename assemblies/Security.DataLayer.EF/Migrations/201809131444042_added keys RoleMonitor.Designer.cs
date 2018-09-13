@@ -7,13 +7,13 @@ namespace Security.DataLayer.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedsomemorerepositories : IMigrationMetadata
+    public sealed partial class addedkeysRoleMonitor : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedsomemorerepositories));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedkeysRoleMonitor));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808271300353_added some more repositories"; }
+            get { return "201809131444042_added keys RoleMonitor"; }
         }
         
         string IMigrationMetadata.Source

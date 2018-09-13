@@ -7,13 +7,13 @@ namespace Security.DataLayer.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class changedtimetypeinPresenceRules : IMigrationMetadata
+    public sealed partial class addedroles : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changedtimetypeinPresenceRules));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedroles));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808271344131_changed time type in PresenceRules"; }
+            get { return "201809131432118_added roles"; }
         }
         
         string IMigrationMetadata.Source

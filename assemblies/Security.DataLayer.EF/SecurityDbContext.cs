@@ -16,5 +16,8 @@ namespace Security.DataLayer.EF
         public DbSet<PresenceRules> PresenceRuleses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleMonitor> RolesMonitors { get; set; }
+        public DbSet<UserRole> UsersRoles { get; set; }
     }
 }

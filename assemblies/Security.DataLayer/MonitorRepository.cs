@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using Security.Entities;
 using Security.Entities.DB;
 
@@ -55,11 +54,12 @@ namespace Security.DataLayer
 
                 while (reader.Read())
                 {
-                    var monitorTab = new MonitorTab
+                    var monitorTab = new MonitorTab()
                     {
                         Id = reader.GetGuid(1),
                         Name = reader.GetString(0)
                     };
+                    
                     monitorTabs.Add(monitorTab);
                 }
             }

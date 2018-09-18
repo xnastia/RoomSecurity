@@ -1,4 +1,4 @@
 ﻿function TriggerCurrentMonitor() {
-    var anchor = document.getElementById(dashboard.currentMonitorId.toLowerCase());
-    selectFloorButtonClick(anchor, dashboard.currentMonitorId);
+    var anchor = document.getElementById(currentMonitor.id.toLowerCase());
+    selectFloorButtonClick(anchor, currentMonitor.id);
 }

@@ -11,22 +11,22 @@ function updateCheckTime(jsonData) {
     checkTime.innerText = timeString;
 }
 
-function refreshFloorTableResult() {
+function refreshFloorTableResult(turnedOn) {
     setInterval(function () {
-        refreshSelectedFloorStatus();
+        refreshSelectedFloorStatus(turnedOn);
     }, 5000);
 }
 
-function refreshSelectedFloorStatus() {
-    if (checkIsScannerEnabled())
+function refreshSelectedFloorStatus(turnedOn) {
+    if (turnedOn)
         httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus, showError);
 }
 
-function checkIsScannerEnabled() {
+/*function checkIsScannerEnabled() {
     var checkbox = document.getElementById("scanner-switcher");
     var scannerEnabled = checkbox.checked;
     return scannerEnabled;
-}
+}*/
 
 function showError(obj) {
     alert("some error");

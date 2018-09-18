@@ -1,7 +1,7 @@
-﻿var dashboard = new function () {
+﻿var currentMonitor = { id: null, turnedOn: false }
+var dashboard = new function () {
     var self = this;
-    var currentMonitorId;
-
+    
     function buildSecurityDashboardTable(jsonData) {
         if (jsonData === undefined)
             return;
@@ -24,8 +24,8 @@
             var currentRoom = scannerStatuses[i];
 
             var row$ = $('<tr/>');
-            row$.append($('<td/>').html("<a onclick=alarmReport.showAlarmReport(this.id) id=" + currentRoom.RoomInfo.UiId + ">"
-                + currentRoom.RoomInfo.Name + "</a>"));
+            row$.append($('<td/>').html("<a onclick=alarmReport.showAlarmReport(this.id) id="
+                + currentRoom.RoomInfo.UiId + ">" + currentRoom.RoomInfo.Name + "</a>"));
 
             if (currentRoom.IsOk) {
                 row$.append($('<td/>').html("<img class='bool-icon' src='/assets/images/ok.png'>"));
@@ -34,18 +34,20 @@
                 row$.append($('<td/>').html("<img class='bool-icon' src='/assets/images/notOk.png'>"));
             }
             
-
             $("#securityDashboardTable").append(row$);
         }
     }
 
-self.buildSecurityDashboard = function(jsonData) {
+    self.buildSecurityDashboard = function (jsonData) {
     buildSecurityDashboardTable(jsonData);
 };
 
 self.init = function() {
-    $("#scanner-switcher").change(function() {
-        refreshFloorTableResult();
+    $("#scanner-switcher").change(function () {
+        if (!currentMonitor.turnedOn) {
+            currentMonitor.turnedOn = !currentMonitor.turnedOn;
+            refreshFloorTableResult(currentMonitor.turnedOn);
+       }      
     });
 };
 

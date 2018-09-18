@@ -11,7 +11,7 @@
         var btnClass = "btnDefault";
         if (i === 0) {
             btnClass = "btnActive";
-            dashboard.currentMonitorId = monitors[0]["Id"];
+            currentMonitor.id = monitors[0]["Id"];
         }
         scrollMenuButtonsHtml += "<a href='#' id=" +
             "'" + monitorId + "' class='" + btnClass + "' " +

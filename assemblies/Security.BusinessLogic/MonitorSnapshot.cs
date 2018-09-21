@@ -20,7 +20,7 @@ namespace Security.BusinessLogic
             CurrentTime = checkerResponse.CheckTime.ToString("f");
             RoomShortInfo roomInfo = RoomProvider.GetRoomInfoById(checkerResponse.ScannerId);
             var securityScannerWithSameUiId = SecurityScannerStatuses
-                .SingleOrDefault(scannerStatus => scannerStatus.RoomInfo.UiId == roomInfo.UiId);
+                .FirstOrDefault(scannerStatus => scannerStatus.RoomInfo.UiId == roomInfo.UiId);
 
             if (securityScannerWithSameUiId == null)
             {

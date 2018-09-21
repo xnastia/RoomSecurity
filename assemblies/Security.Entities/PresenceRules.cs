@@ -11,7 +11,7 @@ namespace Security.Entities
         {
             BadgeType = (BadgeType) badgeId;
             AllowedTime = new AllowedTime(startTime,endTime);
-            
+          
         }
     }
 }

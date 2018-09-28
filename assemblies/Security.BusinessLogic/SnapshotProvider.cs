@@ -30,7 +30,8 @@ namespace Security.BusinessLogic
             {
                 SecurityScannerStatuses = new List<ScannerStatus>()
             };
-            monitor.EventOnCheckDone += monitorSnapshot.UpdateStatus;
+            MonitorStatusUpdater statusUpdater = new MonitorStatusUpdater(monitorSnapshot);
+            monitor.EventOnCheckDone += statusUpdater.UpdateStatus;
             monitor.EventOnIntruderDetected += _alarmStatusProvider.InsertCheckerResponseIntoAlarmStatus;
             
             return monitorSnapshot;

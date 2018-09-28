@@ -1,7 +1,12 @@
+using Security.Entities;
+using System.Collections.Generic;
+
 namespace Security.BusinessLogic
 {
     public interface IMonitorSnapshot
     {
-        void UpdateStatus(CheckerResponse checkerResponse);
+        List<ScannerStatus> SecurityScannerStatuses { get; set; }
+        IRoomProvider RoomProvider { get; set; }
+        string CurrentTime { get; set; }
     }
 }

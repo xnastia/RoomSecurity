@@ -73,6 +73,7 @@
     <Compile Include="SecurityScannerProvider.cs" />
     <Compile Include="SnapshotApi.cs" />
     <Compile Include="SnapshotProvider.cs" />
+    <Compile Include="MonitorStatusUpdater.cs" />
     <Compile Include="TimerScanInvoker.cs" />
     <Compile Include="UserProvider.cs" />
   </ItemGroup>

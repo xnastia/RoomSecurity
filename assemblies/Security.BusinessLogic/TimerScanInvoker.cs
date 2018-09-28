@@ -9,13 +9,12 @@ namespace Security.BusinessLogic
 
         private readonly int _checkTimerInterval;
 
-        public DateTime CurrentTime { get; set; }
+        public DateTime CurrentTime => DateTime.Now;
 
         public event OnScanHandler OnScanInvoke;
 
         public TimerScanInvoker(int checkTimerInterval = 3000)
         {
-            CurrentTime = DateTime.Now;
             _checkTimerInterval = checkTimerInterval;
             _checkTimer = new Timer();
         }

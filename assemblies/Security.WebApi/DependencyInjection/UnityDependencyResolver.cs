@@ -3,6 +3,7 @@ using Security.BusinessLogic;
 using Security.DataLayer.EF;
 using Security.Entities.DB;
 using Unity;
+using Unity.Lifetime;
 
 namespace Security.WebApi.DependencyInjection
 {
@@ -17,27 +18,11 @@ namespace Security.WebApi.DependencyInjection
         private static UnityContainer CreateUnityContainer()
         {
             var container = new UnityContainer();
-            MonitorRepository monitorRepository = new MonitorRepository();
-            RoomRepository roomRepository = new RoomRepository();
-            RoomProvider roomProvider = new RoomProvider(roomRepository);
-            CameraRepository cameraRepository = new CameraRepository();
-            CameraProvider cameraProvider = new CameraProvider(cameraRepository);
-            PresenceRulesRepository presenceRulesRepository = new PresenceRulesRepository();
-            PresenceRulesProvider presenceRulesProvider = new PresenceRulesProvider(presenceRulesRepository);
-            SecurityScannerProvider securityScannerProvider =
-            new SecurityScannerProvider(cameraProvider, presenceRulesProvider);
-            MonitorProvider monitorProvider = new MonitorProvider(monitorRepository, roomProvider, securityScannerProvider);
-            AlarmStatusRepository alarmStatusRepository = new AlarmStatusRepository();
-            AlarmStatusProvider alarmStatusProvider = new AlarmStatusProvider(alarmStatusRepository);
-            SnapshotProvider snapshotProvider = new SnapshotProvider(alarmStatusProvider);
-            ISnapshotApi snapshotApi = new SnapshotApi(monitorProvider, snapshotProvider);
-            IUserRepository userRepository = new UserRepository();
-            IAuthenticationProvider authenticationProvider = new AuthenticationProvider();
-            userRepository.AddUser("Sidor", "Sidorov", "sidorov@ukr.net", "9012");
-            IUserProvider userProvider = new UserProvider(userRepository);
-            container.RegisterInstance<ISnapshotApi>(snapshotApi);
-            container.RegisterInstance<IAuthenticationProvider>(authenticationProvider);
-            container.RegisterType<IAlarmStatusRepository, DataLayer.EF.AlarmStatusRepository>();
+            container.RegisterType<AlarmStatusRepository, AlarmStatusRepository>();
+            container.RegisterType<IMonitorProvider, MonitorProvider>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ISnapshotApi, SnapshotApi>();
+            container.RegisterType<IAuthenticationProvider, AuthenticationProvider>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IAlarmStatusRepository, DataLayer.EF.AlarmStatusRepository>(new ContainerControlledLifetimeManager());
             container.RegisterType<ICameraRepository, DataLayer.EF.CameraRepository>();
             container.RegisterType<ISecurityScannerProvider, SecurityScannerProvider>();
             container.RegisterType<IMonitorRepository, DataLayer.EF.MonitorRepository>();
@@ -46,11 +31,10 @@ namespace Security.WebApi.DependencyInjection
             container.RegisterType<IUserRepository, DataLayer.EF.UserRepository>();
             container.RegisterType<IAlarmStatusProvider, AlarmStatusProvider>();
             container.RegisterType<ICameraProvider, CameraProvider>();
-            container.RegisterType<IMonitorProvider, MonitorProvider>();
             container.RegisterType<IPresenceRulesProvider, PresenceRulesProvider>();
             container.RegisterType<IRoomProvider, RoomProvider>();
             container.RegisterType<IUserProvider, UserProvider>();
-            container.RegisterType<ISnapshotProvider, SnapshotProvider>();
+            container.RegisterType<ISnapshotProvider, SnapshotProvider>(new ContainerControlledLifetimeManager());
             return container;
         }
     }

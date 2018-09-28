@@ -31,7 +31,8 @@ namespace Security.BusinessLogic
             {
                 var monitor = CreateMonitor(monitorId.Value);
                 _monitors.Add(monitorId.Value, monitor);
-                new SecurityDashboard(new TimerScanInvoker(), monitor).StartScanning();
+                var timerScanInvoker = new TimerScanInvoker();
+                new SecurityDashboard(timerScanInvoker, monitor).StartScanning();
             }
             return _monitors[monitorId.Value];
         }

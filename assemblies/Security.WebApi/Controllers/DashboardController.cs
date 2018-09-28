@@ -51,10 +51,9 @@ namespace Security.WebApi.Controllers
 
         public List<MonitorTab> GetMonitors()
         {
-            List<MonitorTab> monitorTabs = new List<MonitorTab>();
             var token = RequestContext.Principal.Identity.Name;
             string email = _authenticationProvider.GetUserByToken(token);
-            monitorTabs = _monitorProvider.GetMonitorsTabList(email);
+            var monitorTabs = _monitorProvider.GetMonitorsTabList(email);
             //_monitorProvider.SetUserTokenSession(token);
             return monitorTabs;
         }

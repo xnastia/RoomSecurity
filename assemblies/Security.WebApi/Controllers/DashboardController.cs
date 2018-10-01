@@ -13,7 +13,8 @@ namespace Security.WebApi.Controllers
         private IAlarmStatusProvider _alarmStatusProvider;
         private IMonitorProvider _monitorProvider;
         private readonly IAuthenticationProvider _authenticationProvider;
-        
+        private static TimerScanInvoker _timerScanInvoker;
+
         public DashboardController(ISnapshotApi snapshotApi, IAlarmStatusProvider alarmStatusProvider,
             IMonitorProvider monitorProvider, IAuthenticationProvider authenticationProvider)
         {
@@ -21,22 +22,43 @@ namespace Security.WebApi.Controllers
             _alarmStatusProvider = alarmStatusProvider;
             _monitorProvider = monitorProvider;
             _authenticationProvider = authenticationProvider;
+            _timerScanInvoker = new TimerScanInvoker();
         }
         
-        public IHttpActionResult GetMonitorStatus(Guid monitorId)
+        public IHttpActionResult GetMonitorStatus(Guid monitorId, bool scannerEnabled)
         {
+            if (scannerEnabled)
+            {
+                StartScanning(monitorId);
+            }
+            else
+            {
+                StopScanning(monitorId);
+            }
             var monitorSnapshot = _snapshotApi.GetMonitorSnapshot(monitorId);
 
             if (monitorSnapshot == null)
             {
                 return NotFound();
             }
-
+            
             var floorScannerStatuses = monitorSnapshot.SecurityScannerStatuses;
             var checkTime = monitorSnapshot.CurrentTime;
             DashboardStatus floorDashboardStatus = new DashboardStatus(checkTime, floorScannerStatuses);
             
             return Ok(floorDashboardStatus);
+        }
+
+        public void StartScanning(Guid monitorId)
+        {
+            Monitor monitor = _monitorProvider.GetMonitor(monitorId);
+            new SecurityDashboard(_timerScanInvoker, monitor).StartScanning();
+        }
+
+        public void StopScanning(Guid monitorId)
+        {
+            Monitor monitor = _monitorProvider.GetMonitor(monitorId);
+            new SecurityDashboard(_timerScanInvoker, monitor).StopScanning();
         }
 
         public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)

@@ -4,9 +4,9 @@
     {
         private readonly ITimerScanInvoker _timerScanInvoker;
 
-        public Monitor Monitor { get; }
+        public IMonitor Monitor { get; }
 
-        public SecurityDashboard(ITimerScanInvoker timerScanInvoker, Monitor monitor)
+        public SecurityDashboard(ITimerScanInvoker timerScanInvoker, IMonitor monitor)
         {
             _timerScanInvoker = timerScanInvoker;
             Monitor = monitor;

@@ -12,6 +12,13 @@
             Monitor = monitor;
         }
 
+        public bool IsSame(SecurityDashboard securityDashboard)
+        {
+            bool isSameTimer = true;/*_timerScanInvoker == securityDashboard._timerScanInvoker*/
+            bool isSameMonitor = Monitor.IsSame(securityDashboard.Monitor);
+            return isSameTimer && isSameMonitor;
+        }
+
         public void StartScanning()
         {
             _timerScanInvoker.OnScanInvoke += Monitor.Scan;

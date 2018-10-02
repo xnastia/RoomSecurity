@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Security.BusinessLogic;
 using Security.Entities;
@@ -10,10 +11,11 @@ namespace Security.WebApi.Controllers
     public class DashboardController : ApiController
     {
         private readonly ISnapshotApi _snapshotApi;
-        private IAlarmStatusProvider _alarmStatusProvider;
-        private IMonitorProvider _monitorProvider;
+        private readonly IAlarmStatusProvider _alarmStatusProvider;
+        private readonly IMonitorProvider _monitorProvider;
         private readonly IAuthenticationProvider _authenticationProvider;
         private static TimerScanInvoker _timerScanInvoker;
+        private static List<SecurityDashboard> _enabledMonitorsDashboards;
 
         public DashboardController(ISnapshotApi snapshotApi, IAlarmStatusProvider alarmStatusProvider,
             IMonitorProvider monitorProvider, IAuthenticationProvider authenticationProvider)
@@ -45,8 +47,13 @@ namespace Security.WebApi.Controllers
         [Route("Dashboard/StartMonitor")]
         public IHttpActionResult StartMonitor(Guid id)
         {
+            if (_enabledMonitorsDashboards == null)
+                _enabledMonitorsDashboards = new List<SecurityDashboard>();
+            
             Monitor monitor = _monitorProvider.GetMonitor(id);
-            new SecurityDashboard(_timerScanInvoker, monitor).StartScanning();
+            SecurityDashboard securityDashboard = new SecurityDashboard(_timerScanInvoker, monitor);
+            securityDashboard.StartScanning();
+            _enabledMonitorsDashboards.Add(securityDashboard);
             return Ok();
         }
 
@@ -55,7 +62,18 @@ namespace Security.WebApi.Controllers
         public IHttpActionResult StopMonitor(Guid id)
         {
             Monitor monitor = _monitorProvider.GetMonitor(id);
-            new SecurityDashboard(_timerScanInvoker, monitor).StopScanning();
+            SecurityDashboard securityDashboard = new SecurityDashboard(_timerScanInvoker, monitor);
+
+            foreach (var dashboard in _enabledMonitorsDashboards)
+            {
+                if (dashboard.IsSame(securityDashboard))
+                {
+                    dashboard.StopScanning();
+                    _enabledMonitorsDashboards.Remove(dashboard);
+                    return Ok();
+                }
+            }
+            
             return Ok();
         }
 

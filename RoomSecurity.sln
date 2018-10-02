@@ -41,6 +41,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{54EC89C3-665C-435E-9769-590CE13DB403}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\database.sql = scripts\database.sql
+		scripts\database_EF.sql = scripts\database_EF.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.DataLayer.EF", "assemblies\Security.DataLayer.EF\Security.DataLayer.EF.csproj", "{E16C68AB-83CC-4BE9-955F-E8B667FD9CBC}"

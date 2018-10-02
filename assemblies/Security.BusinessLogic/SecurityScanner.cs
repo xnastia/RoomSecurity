@@ -23,16 +23,19 @@ namespace Security.BusinessLogic
             _presenseRules = presenseRules;
             ScannerId = scannerId;
         }
+
+        public bool IsSame(ISecurityScanner securityScanner)
+        {
+            var isSame = ScannerId == securityScanner.ScannerId;
+            return isSame;
+        }
         
         public bool IsBadgeAllowed(BadgeType badge, DateTime currentTime)
         {
             if (!_presenseRules.ContainsKey(badge))
                 return false;
 
-            if (_presenseRules[badge].Any(x => x.IsTimeAllowed(currentTime.TimeOfDay)))
-                return true;
-
-            return false;
+            return _presenseRules[badge].Any(x => x.IsTimeAllowed(currentTime.TimeOfDay));
         }
 
         public CheckerResponse CheckRoom(DateTime currentTime)

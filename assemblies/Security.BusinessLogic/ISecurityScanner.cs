@@ -10,5 +10,7 @@ namespace Security.BusinessLogic
         CheckerResponse CheckRoom(DateTime currentTime);
 
         bool IsBadgeAllowed(BadgeType badge, DateTime currentTime);
+
+        bool IsSame(ISecurityScanner securityScanner);
     }
 }

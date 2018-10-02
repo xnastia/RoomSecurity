@@ -25,16 +25,8 @@ namespace Security.WebApi.Controllers
             _timerScanInvoker = new TimerScanInvoker();
         }
         
-        public IHttpActionResult GetMonitorStatus(Guid monitorId, bool scannerEnabled)
+        public IHttpActionResult GetMonitorStatus(Guid monitorId)
         {
-            if (scannerEnabled)
-            {
-                StartScanning(monitorId);
-            }
-            else
-            {
-                StopScanning(monitorId);
-            }
             var monitorSnapshot = _snapshotApi.GetMonitorSnapshot(monitorId);
 
             if (monitorSnapshot == null)
@@ -49,16 +41,22 @@ namespace Security.WebApi.Controllers
             return Ok(floorDashboardStatus);
         }
 
-        public void StartScanning(Guid monitorId)
+        [HttpPost]
+        [Route("Dashboard/StartMonitor")]
+        public IHttpActionResult StartMonitor(Guid id)
         {
-            Monitor monitor = _monitorProvider.GetMonitor(monitorId);
+            Monitor monitor = _monitorProvider.GetMonitor(id);
             new SecurityDashboard(_timerScanInvoker, monitor).StartScanning();
+            return Ok();
         }
 
-        public void StopScanning(Guid monitorId)
+        [HttpPost]
+        [Route("Dashboard/StopMonitor")]
+        public IHttpActionResult StopMonitor(Guid id)
         {
-            Monitor monitor = _monitorProvider.GetMonitor(monitorId);
+            Monitor monitor = _monitorProvider.GetMonitor(id);
             new SecurityDashboard(_timerScanInvoker, monitor).StopScanning();
+            return Ok();
         }
 
         public List<AlarmStatus> GetAlarmStatusHistory(Guid roomId, int page)

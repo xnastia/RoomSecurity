@@ -18,7 +18,12 @@ namespace Security.WebApi
         private static void RegisterRoutes(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                "Default2",
+                "withAction",
+                "{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                "Default",
                 "{controller}/{id}",
                 new {id = RouteParameter.Optional}
             );

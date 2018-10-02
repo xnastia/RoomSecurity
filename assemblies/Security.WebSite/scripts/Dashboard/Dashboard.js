@@ -42,12 +42,27 @@ var dashboard = new function () {
     buildSecurityDashboardTable(jsonData);
 };
 
+    function startScanning() {
+        httpPostAsync("api/dashboard/StartMonitor/" + dashboard.currentMonitorId, switchScanner());
+    }
+
+    function stopScanning() {
+        httpPostAsync("api/dashboard/StopMonitor/" + dashboard.currentMonitorId, switchScanner());
+    }
+
+    function switchScanner() {
+        currentMonitor.turnedOn = !currentMonitor.turnedOn;
+    }
+
 self.init = function() {
     $("#scanner-switcher").change(function () {
         if (!currentMonitor.turnedOn) {
-            currentMonitor.turnedOn = !currentMonitor.turnedOn;
             refreshFloorTableResult(currentMonitor.turnedOn);
-       }      
+            startScanning();
+        } else {
+            currentMonitor.turnedOn = !currentMonitor.turnedOn;
+            stopScanning();
+        }
     });
 };
 

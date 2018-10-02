@@ -11,15 +11,14 @@ function updateCheckTime(jsonData) {
     checkTime.innerText = timeString;
 }
 
-function refreshFloorTableResult(turnedOn) {
+function refreshFloorTableResult() {
     setInterval(function () {
-        refreshSelectedFloorStatus(turnedOn);
+        refreshSelectedFloorStatus();
     }, 5000);
 }
 
-function refreshSelectedFloorStatus(turnedOn) {
-    if (turnedOn)
-        httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus, showError);
+function refreshSelectedFloorStatus() {
+    httpGetAsync("api/dashboard/GetMonitorStatus?monitorId=" + dashboard.currentMonitorId, updateStatus, showError);
 }
 
 /*function checkIsScannerEnabled() {

@@ -7,7 +7,7 @@ using Security.Entities;
 
 namespace Security.WebApi.Controllers
 {
-    [MyAuthentication]
+    //[MyAuthentication]
     public class DashboardController : ApiController
     {
         private readonly ISnapshotApi _snapshotApi;
@@ -52,6 +52,12 @@ namespace Security.WebApi.Controllers
             
             Monitor monitor = _monitorProvider.GetMonitor(id);
             SecurityDashboard securityDashboard = new SecurityDashboard(_timerScanInvoker, monitor);
+
+            foreach (var monitorDashboard in _enabledMonitorsDashboards)
+            {
+                if (securityDashboard.IsSameMonitor(monitorDashboard))
+                    return Ok();
+            }
             securityDashboard.StartScanning();
             _enabledMonitorsDashboards.Add(securityDashboard);
             return Ok();
@@ -66,7 +72,7 @@ namespace Security.WebApi.Controllers
 
             foreach (var dashboard in _enabledMonitorsDashboards)
             {
-                if (dashboard.IsSame(securityDashboard))
+                if (dashboard.IsSameMonitor(securityDashboard))
                 {
                     dashboard.StopScanning();
                     _enabledMonitorsDashboards.Remove(dashboard);
